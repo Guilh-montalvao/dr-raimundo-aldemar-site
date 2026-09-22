@@ -72,8 +72,36 @@ export default function Home(){
     mm.add("(prefers-reduced-motion: no-preference)",()=>{
       const ctx=gsap.context(()=>{
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach(el=>{
-          gsap.from(el,{y:35,opacity:0,duration:.95,ease:"power2.out",scrollTrigger:{trigger:el,start:"top 91%",once:true}});
+          gsap.fromTo(
+            el,
+            { y: 35, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.85,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 92%",
+                end: "bottom 8%",
+                toggleActions: "play reverse play reverse",
+              }
+            }
+          );
         });
+
+        gsap.to(".hero-content, .hero-bottom, .hero-caption", {
+          opacity: 0,
+          y: -25,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "55% 45%",
+            end: "bottom 15%",
+            scrub: 0.5,
+          }
+        });
+
         gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach(el=>{
           gsap.fromTo(el,{yPercent:-3},{yPercent:3,ease:"none",scrollTrigger:{trigger:el.parentElement,start:"top bottom",end:"bottom top",scrub:1}});
         });
@@ -140,7 +168,7 @@ export default function Home(){
         <span className="hero-caption">MEDICINA COM PRESENÇA.</span>
       </section>
 
-      <div className="intro-strip"><span>Ouvidos, nariz e garganta.</span><span>Adultos e crianças.</span><span>Um cuidado que acompanha você.</span></div>
+      <div className="intro-strip" data-reveal><span>Ouvidos, nariz e garganta.</span><span>Adultos e crianças.</span><span>Um cuidado que acompanha você.</span></div>
 
       <section id="sobre" className="about section-pad">
         <div className="section-top" data-reveal><span className="eyebrow">QUEM CUIDA DE VOCÊ</span><span className="small-note">Ciência. Escuta. Proximidade.</span></div>
@@ -187,7 +215,7 @@ export default function Home(){
           <p data-reveal>Atendimento infantil com acolhimento para a criança e orientação para a família. Espaço para conversar sobre os sintomas, esclarecer dúvidas e entender os próximos passos.</p>
           <div data-reveal><LinkButton light>Agendar consulta infantil</LinkButton></div>
         </div>
-        <div className="children-footnote"><span aria-hidden="true" /><span style={{ marginLeft: "auto" }}>ATENÇÃO QUE ACOLHE.</span></div>
+        <div className="children-footnote" data-reveal><span aria-hidden="true" /><span style={{ marginLeft: "auto" }}>ATENÇÃO QUE ACOLHE.</span></div>
       </section>
 
       <section className="surgery surgery-immersive section-pad">
@@ -199,7 +227,7 @@ export default function Home(){
           <p data-reveal>A indicação cirúrgica depende de uma avaliação individual. Durante a consulta, são discutidas as opções de tratamento, os benefícios esperados, os riscos e os cuidados de recuperação.</p>
           <a href="#contato" className="text-link" data-reveal>Agendar uma avaliação <ArrowUpRight size={19}/></a>
         </div>
-        <span className="surgery-signature">CUIDADO EM CADA ETAPA.</span>
+        <span className="surgery-signature" data-reveal>CUIDADO EM CADA ETAPA.</span>
       </section>
 
       <section id="contato" className="contact-section">
@@ -207,8 +235,8 @@ export default function Home(){
         <div className="contact-shade"/>
         <div className="contact-inner">
           <div className="contact-heading" data-reveal><span className="eyebrow">LOCAIS DE ATENDIMENTO</span><h2>Encontre o melhor local<br/><span className="serif">para sua consulta.</span></h2><p>Atendimento em Taguatinga, Gama e Asa Norte.<br className="desktop-break"/>Escolha a unidade e entre em contato com a recepção para consultar horários e agendar.</p></div>
-          <div className="locations" data-reveal>
-            <article className="location">
+          <div className="locations">
+            <article className="location" data-reveal>
               <div className="location-image">
                 <img src="/media/cdootorrino.png" alt="CDO Otorrino no Hospital Anchieta em Taguatinga" loading="lazy" />
               </div>
@@ -224,7 +252,7 @@ export default function Home(){
               </div>
             </article>
 
-            <article className="location">
+            <article className="location" data-reveal>
               <div className="location-image">
                 <img src="/media/otogama.png" alt="Clínica Otogama no Gama Sul" loading="lazy" />
               </div>
@@ -240,7 +268,7 @@ export default function Home(){
               </div>
             </article>
 
-            <article className="location">
+            <article className="location" data-reveal>
               <div className="location-image">
                 <img src="/media/otorhynus.png" alt="Otorhynus Clínica na Asa Norte" loading="lazy" />
               </div>
@@ -256,7 +284,7 @@ export default function Home(){
               </div>
             </article>
           </div>
-          <p className="booking-note">Consulte disponibilidade de horários e convênios diretamente com a unidade escolhida.</p>
+          <p className="booking-note" data-reveal>Consulte disponibilidade de horários e convênios diretamente com a unidade escolhida.</p>
           <div className="contact-social" data-reveal>
             <span>Acompanhe o Dr. Raimundo no Instagram:</span>
             <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="instagram-badge">
@@ -269,12 +297,12 @@ export default function Home(){
       </section>
     </main>
     <footer className="site-footer">
-      <div className="footer-top">
+      <div className="footer-top" data-reveal>
         <a href="#inicio" className="footer-brand"><img src="/media/logo.png" width="2048" height="682" alt="Dr. Raimundo Aldemar — Otorrinolaringologia"/></a>
         <p>Cuidado que começa<br/><span className="serif">com uma boa conversa.</span></p>
         <a href="#inicio" className="back-top" aria-label="Voltar ao início"><ArrowRight size={23}/></a>
       </div>
-      <div className="footer-bottom">
+      <div className="footer-bottom" data-reveal>
         <span>© {new Date().getFullYear()} Dr. Raimundo Aldemar</span>
         <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="footer-instagram"><InstagramIcon size={15}/><span>@raimundo.otorrino</span></a>
         <span>CRM-DF 20094 · RQE 13936 · DF</span>

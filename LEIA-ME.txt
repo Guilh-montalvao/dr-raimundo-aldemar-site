@@ -1,0 +1,17 @@
+SITE DR. RAIMUNDO ALDEMAR
+
+Versão atualizada: imagens de fundo nas seções de especialidade e cirurgia e três clínicas (Taguatinga, Gama e Asa Norte).
+
+REQUISITOS
+Node.js 22.13 ou superior e pnpm.
+
+EXECUTAR
+1. Extraia o ZIP.
+2. Abra o terminal na pasta dr-raimundo-aldemar.
+3. Execute: pnpm install
+4. Execute: pnpm dev
+5. Acesse o endereço local exibido no terminal.
+
+O pacote contém o código-fonte e todas as imagens. As dependências são instaladas pelo comando acima.
+
+React, TypeScript, Tailwind CSS e GSAP. Estrutura App Router do Next.js com adaptador Vinext para execução e publicação. Consulte README.md para detalhes.

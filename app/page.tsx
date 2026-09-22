@@ -9,7 +9,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 
 gsap.registerPlugin(ScrollTrigger);
 
-const links = [{label: "O médico",href:"#sobre"},{label:"Especialidade",href:"#especialidade"},{label:"Para os pequenos",href:"#infantil"},{label:"Onde encontrar",href:"#contato"}];
+const links = [{label: "O médico",href:"#sobre"},{label:"Áreas de atuação",href:"#especialidade"},{label:"Atendimento infantil",href:"#infantil"},{label:"Onde encontrar",href:"#contato"}];
 const whatsapp = (number: string, clinic: string) => `https://wa.me/55${number}?text=${encodeURIComponent(`Olá! Gostaria de informações para agendar uma consulta com o Dr. Raimundo Aldemar na ${clinic}.`)}`;
 const instagramUrl = "https://www.instagram.com/raimundo.otorrino?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==";
 
@@ -24,9 +24,9 @@ function InstagramIcon({ size = 18, className = "" }: { size?: number; className
 }
 
 const areas = [
-  {id:"ouvidos",title:"Ouvidos & audição",text:"Atenção à saúde dos ouvidos e às queixas de audição. Uma avaliação individual para entender o que você sente e orientar os próximos passos.",image:"/media/ouvido-audicao.png"},
-  {id:"nariz",title:"Nariz & respiração",text:"Avaliação de queixas nasais e respiratórias, com escuta e exame clínico. O cuidado começa por compreender como os sintomas afetam o seu dia a dia.",image:"/media/nariz-respiracao.png"},
-  {id:"garganta",title:"Garganta & voz",text:"Cuidado com a garganta e a voz, respeitando a história e as necessidades de cada pessoa. Orientações claras ao longo da consulta.",image:"/media/garganta-voz.png"},
+  {id:"ouvidos",title:"Ouvidos e audição",text:"Avaliação individual das queixas auditivas e da saúde dos ouvidos, com diagnóstico clínico, esclarecimento de dúvidas e orientação dos próximos passos.",image:"/media/ouvido-audicao.png"},
+  {id:"nariz",title:"Nariz e respiração",text:"Avaliação de queixas nasais e respiratórias, compreendendo como os sintomas afetam sua rotina e orientando o tratamento adequado.",image:"/media/nariz-respiracao.png"},
+  {id:"garganta",title:"Garganta e voz",text:"Avaliação das queixas relacionadas à garganta e à voz, com explicações sobre os achados e orientação sobre os próximos passos.",image:"/media/garganta-voz.png"},
 ];
 
 function LinkButton({children,href="#contato",light=false,external=false}:{children:React.ReactNode;href?:string;light?:boolean;external?:boolean}) {
@@ -56,9 +56,10 @@ export default function Home(){
         introTlRef.current = introTl;
 
         introTl
-          .fromTo(".intro-logo", { opacity: 0, y: 20, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power2.out" })
-          .fromTo(".intro-divider", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.55, ease: "power2.out" }, "-=0.35")
-          .fromTo(".intro-subtitle", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.35")
+          .to(".intro-logo", { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power2.out" })
+          .to(".intro-divider", { scaleX: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, "-=0.35")
+          .to(".intro-subtitle", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.35")
+          .to(".intro-skip-hint", { opacity: 0.75, duration: 0.4 }, "-=0.2")
           .to(".intro-content", { opacity: 0, y: -16, duration: 0.45, ease: "power2.in", delay: 0.45 })
           .to(".site-intro", { yPercent: -100, duration: 0.85, ease: "power4.inOut" }, "-=0.12")
           .fromTo(".site-header", { y: -25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.35")
@@ -132,10 +133,10 @@ export default function Home(){
         <div className="hero-content">
           <p className="eyebrow hero-reveal">OTORRINOLARINGOLOGIA EM BRASÍLIA</p>
           <h1 className="hero-reveal">Respirar bem.<br/>Ouvir a vida.<br/><span>Viver melhor.</span></h1>
-          <p className="hero-description hero-reveal">Cuidado especializado para adultos e crianças.<br className="desktop-break"/> Atenção à sua história, em cada detalhe.</p>
-          <div className="hero-reveal"><LinkButton>Agende sua consulta</LinkButton></div>
+          <p className="hero-description hero-reveal">Otorrinolaringologia para adultos e crianças em Brasília.<br className="desktop-break"/> Atenção à saúde dos ouvidos, do nariz e da garganta, com escuta e orientação em cada consulta.</p>
+          <div className="hero-reveal"><LinkButton>Agendar consulta</LinkButton></div>
         </div>
-        <div className="hero-bottom hero-reveal"><a href="#sobre" className="scroll-link"><span className="circle-icon"><ArrowDown size={16}/></span>Conheça o seu médico</a><span className="hero-credentials">Dr. Raimundo Aldemar<br/><small>CRM-DF 20094 · RQE 13936</small></span></div>
+        <div className="hero-bottom hero-reveal"><a href="#sobre" className="scroll-link"><span className="circle-icon"><ArrowDown size={16}/></span>Conheça o Dr. Raimundo</a><span className="hero-credentials">Dr. Raimundo Aldemar<br/><small>CRM-DF 20094 · RQE 13936</small></span></div>
         <span className="hero-caption">MEDICINA COM PRESENÇA.</span>
       </section>
 
@@ -146,15 +147,14 @@ export default function Home(){
         <div className="about-grid">
           <div className="about-text">
             <h2 data-reveal>Antes de cuidar,<br/><span className="serif">é preciso ouvir.</span></h2>
-            <p className="large-copy" data-reveal>Cada pessoa tem uma história.<br/>E ela merece atenção.</p>
-            <p data-reveal>Sou o Dr. Raimundo Aldemar, médico otorrinolaringologista. Atendo adultos e crianças, com ênfase em cirurgia cérvico-facial — a região da cabeça e do pescoço.</p>
-            <p data-reveal>Da primeira conversa à orientação sobre o tratamento, meu compromisso é oferecer um atendimento próximo, com clareza e respeito às necessidades de cada paciente.</p>
+            <p data-reveal>Sou o Dr. Raimundo Aldemar, médico otorrinolaringologista. Atendo adultos e crianças, com atenção às queixas e às necessidades de cada fase da vida.</p>
+            <p data-reveal>Na consulta, meu compromisso é ouvir o que você sente, explicar a avaliação e orientar os próximos passos com clareza.</p>
             <div className="credentials" data-reveal>
               <div><p><strong>Universidade Federal de Goiás</strong><small>Graduação em Medicina · UFG</small></p></div>
               <div><p><strong>Hospital das Forças Armadas</strong><small>Residência em Otorrinolaringologia · HFA</small></p></div>
               <div><p><strong>ABORL-CCF</strong><small>Título de especialista em Otorrinolaringologia</small></p></div>
             </div>
-            <a className="text-link" href="#contato" data-reveal>Vamos cuidar da sua saúde? <ArrowUpRight size={19}/></a>
+            <a className="text-link" href="#contato" data-reveal>Conheça os locais de atendimento <ArrowUpRight size={19}/></a>
           </div>
           <div className="about-visual" data-reveal>
             <div className="about-photo" role="img" aria-label="Dr. Raimundo Aldemar em seu consultório"><div className="photo-background" data-parallax style={{backgroundImage:"url('/media/consultorio.webp')"}}/></div>
@@ -168,12 +168,12 @@ export default function Home(){
           {areas.map(area=><div key={area.id} className={`area-image ${activeArea===area.id?"is-active":""}`} role="img" aria-hidden={activeArea!==area.id} aria-label={`Atendimento de otorrinolaringologia — ${area.title}`} style={{backgroundImage:`url('${area.image}')`}}/>)}
         </div>
         <div className="specialty-shade" aria-hidden="true"/>
-        <div className="section-top" data-reveal><span className="eyebrow">OTORRINOLARINGOLOGIA</span><span className="small-note">O essencial para viver bem.</span></div>
-        <div className="specialties-heading" data-reveal><h2>Pequenos sentidos.<br/><span className="serif">Grandes conexões.</span></h2><p>Ouvir, respirar, falar.<br/>Cuidar do que conecta você ao mundo.</p></div>
+        <div className="section-top" data-reveal><span className="eyebrow">ÁREAS DE ATUAÇÃO</span><span className="small-note">O essencial para viver bem.</span></div>
+        <div className="specialties-heading" data-reveal><h2>Ouvir, respirar e falar.<br/><span className="serif">Saúde que faz parte da sua vida.</span></h2><p>Atenção à saúde dos ouvidos, do nariz e da garganta para adultos e crianças.</p></div>
         <div className="specialties-grid">
           <div className="area-context" aria-hidden="true" />
           <Accordion type="single" value={activeArea} onValueChange={value=>{if(value)setActiveArea(value)}} className="areas-accordion" data-reveal>
-            {areas.map((area)=><AccordionItem value={area.id} key={area.id} className="area-item"><AccordionTrigger className="area-trigger"><span>{area.title}</span><span className="area-toggle">{activeArea===area.id?<Minus size={19}/>:<Plus size={19}/>}</span></AccordionTrigger><AccordionContent className="area-content"><p>{area.text}</p><a href="#contato" className="text-link">Agendar uma avaliação <ArrowUpRight size={18}/></a></AccordionContent></AccordionItem>)}
+            {areas.map((area)=><AccordionItem value={area.id} key={area.id} className="area-item"><AccordionTrigger className="area-trigger"><span>{area.title}</span><span className="area-toggle">{activeArea===area.id?<Minus size={19}/>:<Plus size={19}/>}</span></AccordionTrigger><AccordionContent className="area-content"><p>{area.text}</p><a href="#contato" className="text-link">Agendar consulta <ArrowUpRight size={18}/></a></AccordionContent></AccordionItem>)}
           </Accordion>
         </div>
       </section>
@@ -182,32 +182,31 @@ export default function Home(){
         <div className="children-photo photo-background" data-parallax role="img" aria-label="Dr. Raimundo acolhe uma criança no ambiente hospitalar"/>
         <div className="children-shade"/>
         <div className="children-content">
-          <span className="eyebrow" data-reveal>OTORRINO PARA CRIANÇAS</span>
-          <h2 data-reveal>Para os pequenos,<br/>um cuidado<br/><span className="serif">do tamanho<br className="kids-break"/> do mundo.</span></h2>
-          <p data-reveal>Um olhar atento para cada fase da infância.<br/>Acolhimento para a criança, orientação para a família e tempo para escutar.</p>
+          <span className="eyebrow" data-reveal>ATENDIMENTO INFANTIL</span>
+          <h2 data-reveal>Para os pequenos,<br/><span className="serif">atenção em cada descoberta.</span></h2>
+          <p data-reveal>Atendimento infantil com acolhimento para a criança e orientação para a família. Espaço para conversar sobre os sintomas, esclarecer dúvidas e entender os próximos passos.</p>
           <div data-reveal><LinkButton light>Agendar consulta infantil</LinkButton></div>
         </div>
-        <div className="children-footnote"><span>Pequenos pacientes.<br/>Grandes histórias.</span><span>ATENÇÃO QUE ACOLHE.</span></div>
+        <div className="children-footnote"><span aria-hidden="true" /><span style={{ marginLeft: "auto" }}>ATENÇÃO QUE ACOLHE.</span></div>
       </section>
 
       <section className="surgery surgery-immersive section-pad">
         <div className="surgery-photo photo-background" data-parallax role="img" aria-label="Dr. Raimundo Aldemar em procedimento médico"/>
         <div className="surgery-shade" aria-hidden="true"/>
         <div className="surgery-text">
-          <span className="eyebrow" data-reveal>CIRURGIA CÉRVICO-FACIAL</span>
-          <h2 data-reveal>Precisão no cuidado.<br/><span className="serif">Presença em<br/>cada etapa.</span></h2>
-          <p data-reveal>A atuação do Dr. Raimundo tem ênfase em cirurgia cérvico-facial, na região da cabeça e do pescoço.</p>
-          <p data-reveal>A indicação de uma cirurgia começa com uma avaliação individual. Entender o diagnóstico, conversar sobre as opções e esclarecer dúvidas fazem parte desse caminho.</p>
-          <a href="#contato" className="text-link" data-reveal>Converse com o especialista <ArrowUpRight size={19}/></a>
+          <span className="eyebrow" data-reveal>AVALIAÇÃO CIRÚRGICA</span>
+          <h2 data-reveal>Quando a cirurgia é indicada,<br/><span className="serif">entender faz parte do cuidado.</span></h2>
+          <p data-reveal>A indicação cirúrgica depende de uma avaliação individual. Durante a consulta, são discutidas as opções de tratamento, os benefícios esperados, os riscos e os cuidados de recuperação.</p>
+          <a href="#contato" className="text-link" data-reveal>Agendar uma avaliação <ArrowUpRight size={19}/></a>
         </div>
-        <span className="surgery-signature">TÉCNICA E ATENÇÃO, JUNTAS.</span>
+        <span className="surgery-signature">CUIDADO EM CADA ETAPA.</span>
       </section>
 
       <section id="contato" className="contact-section">
         <div className="contact-photo photo-background" data-parallax role="img" aria-label="Consulta com o Dr. Raimundo Aldemar"/>
         <div className="contact-shade"/>
         <div className="contact-inner">
-          <div className="contact-heading" data-reveal><span className="eyebrow">LOCAIS DE ATENDIMENTO</span><h2>O próximo passo<br/><span className="serif">é cuidar de você.</span></h2><p>Escolha a unidade mais próxima.<br/>A equipe da clínica ajuda você com o agendamento.</p></div>
+          <div className="contact-heading" data-reveal><span className="eyebrow">LOCAIS DE ATENDIMENTO</span><h2>Encontre o melhor local<br/><span className="serif">para sua consulta.</span></h2><p>Atendimento em Taguatinga, Gama e Asa Norte.<br className="desktop-break"/>Escolha a unidade e entre em contato com a recepção para consultar horários e agendar.</p></div>
           <div className="locations" data-reveal>
             <article className="location">
               <div className="location-image">
@@ -221,7 +220,7 @@ export default function Home(){
               </div>
               <div className="location-actions">
                 <LinkButton href={whatsapp("61983230103","CDO Otorrino")} external light>Agendar pelo WhatsApp</LinkButton>
-                <a href="https://www.google.com/maps/search/?api=1&query=CDO+Otorrino+Hospital+Anchieta+Taguatinga" target="_blank" rel="noopener noreferrer" className="location-map">Ver localização <ArrowUpRight size={15}/></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=CDO+Otorrino+Hospital+Anchieta+Taguatinga" target="_blank" rel="noopener noreferrer" className="location-map">Ver no mapa <ArrowUpRight size={15}/></a>
               </div>
             </article>
 
@@ -237,7 +236,7 @@ export default function Home(){
               </div>
               <div className="location-actions">
                 <LinkButton href={whatsapp("61983466377","Clínica Otogama")} external light>Agendar pelo WhatsApp</LinkButton>
-                <a href="https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul" target="_blank" rel="noopener noreferrer" className="location-map">Ver localização <ArrowUpRight size={15}/></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul" target="_blank" rel="noopener noreferrer" className="location-map">Ver no mapa <ArrowUpRight size={15}/></a>
               </div>
             </article>
 
@@ -253,7 +252,7 @@ export default function Home(){
               </div>
               <div className="location-actions">
                 <LinkButton href={whatsapp("61985743764","Otorhynus Clínica")} external light>Agendar pelo WhatsApp</LinkButton>
-                <a href="https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8" target="_blank" rel="noopener noreferrer" className="location-map">Ver localização <ArrowUpRight size={15}/></a>
+                <a href="https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8" target="_blank" rel="noopener noreferrer" className="location-map">Ver no mapa <ArrowUpRight size={15}/></a>
               </div>
             </article>
           </div>

@@ -286,11 +286,20 @@ export default function Home(){
           </div>
           <p className="booking-note" data-reveal>Consulte disponibilidade de horários e convênios diretamente com a unidade escolhida.</p>
           <div className="contact-social" data-reveal>
-            <span>Acompanhe o Dr. Raimundo no Instagram:</span>
-            <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="instagram-badge">
-              <InstagramIcon size={16}/>
-              <span>@raimundo.otorrino</span>
-              <ArrowUpRight size={14}/>
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="instagram-profile-card"
+              aria-label="Acompanhe o Dr. Raimundo Aldemar no Instagram"
+            >
+              <img
+                src="/media/perfil-instagram-corrigido.png"
+                alt="Dr. Raimundo Aldemar no Instagram"
+                width="2172"
+                height="724"
+                className="instagram-profile-img"
+              />
             </a>
           </div>
         </div>

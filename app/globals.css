@@ -105,7 +105,10 @@
 .menu-instagram>svg:last-child{margin-left:auto;opacity:.7}
 
 /* Contact social */
-.contact-social{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:32px;font-size:13px;color:#d5c5b5}
+.contact-social{display:flex;align-items:center;margin-top:32px}
+.instagram-profile-card{display:inline-flex;align-items:center;max-width:340px;width:100%;transition:transform .3s cubic-bezier(.2,0,.2,1),opacity .3s}
+.instagram-profile-card:hover{transform:translateY(-2px) scale(1.02);opacity:.94}
+.instagram-profile-img{width:100%;height:auto;display:block;filter:drop-shadow(0 4px 18px rgba(0,0,0,.35))}
 .instagram-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 18px;background:rgba(255,255,255,.07);border:1px solid rgba(193,165,134,.45);border-radius:100px;color:var(--cream);font-size:13px;font-weight:500;transition:all .3s}
 .instagram-badge:hover{background:rgba(255,255,255,.15);border-color:var(--gold);transform:translateY(-1px);color:var(--paper)}
 

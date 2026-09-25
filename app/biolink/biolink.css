@@ -1,0 +1,441 @@
+/* Scoped biolink theme styles */
+.biolink-theme {
+  --background: #201813;
+  --foreground: #f8f5ef;
+  --cream: #f8f5ef;
+  --paper: #fffefa;
+  --beige: #2a211a;
+  --card-bg: rgba(36, 28, 22, 0.88);
+  --card-bg-hover: rgba(46, 36, 28, 0.96);
+  --gold: #c1a586;
+  --gold-dark: #a0815e;
+  --gold-light: #dec9ad;
+  --gold-sand: #d5c1a8;
+  --gold-border: rgba(193, 165, 134, 0.35);
+  --brown: #35291f;
+  --brown-hover: #48382b;
+  --brown-dark: #18120e;
+  --muted: #ece3d9;
+  --muted-light: #ccbeb0;
+  --border: rgba(193, 165, 134, 0.28);
+  --border-hover: rgba(193, 165, 134, 0.65);
+  --shadow-card: 0 10px 28px -6px rgba(18, 13, 9, 0.55), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 18px 40px -8px rgba(18, 13, 9, 0.75), 0 0 25px rgba(193, 165, 134, 0.25);
+
+  background-color: #201813;
+  color: #f8f5ef;
+  min-height: 100vh;
+  min-height: 100svh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+html:has(.biolink-theme),
+body:has(.biolink-theme) {
+  background-color: #201813 !important;
+  color: #f8f5ef !important;
+}
+
+.biolink-theme h1,
+.biolink-theme h2,
+.biolink-theme h3,
+.biolink-theme .font-heading {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  color: var(--cream);
+  margin: 0;
+}
+
+.biolink-theme .serif {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--gold-light);
+}
+
+.biolink-theme .eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gold-sand);
+}
+
+/* SITE INTRO OVERLAY (Matches Home Page) */
+.biolink-theme .site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--cream);
+  background: radial-gradient(circle at 50% 48%, #fffefa 0%, #f8f5ef 65%, #ede4d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+.biolink-theme .intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+}
+.biolink-theme .intro-logo {
+  width: clamp(230px, 36vw, 400px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(53, 41, 31, 0.06));
+  opacity: 0;
+  transform: translateY(18px) scale(0.95);
+  will-change: opacity, transform;
+}
+.biolink-theme .intro-divider {
+  width: 52px;
+  height: 1.5px;
+  background: #c1a586;
+  margin: 24px 0 16px;
+  transform-origin: center;
+  opacity: 0;
+  transform: scaleX(0);
+  will-change: opacity, transform;
+}
+.biolink-theme .intro-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  font-weight: 500;
+  color: #74685d;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  will-change: opacity, transform;
+}
+.biolink-theme .intro-skip-hint {
+  position: absolute;
+  bottom: 24px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #a5978a;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+/* CINEMATIC PHOTOGRAPHIC BACKGROUND SYSTEM */
+.biolink-theme .cinematic-bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #241c16;
+}
+
+.biolink-theme .cinematic-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.biolink-theme .cinematic-bg-layer.active {
+  opacity: 0.85;
+  transform: scale(1);
+}
+
+@media (min-width: 1024px) {
+  .biolink-theme .cinematic-bg-layer.layer-consultorio {
+    background-position: 75% 26%;
+    background-size: auto 115%;
+  }
+  .biolink-theme .cinematic-bg-layer.layer-cirurgia {
+    background-position: 70% 35%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .biolink-theme .cinematic-bg-layer {
+    background-position: 65% 10%;
+    background-size: auto 65%;
+  }
+  .biolink-theme .cinematic-bg-layer.active {
+    opacity: 0.65;
+  }
+}
+
+.biolink-theme .cinematic-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    linear-gradient(90deg, rgba(36, 28, 22, 0.94) 0%, rgba(40, 32, 25, 0.82) 40%, rgba(32, 25, 20, 0.35) 85%),
+    linear-gradient(180deg, rgba(32, 25, 20, 0.65) 0%, rgba(26, 20, 16, 0.94) 75%, #201813 100%);
+}
+
+@media (max-width: 1023px) {
+  .biolink-theme .cinematic-shade {
+    background: 
+      linear-gradient(0deg, #201813 0%, #201813 32%, rgba(36, 28, 22, 0.88) 58%, rgba(40, 32, 25, 0.45) 82%, rgba(32, 25, 20, 0.2) 100%);
+  }
+}
+
+/* OPTIMIZED COMPACT CLINIC CARDS */
+.biolink-theme .clinic-card-bg {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+  background-color: #241c15;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 235px;
+  padding: 16px 18px;
+  color: #f8f5ef;
+}
+
+.biolink-theme .clinic-card-bg:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.biolink-theme .clinic-card-bg-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  opacity: 1;
+}
+
+.biolink-theme .clinic-card-bg:hover .clinic-card-bg-photo {
+  transform: scale(1.04);
+}
+
+.biolink-theme .clinic-card-bg-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 24, 19, 0.90) 0%,
+    rgba(34, 27, 21, 0.50) 30%,
+    rgba(34, 27, 21, 0.85) 65%,
+    rgba(26, 20, 15, 0.98) 100%
+  );
+  pointer-events: none;
+}
+
+.biolink-theme .clinic-card-bg.featured {
+  border-color: rgba(193, 165, 134, 0.7);
+  box-shadow: 0 14px 36px -6px rgba(18, 13, 9, 0.65), 0 0 20px rgba(193, 165, 134, 0.22);
+  position: relative;
+}
+
+.biolink-theme .clinic-card-bg.featured::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(222, 201, 173, 0.6), transparent 50%, rgba(193, 165, 134, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: featuredGlow 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes featuredGlow {
+  0% { opacity: 0.45; }
+  100% { opacity: 0.9; }
+}
+
+/* OPTIMIZED COMPACT SURGICAL CARD */
+.biolink-theme .surgical-card-bg {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  isolation: isolate;
+  background-color: #241c15;
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+  padding: 18px 22px;
+  color: #f8f5ef;
+}
+
+.biolink-theme .surgical-card-bg:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.biolink-theme .surgical-card-bg-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 70% 35%;
+  background-repeat: no-repeat;
+  z-index: -2;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  opacity: 1;
+}
+
+.biolink-theme .surgical-card-bg:hover .surgical-card-bg-photo {
+  transform: scale(1.03);
+}
+
+.biolink-theme .surgical-card-bg-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(32, 27, 22, 0.95) 0%,
+    rgba(35, 29, 22, 0.82) 42%,
+    rgba(32, 27, 22, 0.2) 85%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .biolink-theme .surgical-card-bg-shade {
+    background: linear-gradient(
+      0deg,
+      rgba(30, 24, 19, 0.98) 0%,
+      rgba(34, 27, 21, 0.88) 45%,
+      rgba(32, 27, 22, 0.3) 100%
+    );
+  }
+  .biolink-theme .clinic-card-bg {
+    min-height: 185px;
+    padding: 14px 15px;
+  }
+  .biolink-theme .surgical-card-bg {
+    padding: 16px 16px;
+  }
+}
+
+/* ENHANCED LUXURY BUTTONS */
+.biolink-theme .button {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  background: var(--cream);
+  border: 1px solid var(--cream);
+  color: #241c16;
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.28s cubic-bezier(0.2, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.biolink-theme .button:hover {
+  background: #ffffff;
+  color: #241c16;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+
+.biolink-theme .button-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #1a9e4b 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 18px rgba(37, 211, 102, 0.32) !important;
+  font-weight: 600;
+}
+
+.biolink-theme .button-whatsapp:hover {
+  background: linear-gradient(135deg, #28e871 0%, #1fb054 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 26px rgba(37, 211, 102, 0.48) !important;
+  transform: translateY(-2px);
+}
+
+/* Shimmer highlight sweeping across buttons */
+.biolink-theme .button-whatsapp::before,
+.biolink-theme .button-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: buttonShine 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes buttonShine {
+  0%, 70% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.biolink-theme .button-gold {
+  background: linear-gradient(135deg, #c1a586 0%, #8f6f4c 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 5px 18px rgba(193, 165, 134, 0.32) !important;
+}
+
+.biolink-theme .button-gold:hover {
+  background: linear-gradient(135deg, #dec9ad 0%, #9e7a53 100%) !important;
+  color: #140e0a !important;
+  box-shadow: 0 8px 24px rgba(193, 165, 134, 0.45) !important;
+  transform: translateY(-2px);
+}
+
+/* CARDS & PILLS */
+.biolink-theme .official-card {
+  background: rgba(36, 28, 22, 0.85);
+  border: 1px solid rgba(193, 165, 134, 0.25);
+  border-radius: 14px;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+.biolink-theme .official-card:hover {
+  transform: translateY(-2.5px);
+  border-color: rgba(193, 165, 134, 0.6);
+  background: rgba(46, 36, 28, 0.95);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}

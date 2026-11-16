@@ -21,10 +21,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Dr. Raimundo Aldemar | Otorrinolaringologista em Brasília",
-  description: "Otorrinolaringologia para adultos e crianças em Brasília. CRM-DF 20094 · RQE 13936. Atendimento em Taguatinga (CDO), Gama (Otogama) e Asa Norte (Otorhynus).",
+  description: "Otorrinolaringologia para adultos e crianças em Brasília. CRM-DF 20094 · RQE 13936. Atendimento na Asa Norte (Otorhynus) e no Gama (Otogama).",
   openGraph: {
     title: "Dr. Raimundo Aldemar | Otorrinolaringologista em Brasília",
-    description: "Otorrinolaringologia para adultos e crianças em Brasília. CRM-DF 20094 · RQE 13936. Atendimento em Taguatinga, Gama e Asa Norte.",
+    description: "Otorrinolaringologia para adultos e crianças em Brasília. CRM-DF 20094 · RQE 13936. Atendimento na Asa Norte e no Gama.",
     url: "/",
     siteName: "Dr. Raimundo Aldemar — Otorrinolaringologia",
     locale: "pt_BR",

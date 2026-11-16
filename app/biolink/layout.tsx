@@ -19,7 +19,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 export const metadata: Metadata = {
   title: "Dr. Raimundo Aldemar | Agendamento & Links Oficiais",
-  description: "Agende sua consulta de Otorrinolaringologia com o Dr. Raimundo Aldemar. Atendimento no CDO Otorrino (Taguatinga), Otogama (Gama) e Otorhynus (Asa Norte).",
+  description: "Agende sua consulta de Otorrinolaringologia com o Dr. Raimundo Aldemar. Atendimento na Otorhynus (Asa Norte) e Otogama (Gama).",
   alternates: {
     canonical: "/biolink",
   },

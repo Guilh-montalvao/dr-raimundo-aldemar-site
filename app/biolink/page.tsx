@@ -41,17 +41,17 @@ interface Clinic {
 
 const clinics: Clinic[] = [
   {
-    id: "taguatinga",
-    region: "TAGUATINGA",
-    name: "CDO Otorrino",
-    badge: "Hospital Anchieta",
-    address: "Centro Médico Hospital Anchieta, Salas 111/112 B",
-    neighborhood: "Área Especial 08/09/10, Setor C Norte",
-    whatsapp: "61983230103",
-    phone: "(61) 3352-6994",
-    phoneRaw: "+556133526994",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=CDO+Otorrino+Hospital+Anchieta+Taguatinga",
-    image: "/media/cdootorrino.png",
+    id: "asanorte",
+    region: "ASA NORTE",
+    name: "Otorhynus Clínica",
+    badge: "Ed. Multiclínicas",
+    address: "SHLN, Bloco J, Edifício Multiclínicas, Salas 102 a 104",
+    neighborhood: "Asa Norte · Brasília, DF",
+    whatsapp: "61985743764",
+    phone: "(61) 3340-8859",
+    phoneRaw: "+556133408859",
+    mapUrl: "https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8",
+    image: "/media/otorhynus.png",
     featured: true,
   },
   {
@@ -66,19 +66,6 @@ const clinics: Clinic[] = [
     phoneRaw: "+556132540111",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul",
     image: "/media/otogama.png",
-  },
-  {
-    id: "asanorte",
-    region: "ASA NORTE",
-    name: "Otorhynus Clínica",
-    badge: "Ed. Multiclínicas",
-    address: "SHLN, Bloco J, Edifício Multiclínicas, Salas 102 a 104",
-    neighborhood: "Asa Norte · Brasília, DF",
-    whatsapp: "61985743764",
-    phone: "(61) 3340-8859",
-    phoneRaw: "+556133408859",
-    mapUrl: "https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8",
-    image: "/media/otorhynus.png",
   },
 ];
 
@@ -125,12 +112,19 @@ export default function BiolinkPage() {
         introTlRef.current = introTl;
 
         introTl
-          .to(".intro-logo", { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power2.out" })
+          .fromTo(
+            ".intro-bg-photo",
+            { opacity: 0, scale: 1.08, x: 22 },
+            { opacity: 1, scale: 1.02, x: 0, duration: 1.35, ease: "power2.out" },
+            0
+          )
+          .to(".intro-logo", { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power2.out" }, 0.15)
           .to(".intro-divider", { scaleX: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, "-=0.35")
           .to(".intro-subtitle", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.35")
           .to(".intro-skip-hint", { opacity: 0.75, duration: 0.4 }, "-=0.2")
           .to(".intro-content", { opacity: 0, y: -16, duration: 0.45, ease: "power2.in", delay: 0.45 })
-          .to(".site-intro", { yPercent: -100, duration: 0.85, ease: "power4.inOut" }, "-=0.12")
+          .to(".intro-bg-photo", { scale: 1, yPercent: 18, duration: 0.85, ease: "power4.inOut" }, "-=0.12")
+          .to(".site-intro", { yPercent: -100, duration: 0.85, ease: "power4.inOut" }, "<")
           .fromTo(
             ".cinematic-cover-img",
             { scale: 1.06, opacity: 0.85 },
@@ -221,6 +215,8 @@ export default function BiolinkPage() {
         role="banner"
         aria-label="Apresentação inicial Dr. Raimundo Aldemar"
       >
+        <div className="intro-bg-photo" aria-hidden="true" />
+        <div className="intro-bg-shade" aria-hidden="true" />
         <div className="intro-content">
           <img
             src="/media/logo.png"
@@ -331,8 +327,8 @@ export default function BiolinkPage() {
             <span className="text-[10.5px] text-[#dec9ad]">Particular e Convênios</span>
           </div>
 
-          {/* 3 Compact Clinic Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 items-stretch">
+          {/* 2 Compact Clinic Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 items-stretch">
             {clinics.map((clinic) => (
               <article
                 key={clinic.id}
@@ -455,7 +451,7 @@ export default function BiolinkPage() {
             </div>
 
             <a
-              href={whatsappUrl("61983230103", "CDO Otorrino — Avaliação Cirúrgica")}
+              href={whatsappUrl("61985743764", "Otorhynus Clínica — Avaliação Cirúrgica")}
               target="_blank"
               rel="noopener noreferrer"
               className="button button-gold shrink-0 w-full sm:w-auto !justify-between !min-h-[42px] !text-[12.5px] !py-2.5 !px-4 shadow-md mt-1 lg:mt-0"

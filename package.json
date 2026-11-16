@@ -7,7 +7,7 @@
   },
   "scripts": {
     "install:ci": "bash scripts/install-pnpm.sh",
-    "dev": "node scripts/run-framework.mjs dev",
+    "dev": "next dev --port 5173",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",

@@ -14,6 +14,16 @@ if (managedLinux && command === "build") {
   process.exit(result.status ?? 1);
 }
 
+// Prevent vinext's socket-error-backstop from re-throwing Windows EBUSY/EPERM watcher errors.
+process[Symbol.for("vinext.socketErrorBackstopInstalled")] = true;
+process.on("uncaughtException", (err) => {
+  if (err && (err.code === "EBUSY" || err.code === "EPERM" || err.code === "ECONNRESET" || err.code === "EPIPE")) {
+    return;
+  }
+  console.error(err);
+  process.exit(1);
+});
+
 // Import in this process so the preview owner retains its PID and signals.
 const cli = new URL(managedLinux
   ? "../node_modules/vite/bin/vite.js"

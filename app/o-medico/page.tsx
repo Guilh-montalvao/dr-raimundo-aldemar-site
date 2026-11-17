@@ -10,6 +10,7 @@ import {
   ContactSection,
   SiteFooter,
   LinkButton,
+  SmartVideo,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,6 +19,7 @@ export default function OMedicoPage() {
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
@@ -46,7 +48,7 @@ export default function OMedicoPage() {
                 trigger: el,
                 start: "top 92%",
                 end: "bottom 8%",
-                toggleActions: "play reverse play reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -153,8 +155,15 @@ export default function OMedicoPage() {
                 todas as decisões.
               </p>
 
-              <div className="credentials" data-reveal>
-                <div>
+              <div className="credentials credentials-with-logos" data-reveal>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo-ufg.png"
+                      alt="Logo UFG"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>Universidade Federal de Goiás — UFG</strong>
                     <small>
@@ -162,7 +171,14 @@ export default function OMedicoPage() {
                     </small>
                   </p>
                 </div>
-                <div>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo-hfa.webp"
+                      alt="Logo HFA"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>Hospital das Forças Armadas — HFA</strong>
                     <small>
@@ -171,7 +187,14 @@ export default function OMedicoPage() {
                     </small>
                   </p>
                 </div>
-                <div>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo-ABORL.png"
+                      alt="Logo ABORL-CCF"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>Sociedade Brasília de Otorrinolaringologia</strong>
                     <small>
@@ -179,7 +202,14 @@ export default function OMedicoPage() {
                     </small>
                   </p>
                 </div>
-                <div>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo.webp"
+                      alt="Logo Dr. Raimundo Aldemar"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>CRM-DF 20094 e RQE 13936</strong>
                     <small>
@@ -206,7 +236,7 @@ export default function OMedicoPage() {
                   data-parallax
                   style={{
                     backgroundImage:
-                      "url('/media/dr-raimundo-consultorio.png')",
+                      "url('/media/dr-raimundo-consultorio.webp')",
                   }}
                 />
               </div>
@@ -274,16 +304,9 @@ export default function OMedicoPage() {
 
             <div className="about-visual" data-reveal>
               <div className="section-video-showcase">
-                <video
+                <SmartVideo
                   src="/videos/ser-medico.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls
-                  preload="metadata"
-                  className="children-video-player"
-                  aria-label="Vídeo Dr. Raimundo Aldemar — Ser médico"
+                  ariaLabel="Vídeo Dr. Raimundo Aldemar — Ser médico"
                 />
               </div>
               <div className="photo-caption video-caption">

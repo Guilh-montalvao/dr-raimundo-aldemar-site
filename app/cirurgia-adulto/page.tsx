@@ -30,7 +30,7 @@ const adultSurgeries = [
     id: "turbinectomia",
     title: "Remoção dos cornetos nasais (Turbinectomia)",
     text: "Redução cirúrgica dos cornetos nasais hipertrofiados para aliviar a obstrução nasal crônica e potencializar o controle da rinite.",
-    image: "/media/exame-nasal.png",
+    image: "/media/exame-nasal.webp",
   },
   {
     id: "amigdalectomia",
@@ -57,6 +57,7 @@ export default function CirurgiaAdultoPage() {
   const [activeSurgery, setActiveSurgery] = useState("septo");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
@@ -85,7 +86,7 @@ export default function CirurgiaAdultoPage() {
                 trigger: el,
                 start: "top 92%",
                 end: "bottom 8%",
-                toggleActions: "play reverse play reverse",
+                toggleActions: "play none none none",
               },
             }
           );

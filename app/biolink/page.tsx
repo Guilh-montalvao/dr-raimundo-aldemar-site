@@ -51,7 +51,7 @@ const clinics: Clinic[] = [
     phone: "(61) 3340-8859",
     phoneRaw: "+556133408859",
     mapUrl: "https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8",
-    image: "/media/otorhynus.png",
+    image: "/media/otorhynus.webp",
     featured: true,
   },
   {
@@ -65,7 +65,7 @@ const clinics: Clinic[] = [
     phone: "(61) 3254-0111",
     phoneRaw: "+556132540111",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul",
-    image: "/media/otogama.png",
+    image: "/media/otogama.webp",
   },
 ];
 
@@ -180,7 +180,7 @@ export default function BiolinkPage() {
   const handleShare = async () => {
     const shareData = {
       title: "Dr. Raimundo Aldemar — Otorrinolaringologia em Brasília",
-      text: "Agende sua consulta de Otorrino com Dr. Raimundo Aldemar (Taguatinga, Gama e Asa Norte).",
+      text: "Agende sua consulta de Otorrino com Dr. Raimundo Aldemar (Asa Norte e Gama).",
       url: typeof window !== "undefined" ? window.location.href : siteUrl,
     };
 
@@ -219,7 +219,7 @@ export default function BiolinkPage() {
         <div className="intro-bg-shade" aria-hidden="true" />
         <div className="intro-content">
           <img
-            src="/media/logo.png"
+            src="/media/logo.webp"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             className="intro-logo"
             width="2048"
@@ -235,7 +235,7 @@ export default function BiolinkPage() {
       <div className="cinematic-bg-container" aria-hidden="true">
         <div
           className="cinematic-bg-layer active"
-          style={{ backgroundImage: "url('/media/retrato.webp')" }}
+          style={{ backgroundImage: "url('/media/background-hero-section.webp')" }}
         />
         <div className="cinematic-shade" />
       </div>
@@ -243,9 +243,9 @@ export default function BiolinkPage() {
       {/* 2. STREAMLINED COMPACT COVER BANNER */}
       <div className="cinematic-hero-cover relative w-full h-28 sm:h-36 md:h-40 overflow-hidden">
         <img
-          src="/media/cirurgia.webp"
-          alt="Dr. Raimundo Aldemar — Cirurgia Otorrinolaringológica"
-          className="cinematic-cover-img w-full h-full object-cover object-[center_28%] filter contrast-105 brightness-95"
+          src="/media/background-hero-section.webp"
+          alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
+          className="cinematic-cover-img w-full h-full object-cover object-[right_28%] filter contrast-105 brightness-95"
         />
         <div
           className="absolute inset-0 pointer-events-none"
@@ -291,7 +291,7 @@ export default function BiolinkPage() {
               aria-label="Instagram @raimundo.otorrino"
             >
               <img
-                src="/media/perfil-instagram-corrigido.png"
+                src="/media/perfil-instagram-corrigido.webp"
                 alt="Dr. Raimundo Aldemar — @raimundo.otorrino"
                 className="w-[195px] sm:w-[235px] h-auto object-contain block filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)]"
                 width="2172"
@@ -306,7 +306,7 @@ export default function BiolinkPage() {
               CRM-DF 20094 · RQE 13936
             </span>
             <span className="opacity-30">·</span>
-            <span>Otorrinolaringologia & Cirurgia Facial</span>
+            <span>Otorrinolaringologia (UFG · HFA)</span>
             <span className="opacity-30 hidden xs:inline">·</span>
             <span className="text-[#c1a586] font-medium">Adultos e Crianças</span>
           </div>
@@ -431,15 +431,21 @@ export default function BiolinkPage() {
               </div>
 
               <h3 className="text-[16px] sm:text-[18px] font-bold text-[#f8f5ef] leading-snug mb-1">
-                Avaliação Cirúrgica Especializada{" "}
+                Exames em Consultório e Cirurgias{" "}
                 <span className="serif text-[#dec9ad]">com Clareza e Segurança</span>
               </h3>
               <p className="text-[12px] sm:text-[12.5px] text-[#ece3d9] leading-relaxed mb-2">
-                Rinoplastia estética e funcional, desvio de septo, amígdalas, adenoide e sinusite. Esclareça dúvidas e agende diretamente com a equipe cirúrgica.
+                Videoendoscopia nasal flexível, laringoscopia, desvio de septo, cornetos nasais, amígdalas, adenoide, tubo de ventilação, frenectomia, sinusite e ronco/apneia.
               </p>
 
               <div className="flex flex-wrap gap-1.5">
-                {["Rinoplastia", "Desvio de Septo", "Amígdalas & Adenoide", "Sinusite"].map((proc) => (
+                {[
+                  "Videoendoscopia Flexível",
+                  "Desvio de Septo & Cornetos",
+                  "Amígdalas & Adenoide",
+                  "Cirurgia Endoscópica Nasal",
+                  "Ronco & Apneia",
+                ].map((proc) => (
                   <span
                     key={proc}
                     className="text-[10.5px] px-2 py-0.5 rounded-md bg-black/45 text-[#dec9ad] border border-[#c1a586]/25 font-medium"
@@ -529,7 +535,7 @@ export default function BiolinkPage() {
           aria-label="Voltar para a página inicial"
         >
           <img
-            src="/media/logo.png"
+            src="/media/logo.webp"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             className="h-7 w-auto object-contain"
           />

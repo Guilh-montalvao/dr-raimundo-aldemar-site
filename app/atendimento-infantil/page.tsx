@@ -15,6 +15,7 @@ import {
   ContactSection,
   SiteFooter,
   LinkButton,
+  SmartVideo,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -79,6 +80,7 @@ export default function AtendimentoInfantilPage() {
   const [activeSurgery, setActiveSurgery] = useState("amigdalectomia");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
@@ -107,7 +109,7 @@ export default function AtendimentoInfantilPage() {
                 trigger: el,
                 start: "top 92%",
                 end: "bottom 8%",
-                toggleActions: "play reverse play reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -169,16 +171,9 @@ export default function AtendimentoInfantilPage() {
             </div>
           </div>
           <div className="children-video-float hero-reveal">
-            <video
+            <SmartVideo
               src="/videos/super-heroi.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              controls
-              preload="metadata"
-              className="children-video-player"
-              aria-label="Vídeo de atendimento infantil — pequeno super-herói"
+              ariaLabel="Vídeo de atendimento infantil — pequeno super-herói"
             />
           </div>
           <div className="children-footnote hero-reveal">

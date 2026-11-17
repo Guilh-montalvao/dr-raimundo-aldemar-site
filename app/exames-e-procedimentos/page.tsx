@@ -15,6 +15,7 @@ import {
   ContactSection,
   SiteFooter,
   LinkButton,
+  SmartVideo,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -51,6 +52,7 @@ export default function ExamesEProcedimentosPage() {
   const [activeProcedure, setActiveProcedure] = useState("lavagem");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
@@ -79,7 +81,7 @@ export default function ExamesEProcedimentosPage() {
                 trigger: el,
                 start: "top 92%",
                 end: "bottom 8%",
-                toggleActions: "play reverse play reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -212,16 +214,9 @@ export default function ExamesEProcedimentosPage() {
 
             <div className="about-visual" data-reveal>
               <div className="section-video-showcase">
-                <video
+                <SmartVideo
                   src="/videos/endoscopia-nasal.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls
-                  preload="metadata"
-                  className="children-video-player"
-                  aria-label="Vídeo de exame de videoendoscopia nasal com ótica flexível"
+                  ariaLabel="Vídeo de exame de videoendoscopia nasal com ótica flexível"
                 />
               </div>
               <div className="photo-caption video-caption">
@@ -270,16 +265,9 @@ export default function ExamesEProcedimentosPage() {
           <div className="specialties-grid">
             <div className="area-context area-video-context" data-reveal>
               <div className="section-video-showcase">
-                <video
+                <SmartVideo
                   src="/videos/lavagem-de-ouvido.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls
-                  preload="metadata"
-                  className="children-video-player"
-                  aria-label="Vídeo de procedimento de lavagem de ouvido em consultório"
+                  ariaLabel="Vídeo de procedimento de lavagem de ouvido em consultório"
                 />
               </div>
             </div>

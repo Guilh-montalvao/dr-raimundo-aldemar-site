@@ -16,6 +16,7 @@ import {
   ContactSection,
   SiteFooter,
   LinkButton,
+  SmartVideo,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,27 +42,31 @@ const areas = [
   },
 ];
 
-let introHasPlayedInSession = false;
+let introCompletedInSpa = false;
 
 export default function Home() {
   const root = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
+  const introStartedRef = useRef(false);
   const introTlRef = useRef<gsap.core.Timeline | null>(null);
   const [activeArea, setActiveArea] = useState("ouvidos");
 
   useEffect(() => {
-    if (introHasPlayedInSession) {
+    window.scrollTo(0, 0);
+    if (introCompletedInSpa) {
       if (introRef.current) introRef.current.style.display = "none";
-    } else {
-      introHasPlayedInSession = true;
+    } else if (!introStartedRef.current) {
+      introStartedRef.current = true;
       const prefersReduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
       if (prefersReduced) {
+        introCompletedInSpa = true;
         if (introRef.current) introRef.current.style.display = "none";
       } else {
         const introTl = gsap.timeline({
           onComplete: () => {
+            introCompletedInSpa = true;
             if (introRef.current) introRef.current.style.display = "none";
           },
         });
@@ -156,7 +161,7 @@ export default function Home() {
                 trigger: el,
                 start: "top 92%",
                 end: "bottom 8%",
-                toggleActions: "play reverse play reverse",
+                toggleActions: "play none none none",
               },
             }
           );
@@ -204,6 +209,7 @@ export default function Home() {
         className="site-intro"
         id="site-intro"
         onClick={() => {
+          introCompletedInSpa = true;
           if (introTlRef.current) {
             introTlRef.current.progress(1);
           }
@@ -218,7 +224,7 @@ export default function Home() {
         <div className="intro-bg-shade" aria-hidden="true" />
         <div className="intro-content">
           <img
-            src="/media/logo.png"
+            src="/media/logo.webp"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             className="intro-logo"
             width="2048"
@@ -307,14 +313,28 @@ export default function Home() {
                 Na consulta, meu compromisso é ouvir o que você sente, explicar
                 a avaliação e orientar os próximos passos com clareza.
               </p>
-              <div className="credentials" data-reveal>
-                <div>
+              <div className="credentials credentials-with-logos" data-reveal>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo-ufg.png"
+                      alt="Logo UFG"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>Universidade Federal de Goiás — UFG</strong>
                     <small>Formado pela Universidade Federal de Goiás</small>
                   </p>
                 </div>
-                <div>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo-hfa.webp"
+                      alt="Logo HFA"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>Hospital das Forças Armadas — HFA</strong>
                     <small>
@@ -322,7 +342,14 @@ export default function Home() {
                     </small>
                   </p>
                 </div>
-                <div>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo-ABORL.png"
+                      alt="Logo ABORL-CCF"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>Sociedade Brasília de Otorrinolaringologia</strong>
                     <small>
@@ -330,7 +357,14 @@ export default function Home() {
                     </small>
                   </p>
                 </div>
-                <div>
+                <div className="credential-row">
+                  <span className="credential-logo-wrap">
+                    <img
+                      src="/media/logo.webp"
+                      alt="Logo Dr. Raimundo Aldemar"
+                      loading="lazy"
+                    />
+                  </span>
                   <p>
                     <strong>CRM-DF 20094 · RQE 13936</strong>
                     <small>
@@ -353,13 +387,25 @@ export default function Home() {
                   className="photo-background"
                   data-parallax
                   style={{
-                    backgroundImage: "url('/media/dr-raimundo-consultorio.png')",
+                    backgroundImage: "url('/media/dr-raimundo-consultorio.webp')",
                   }}
                 />
               </div>
               <div className="photo-caption">
                 <span>Dr. Raimundo Aldemar</span>
                 <span>CRM-DF 20094 · RQE 13936</span>
+              </div>
+              <div className="about-video-below" data-reveal>
+                <div className="section-video-showcase">
+                  <SmartVideo
+                    src="/videos/ser-medico.mp4"
+                    ariaLabel="Vídeo Dr. Raimundo Aldemar — Ser médico"
+                  />
+                </div>
+                <div className="photo-caption video-caption">
+                  <span>O significado de ser médico</span>
+                  <span>Vocação e propósito</span>
+                </div>
               </div>
             </div>
           </div>
@@ -469,16 +515,9 @@ export default function Home() {
             </div>
           </div>
           <div className="children-video-float" data-reveal>
-            <video
+            <SmartVideo
               src="/videos/super-heroi.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              controls
-              preload="metadata"
-              className="children-video-player"
-              aria-label="Vídeo de atendimento infantil — pequeno super-herói"
+              ariaLabel="Vídeo de atendimento infantil — pequeno super-herói"
             />
           </div>
           <div className="children-footnote" data-reveal>

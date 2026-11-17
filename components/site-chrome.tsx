@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -130,6 +130,53 @@ export function LinkButton({
   );
 }
 
+export function SmartVideo({
+  src,
+  ariaLabel,
+  className = "children-video-player",
+}: {
+  src: string;
+  ariaLabel: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.play().catch(() => {});
+          } else {
+            el.pause();
+          }
+        });
+      },
+      { rootMargin: "180px 0px", threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      loop
+      muted
+      playsInline
+      controls
+      preload="metadata"
+      className={className}
+      aria-label={ariaLabel}
+    />
+  );
+}
+
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -145,6 +192,24 @@ export function SiteHeader() {
     }, 220);
   };
 
+  const handleRouteClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    closeMobile = false
+  ) => {
+    if (closeMobile) setMenuOpen(false);
+    if (href === pathname) {
+      e.preventDefault();
+      if (closeMobile) {
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 220);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <>
       <a href="#principal" className="skip-link">
@@ -153,11 +218,12 @@ export function SiteHeader() {
       <header className="site-header">
         <Link
           href="/"
+          onClick={(e) => handleRouteClick(e, "/")}
           className="brand"
           aria-label="Dr. Raimundo Aldemar — início"
         >
           <img
-            src="/media/logo.png"
+            src="/media/logo.webp"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             width="2048"
             height="682"
@@ -185,6 +251,7 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleRouteClick(e, link.href)}
                 className={isActive ? "nav-link-active" : ""}
               >
                 {link.label}
@@ -254,7 +321,7 @@ export function SiteHeader() {
                     key={link.href}
                     href={link.href}
                     className={isActive ? "mobile-nav-active" : ""}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={(e) => handleRouteClick(e, link.href, true)}
                   >
                     {link.label}
                     <ArrowUpRight size={20} />
@@ -319,9 +386,10 @@ export function ContactSection() {
           <article className="location" data-reveal>
             <div className="location-image">
               <img
-                src="/media/otorhynus.png"
+                src="/media/otorhynus.webp"
                 alt="Unidade Otorhynus na Asa Norte"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="location-top">
@@ -399,9 +467,10 @@ export function ContactSection() {
           <article className="location" data-reveal>
             <div className="location-image">
               <img
-                src="/media/otogama.png"
+                src="/media/otogama.webp"
                 alt="Unidade Clínica Otogama no Gama Sul"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="location-top">
@@ -490,10 +559,12 @@ export function ContactSection() {
             aria-label="Acompanhe o Dr. Raimundo Aldemar no Instagram"
           >
             <img
-              src="/media/perfil-instagram-corrigido.png"
+              src="/media/perfil-instagram-corrigido.webp"
               alt="Dr. Raimundo Aldemar no Instagram"
               width="2172"
               height="724"
+              loading="lazy"
+              decoding="async"
               className="instagram-profile-img"
             />
           </a>
@@ -504,14 +575,27 @@ export function ContactSection() {
 }
 
 export function SiteFooter() {
+  const pathname = usePathname();
+
   return (
     <footer className="site-footer">
       <div className="footer-top" data-reveal>
-        <Link href="/" className="footer-brand">
+        <Link
+          href="/"
+          onClick={(e) => {
+            if (pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          className="footer-brand"
+        >
           <img
-            src="/media/logo.png"
+            src="/media/logo.webp"
             width="2048"
             height="682"
+            loading="lazy"
+            decoding="async"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
           />
         </Link>
@@ -522,6 +606,10 @@ export function SiteFooter() {
         </p>
         <a
           href="#principal"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           className="back-top"
           aria-label="Voltar ao início"
         >

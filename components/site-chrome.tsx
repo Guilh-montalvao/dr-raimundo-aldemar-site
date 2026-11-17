@@ -223,10 +223,10 @@ export function SiteHeader() {
           aria-label="Dr. Raimundo Aldemar — início"
         >
           <img
-            src="/media/logo.webp"
+            src="/media/logo.png"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
-            width="2048"
-            height="682"
+            width="640"
+            height="213"
           />
         </Link>
 
@@ -386,7 +386,7 @@ export function ContactSection() {
           <article className="location" data-reveal>
             <div className="location-image">
               <img
-                src="/media/otorhynus.webp"
+                src="/media/otorhynus.jpg"
                 alt="Unidade Otorhynus na Asa Norte"
                 loading="lazy"
                 decoding="async"
@@ -467,7 +467,7 @@ export function ContactSection() {
           <article className="location" data-reveal>
             <div className="location-image">
               <img
-                src="/media/otogama.webp"
+                src="/media/otogama.jpg"
                 alt="Unidade Clínica Otogama no Gama Sul"
                 loading="lazy"
                 decoding="async"
@@ -559,10 +559,10 @@ export function ContactSection() {
             aria-label="Acompanhe o Dr. Raimundo Aldemar no Instagram"
           >
             <img
-              src="/media/perfil-instagram-corrigido.webp"
+              src="/media/perfil-instagram-corrigido.png"
               alt="Dr. Raimundo Aldemar no Instagram"
-              width="2172"
-              height="724"
+              width="900"
+              height="300"
               loading="lazy"
               decoding="async"
               className="instagram-profile-img"
@@ -591,9 +591,9 @@ export function SiteFooter() {
           className="footer-brand"
         >
           <img
-            src="/media/logo.webp"
-            width="2048"
-            height="682"
+            src="/media/logo.png"
+            width="640"
+            height="213"
             loading="lazy"
             decoding="async"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"

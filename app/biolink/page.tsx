@@ -51,7 +51,7 @@ const clinics: Clinic[] = [
     phone: "(61) 3340-8859",
     phoneRaw: "+556133408859",
     mapUrl: "https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8",
-    image: "/media/otorhynus.webp",
+    image: "/media/otorhynus.jpg",
     featured: true,
   },
   {
@@ -65,7 +65,7 @@ const clinics: Clinic[] = [
     phone: "(61) 3254-0111",
     phoneRaw: "+556132540111",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul",
-    image: "/media/otogama.webp",
+    image: "/media/otogama.jpg",
   },
 ];
 
@@ -219,11 +219,11 @@ export default function BiolinkPage() {
         <div className="intro-bg-shade" aria-hidden="true" />
         <div className="intro-content">
           <img
-            src="/media/logo.webp"
+            src="/media/logo.png"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             className="intro-logo"
-            width="2048"
-            height="682"
+            width="640"
+            height="213"
           />
           <div className="intro-divider" />
           <span className="intro-subtitle">OTORRINOLARINGOLOGIA · BRASÍLIA, DF</span>
@@ -235,7 +235,7 @@ export default function BiolinkPage() {
       <div className="cinematic-bg-container" aria-hidden="true">
         <div
           className="cinematic-bg-layer active"
-          style={{ backgroundImage: "url('/media/background-hero-section.webp')" }}
+          style={{ backgroundImage: "url('/media/background-hero-section.jpg')" }}
         />
         <div className="cinematic-shade" />
       </div>
@@ -243,7 +243,7 @@ export default function BiolinkPage() {
       {/* 2. STREAMLINED COMPACT COVER BANNER */}
       <div className="cinematic-hero-cover relative w-full h-28 sm:h-36 md:h-40 overflow-hidden">
         <img
-          src="/media/background-hero-section.webp"
+          src="/media/background-hero-section.jpg"
           alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
           className="cinematic-cover-img w-full h-full object-cover object-[right_28%] filter contrast-105 brightness-95"
         />
@@ -291,11 +291,11 @@ export default function BiolinkPage() {
               aria-label="Instagram @raimundo.otorrino"
             >
               <img
-                src="/media/perfil-instagram-corrigido.webp"
+                src="/media/perfil-instagram-corrigido.png"
                 alt="Dr. Raimundo Aldemar — @raimundo.otorrino"
                 className="w-[195px] sm:w-[235px] h-auto object-contain block filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)]"
-                width="2172"
-                height="724"
+                width="900"
+                height="300"
               />
             </a>
           </div>
@@ -412,7 +412,7 @@ export default function BiolinkPage() {
         <section className="surgical-spotlight-card surgical-card-bg group">
           <div
             className="surgical-card-bg-photo filter contrast-105 brightness-95"
-            style={{ backgroundImage: "url('/media/cirurgia.webp')" }}
+            style={{ backgroundImage: "url('/media/cirurgia.jpg')" }}
           />
           <div className="surgical-card-bg-shade" />
 
@@ -535,7 +535,7 @@ export default function BiolinkPage() {
           aria-label="Voltar para a página inicial"
         >
           <img
-            src="/media/logo.webp"
+            src="/media/logo.png"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             className="h-7 w-auto object-contain"
           />

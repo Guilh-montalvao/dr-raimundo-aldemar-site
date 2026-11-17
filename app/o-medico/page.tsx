@@ -156,11 +156,14 @@ export default function OMedicoPage() {
               </p>
 
               <div className="credentials credentials-with-logos" data-reveal>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
                       src="/media/logo-ufg.png"
                       alt="Logo UFG"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -171,11 +174,14 @@ export default function OMedicoPage() {
                     </small>
                   </p>
                 </div>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
-                      src="/media/logo-hfa.webp"
+                      src="/media/logo-hfa.png"
                       alt="Logo HFA"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -187,11 +193,14 @@ export default function OMedicoPage() {
                     </small>
                   </p>
                 </div>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
                       src="/media/logo-ABORL.png"
                       alt="Logo ABORL-CCF"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -202,11 +211,14 @@ export default function OMedicoPage() {
                     </small>
                   </p>
                 </div>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
-                      src="/media/logo.webp"
+                      src="/media/logo.png"
                       alt="Logo Dr. Raimundo Aldemar"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -236,7 +248,7 @@ export default function OMedicoPage() {
                   data-parallax
                   style={{
                     backgroundImage:
-                      "url('/media/dr-raimundo-consultorio.webp')",
+                      "url('/media/dr-raimundo-consultorio.jpg')",
                   }}
                 />
               </div>

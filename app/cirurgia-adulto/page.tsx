@@ -30,7 +30,7 @@ const adultSurgeries = [
     id: "turbinectomia",
     title: "Remoção dos cornetos nasais (Turbinectomia)",
     text: "Redução cirúrgica dos cornetos nasais hipertrofiados para aliviar a obstrução nasal crônica e potencializar o controle da rinite.",
-    image: "/media/exame-nasal.webp",
+    image: "/media/exame-nasal.jpg",
   },
   {
     id: "amigdalectomia",
@@ -48,7 +48,7 @@ const adultSurgeries = [
     id: "ronco",
     title: "Cirurgia para melhorar o ronco e apneia do sono",
     text: "Avaliação e tratamento cirúrgico individualizado das vias aéreas superiores para reduzir o ronco e auxiliar no controle da apneia obstrutiva do sono.",
-    image: "/media/cirurgia.webp",
+    image: "/media/cirurgia.jpg",
   },
 ];
 

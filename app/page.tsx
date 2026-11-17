@@ -224,11 +224,11 @@ export default function Home() {
         <div className="intro-bg-shade" aria-hidden="true" />
         <div className="intro-content">
           <img
-            src="/media/logo.webp"
+            src="/media/logo.png"
             alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
             className="intro-logo"
-            width="2048"
-            height="682"
+            width="640"
+            height="213"
           />
           <div className="intro-divider" />
           <span className="intro-subtitle">
@@ -314,11 +314,14 @@ export default function Home() {
                 a avaliação e orientar os próximos passos com clareza.
               </p>
               <div className="credentials credentials-with-logos" data-reveal>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
                       src="/media/logo-ufg.png"
                       alt="Logo UFG"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -327,11 +330,14 @@ export default function Home() {
                     <small>Formado pela Universidade Federal de Goiás</small>
                   </p>
                 </div>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
-                      src="/media/logo-hfa.webp"
+                      src="/media/logo-hfa.png"
                       alt="Logo HFA"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -342,11 +348,14 @@ export default function Home() {
                     </small>
                   </p>
                 </div>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
                       src="/media/logo-ABORL.png"
                       alt="Logo ABORL-CCF"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -357,11 +366,14 @@ export default function Home() {
                     </small>
                   </p>
                 </div>
-                <div className="credential-row">
-                  <span className="credential-logo-wrap">
+                <div className="credential-row" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <span className="credential-logo-wrap" style={{ width: 72, height: 38, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <img
-                      src="/media/logo.webp"
+                      src="/media/logo.png"
                       alt="Logo Dr. Raimundo Aldemar"
+                      width={72}
+                      height={38}
+                      style={{ maxWidth: 72, maxHeight: 38, width: "auto", height: "auto", objectFit: "contain" }}
                       loading="lazy"
                     />
                   </span>
@@ -387,7 +399,7 @@ export default function Home() {
                   className="photo-background"
                   data-parallax
                   style={{
-                    backgroundImage: "url('/media/dr-raimundo-consultorio.webp')",
+                    backgroundImage: "url('/media/dr-raimundo-consultorio.jpg')",
                   }}
                 />
               </div>

@@ -18,6 +18,7 @@ import {
   LinkButton,
   SmartVideo,
   surgeryWhatsapp,
+  pediatricFaqItems,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -447,6 +448,8 @@ export default function AtendimentoInfantilPage() {
           eyebrow="DÚVIDAS DOS PAIS"
           title="Perguntas frequentes sobre"
           subtitle="respiração e sono infantil."
+          items={pediatricFaqItems}
+          introText="Respostas educativas para as principais dúvidas dos pais sobre adenoide, respiração pela boca, ronco na infância, amígdalas, tubo de ventilação e videoendoscopia nasal infantil."
         />
 
         <ContactSection />

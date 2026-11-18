@@ -297,8 +297,8 @@ h2 .serif,h1 .serif{color:#80664b}
 .quick-booking-scroll-link:hover{color:#fff}
 @keyframes quickFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* Convenios Logos Grid Inside Clinic Card */
-.convenios-logos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:270px;overflow-y:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c1a586 rgba(255,255,255,.06)}
+/* Convenios Logos Grid Inside Clinic Card (Vertical Alphabetical Flow per Column) */
+.convenios-logos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;gap:8px;max-height:270px;overflow-y:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c1a586 rgba(255,255,255,.06)}
 .convenio-chip{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(193,165,134,.22);min-width:0}
 .convenio-logo-box{width:24px;height:24px;border-radius:5px;background:#fff;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
 .convenio-logo-box img{width:100%;height:100%;object-fit:contain;display:block}
@@ -336,9 +336,13 @@ h2 .serif,h1 .serif{color:#80664b}
 @media(max-width:640px){
   .site-footer{padding:48px 24px 86px}
   .footer-grid{grid-template-columns:1fr;gap:32px}
-  .convenios-logos-grid{grid-template-columns:1fr}
+  .convenios-logos-grid{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none!important}
   .footer-bottom{flex-direction:column;align-items:flex-start;margin-top:32px;gap:12px}
 }
+
+/* Desktop Navigation 8-Link Structure Refinement */
+.site-header .desktop-nav{gap:clamp(11px,1.15vw,20px)}
+.site-header .desktop-nav a{font-size:clamp(11.5px,.82vw,13px);white-space:nowrap}
 
 /* Direct Surgery & Pricing Consultation Channel */
 .surgery-cta-group{display:flex;align-items:center;flex-wrap:wrap;gap:22px}

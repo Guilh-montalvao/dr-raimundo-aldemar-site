@@ -25,7 +25,7 @@ const instagramUrl =
   "https://www.instagram.com/raimundo.otorrino?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==";
 
 function whatsappUrl(phone: string, clinic: string) {
-  const text = `Olá! Gostaria de agendar uma consulta com o Dr. Raimundo Aldemar na unidade ${clinic}.`;
+  const text = `Olá! Gostaria de agendar uma consulta com o Dr. Raimundo Aldemar, otorrinolaringologista, na ${clinic}.`;
   return `https://wa.me/55${phone}?text=${encodeURIComponent(text)}`;
 }
 
@@ -613,7 +613,14 @@ export default function BiolinkPage() {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 max-h-[320px] overflow-y-auto pr-1">
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 sm:grid-flow-col gap-2 max-h-[320px] overflow-y-auto pr-1"
+              style={{
+                gridTemplateRows: `repeat(${Math.ceil(
+                  selectedClinicConvenios.convenios.length / 2
+                )}, minmax(0, auto))`,
+              }}
+            >
               {selectedClinicConvenios.convenios.map((conv) => (
                 <div
                   key={conv.name}

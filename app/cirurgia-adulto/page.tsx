@@ -17,6 +17,7 @@ import {
   SiteFooter,
   LinkButton,
   surgeryWhatsapp,
+  adultFaqItems,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -252,9 +253,11 @@ export default function CirurgiaAdultoPage() {
         </section>
 
         <FaqSection
-          eyebrow="DÚVIDAS FREQUENTES"
+          eyebrow="DÚVIDAS FREQUENTES · ADULTO"
           title="Perguntas comuns sobre"
-          subtitle="obstrução nasal e cirurgias."
+          subtitle="obstrução nasal e cirurgias em adultos."
+          items={adultFaqItems}
+          introText="Esclarecimentos médicos sobre cirurgia de desvio de septo, redução dos cornetos nasais, risco do uso prolongado de descongestionantes, sinusite crônica e tratamento cirúrgico do ronco e apneia do sono em adultos."
         />
 
         <ContactSection />

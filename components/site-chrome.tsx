@@ -31,29 +31,50 @@ import {
 
 export const whatsapp = (number: string, clinic: string) =>
   `https://wa.me/55${number}?text=${encodeURIComponent(
-    `Olá! Gostaria de informações para agendar uma consulta com o Dr. Raimundo Aldemar na ${clinic}.`
+    `Olá! Gostaria de informações para agendar uma consulta com o Dr. Raimundo Aldemar, otorrinolaringologista, na ${clinic}.`
   )}`;
 
 export const surgeryWhatsapp = (procedure?: string) =>
   `https://wa.me/556182994767?text=${encodeURIComponent(
     procedure
-      ? `Olá! Gostaria de consultar valores e informações sobre agendamento da cirurgia de ${procedure} com o Dr. Raimundo Aldemar.`
-      : `Olá! Gostaria de consultar valores e informações para agendar cirurgia (criança / adulto) com o Dr. Raimundo Aldemar.`
+      ? `Olá! Gostaria de consultar valores e informações sobre agendamento da cirurgia de ${procedure} com o Dr. Raimundo Aldemar, otorrinolaringologista.`
+      : `Olá! Gostaria de consultar valores e informações para agendar cirurgia (criança / adulto) com o Dr. Raimundo Aldemar, otorrinolaringologista.`
   )}`;
 
 const instagramUrl =
   "https://www.instagram.com/raimundo.otorrino?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==";
 
-const navLinks = [
+export interface NavItem {
+  label: string;
+  href: string;
+  action?: "booking-modal" | "surgery-whatsapp";
+}
+
+export const navLinks: NavItem[] = [
   { label: "Início", href: "/" },
-  { label: "O médico", href: "/o-medico" },
+  { label: "Conheça o Dr. Raimundo Aldemar", href: "/o-medico" },
+  { label: "Consultas e cirurgias - Infantil", href: "/atendimento-infantil" },
+  { label: "Consultas e cirurgias - Adulto", href: "/cirurgia-adulto" },
   { label: "Exames e procedimentos", href: "/exames-e-procedimentos" },
-  { label: "Atendimento infantil", href: "/atendimento-infantil" },
-  { label: "Cirurgia adulto", href: "/cirurgia-adulto" },
-  { label: "Onde encontrar", href: "#contato" },
+  { label: "Locais de atendimento", href: "#contato" },
+  {
+    label: "Agendamento consultas",
+    href: "#agendar-consulta",
+    action: "booking-modal",
+  },
+  {
+    label: "Agendamento cirurgia",
+    href: surgeryWhatsapp(),
+    action: "surgery-whatsapp",
+  },
 ];
 
-export const otorhynusConvenios = [
+const sortAlphabetically = (items: { name: string; logo: string }[]) =>
+  [...items].sort((a, b) =>
+    a.name.localeCompare(b.name, "pt-BR", { sensitivity: "base" })
+  );
+
+export const otorhynusConvenios = sortAlphabetically([
   { name: "AFEB Brasal", logo: "/media/convenios/afeb-brasal.png" },
   { name: "Affego", logo: "/media/convenios/affego.svg" },
   { name: "Assefaz", logo: "/media/convenios/assefaz.png" },
@@ -75,7 +96,10 @@ export const otorhynusConvenios = [
   { name: "Gravia", logo: "/media/convenios/gravia.png" },
   { name: "Infraero", logo: "/media/convenios/infraero.png" },
   { name: "Interlife", logo: "/media/convenios/interlife.png" },
-  { name: "Life Empresarial Premium", logo: "/media/convenios/life-empresarial.png" },
+  {
+    name: "Life Empresarial Premium",
+    logo: "/media/convenios/life-empresarial.png",
+  },
   { name: "Medi Service", logo: "/media/convenios/medi-service.png" },
   { name: "Medsenior", logo: "/media/convenios/medsenior.png" },
   { name: "Notre Dame", logo: "/media/convenios/notre-dame.png" },
@@ -97,9 +121,9 @@ export const otorhynusConvenios = [
   { name: "Sul América", logo: "/media/convenios/sul-america.png" },
   { name: "TRT 5 Saúde", logo: "/media/convenios/trt5-saude.png" },
   { name: "TST Saúde", logo: "/media/convenios/tst-saude.png" },
-];
+]);
 
-export const otogamaConvenios = [
+export const otogamaConvenios = sortAlphabetically([
   { name: "AFEB Brasal", logo: "/media/convenios/afeb-brasal.png" },
   { name: "Affego", logo: "/media/convenios/affego.svg" },
   { name: "Amil", logo: "/media/convenios/amil.png" },
@@ -113,8 +137,8 @@ export const otogamaConvenios = [
   { name: "Care Plus", logo: "/media/convenios/care-plus.png" },
   { name: "Casec (Codevasf)", logo: "/media/convenios/casec.png" },
   { name: "Casembrapa (Embrapa)", logo: "/media/convenios/casembrapa.png" },
-  { name: "CNTI", logo: "/media/convenios/cnti.svg" },
   { name: "Central Nacional Unimed (CNU)", logo: "/media/convenios/unimed.png" },
+  { name: "CNTI", logo: "/media/convenios/cnti.svg" },
   { name: "Conab", logo: "/media/convenios/conab.png" },
   { name: "E-Saúde", logo: "/media/convenios/e-saude.svg" },
   { name: "E-Vida (Eletronorte)", logo: "/media/convenios/e-vida.png" },
@@ -123,10 +147,13 @@ export const otogamaConvenios = [
   { name: "FAPES (BNDES)", logo: "/media/convenios/fapes-bndes.png" },
   { name: "Fascal", logo: "/media/convenios/fascal.svg" },
   { name: "Gama Saúde", logo: "/media/convenios/gama-saude.png" },
-  { name: "GEAP", logo: "/media/convenios/geap.png" },
   { name: "GDF Saúde", logo: "/media/convenios/gdf-saude.png" },
+  { name: "GEAP", logo: "/media/convenios/geap.png" },
   { name: "Gravia", logo: "/media/convenios/gravia.png" },
-  { name: "Life Empresarial Saúde", logo: "/media/convenios/life-empresarial.png" },
+  {
+    name: "Life Empresarial Saúde",
+    logo: "/media/convenios/life-empresarial.png",
+  },
   { name: "Mediservice", logo: "/media/convenios/medi-service.png" },
   { name: "Medsenior", logo: "/media/convenios/medsenior.png" },
   { name: "Notre Dame", logo: "/media/convenios/notre-dame.png" },
@@ -153,11 +180,11 @@ export const otogamaConvenios = [
   { name: "TRT", logo: "/media/convenios/trt5-saude.png" },
   { name: "TST-Saúde", logo: "/media/convenios/tst-saude.png" },
   { name: "Unafisco (Sindifisco)", logo: "/media/convenios/sindifisco.png" },
-];
+]);
 
-export const cdoConvenios = [
-  { name: "Affego", logo: "/media/convenios/affego.svg" },
+export const cdoConvenios = sortAlphabetically([
   { name: "AFEB Brasal", logo: "/media/convenios/afeb-brasal.png" },
+  { name: "Affego", logo: "/media/convenios/affego.svg" },
   { name: "Asete - ASTE", logo: "/media/convenios/asete.svg" },
   { name: "Bacen", logo: "/media/convenios/bacen.png" },
   { name: "Bradesco — Todos", logo: "/media/convenios/bradesco.png" },
@@ -171,9 +198,9 @@ export const cdoConvenios = [
   { name: "CNTI", logo: "/media/convenios/cnti.svg" },
   { name: "Codevasf - Casec", logo: "/media/convenios/casec.png" },
   { name: "Conab", logo: "/media/convenios/conab.png" },
-  { name: "Embratel", logo: "/media/convenios/embratel.png" },
   { name: "E-Saúde", logo: "/media/convenios/e-saude.svg" },
   { name: "E-Vida Eletronorte", logo: "/media/convenios/e-vida.png" },
+  { name: "Embratel", logo: "/media/convenios/embratel.png" },
   { name: "Faceb", logo: "/media/convenios/faceb.svg" },
   { name: "FAPES - BNDES", logo: "/media/convenios/fapes-bndes.png" },
   { name: "Fascal", logo: "/media/convenios/fascal.svg" },
@@ -186,7 +213,10 @@ export const cdoConvenios = [
   { name: "One Health - Amil", logo: "/media/convenios/one-health.svg" },
   { name: "Petrobras - Distribuidora", logo: "/media/convenios/petrobras.png" },
   { name: "Petrobras - Petróleo", logo: "/media/convenios/petrobras.png" },
-  { name: "Plan-Assiste (MPDFT/MPF/MPM/MPT)", logo: "/media/convenios/plan-assiste.png" },
+  {
+    name: "Plan-Assiste (MPDFT/MPF/MPM/MPT)",
+    logo: "/media/convenios/plan-assiste.png",
+  },
   { name: "PLAS/JMU (STM)", logo: "/media/convenios/plas-jmu.svg" },
   { name: "Postal Saúde", logo: "/media/convenios/postal-saude.png" },
   { name: "Proasa", logo: "/media/convenios/proasa.png" },
@@ -203,9 +233,15 @@ export const cdoConvenios = [
   { name: "TRT", logo: "/media/convenios/trt5-saude.png" },
   { name: "TST Saúde", logo: "/media/convenios/tst-saude.png" },
   { name: "Unafisco (Sindifisco)", logo: "/media/convenios/sindifisco.png" },
-];
+]);
 
-export const faqItems = [
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export const pediatricFaqItems: FaqItem[] = [
   {
     id: "adenoide-respiracao-boca",
     question: "Adenoide aumentada e respiração pela boca: quando avaliar?",
@@ -222,7 +258,7 @@ export const faqItems = [
     id: "quando-cirurgia-amigdalas-indicada",
     question: "Quando a cirurgia de amígdalas (amigdalectomia) é indicada?",
     answer:
-      "A amigdalectomia pode ser indicada em crianças e adultos quando ocorrem amigdalites bacterianas de repetição que prejudicam a rotina escolar ou profissional, aumento acentuado das amígdalas causando obstrução respiratória e distúrbios do sono (ronco e apneia), ou quadros persistentes de caseum amigdaliano. A decisão é sempre individualizada após avaliação clínica criteriosa.",
+      "A amigdalectomia pode ser indicada quando ocorrem amigdalites bacterianas de repetição que prejudicam a rotina e o bem-estar da criança, ou aumento acentuado das amígdalas causando obstrução respiratória e distúrbios do sono (ronco e apneia). A decisão é sempre individualizada após avaliação clínica criteriosa.",
   },
   {
     id: "videoendoscopia-nasal-criancas",
@@ -231,11 +267,52 @@ export const faqItems = [
       "A videoendoscopia nasal é realizada no próprio consultório com uma fibra óptica flexível e delicada, o que pode proporcionar maior conforto e tranquilidade para a criança e para os pais. O exame dura poucos minutos, permite visualizar em vídeo toda a cavidade nasal e a região da adenoide em tempo real e oferece um diagnóstico detalhado sem exposição à radiação.",
   },
   {
+    id: "tubo-ventilacao-otite-infantil",
+    question: "Quando a miringotomia e o tubo de ventilação são indicados?",
+    answer:
+      "São indicados principalmente em crianças que apresentam otites médias de repetição ou acúmulo persistente de líquido atrás do tímpano (otite média secretora), que pode afetar a audição e o desenvolvimento da fala. O procedimento permite ventilar o ouvido médio e drenar a secreção com segurança.",
+  },
+];
+
+export const adultFaqItems: FaqItem[] = [
+  {
+    id: "desvio-septo-quando-operar",
+    question: "Quando a cirurgia de desvio de septo (septoplastia) é indicada?",
+    answer:
+      "A septoplastia é indicada para pacientes adultos quando o desvio do septo nasal causa obstrução respiratória persistente, dificuldade para dormir, respiração oral de suplência, cefaleia rinogênica ou sinusites de repetição que não melhoram apenas com tratamento clínico.",
+  },
+  {
+    id: "reducao-cornetos-nasais",
+    question: "Como funciona a redução dos cornetos nasais (turbinoplastia / turbinectomia)?",
+    answer:
+      "Os cornetos nasais aquecem e filtram o ar, mas quando aumentados cronicamente (hipertrofia, muito comum na rinite) bloqueiam a passagem do ar. A redução cirúrgica diminui o volume dos cornetos preservando sua função fisiológica, frequentemente associada à septoplastia para restaurar a respiração livre.",
+  },
+  {
     id: "obstrucao-nasal-descongestionantes",
     question: "Obstrução nasal e uso prolongado de descongestionantes: qual o risco?",
     answer:
       "O uso contínuo de gotas descongestionantes nasais promove apenas alívio momentâneo e pode desencadear rinite medicamentosa (efeito rebote), fazendo com que o nariz fique cada vez mais obstruído, além de oferecer riscos cardiovasculares. Investigar a causa da obstrução — como desvio de septo, aumento dos cornetos nasais, rinite ou sinusite — é o caminho seguro para voltar a respirar bem.",
   },
+  {
+    id: "cirurgia-endoscopica-sinusite",
+    question: "Quando a cirurgia endoscópica nasal para sinusite é recomendada?",
+    answer:
+      "A cirurgia endoscópica nasal é realizada por vídeo, por dentro das narinas e sem cortes externos, sendo indicada para quadros de rinossinusite crônica, pólipos nasais ou bloqueios na drenagem dos seios da face que persistem mesmo após o tratamento medicamentoso adequado.",
+  },
+  {
+    id: "ronco-apneia-adulto",
+    question: "Como é feita a avaliação cirúrgica para ronco e apneia do sono em adultos?",
+    answer:
+      "A investigação avalia toda a via aérea superior (cavidade nasal, septo, cornetos, palato, amígdalas e faringe) por meio de exame clínico, videoendoscopia e exames do sono. O tratamento é individualizado para desobstruir a passagem do ar e melhorar a qualidade do sono e a oxigenação noturna.",
+  },
+];
+
+export const faqItems: FaqItem[] = [
+  pediatricFaqItems[0],
+  pediatricFaqItems[1],
+  pediatricFaqItems[2],
+  pediatricFaqItems[3],
+  adultFaqItems[2],
 ];
 
 function scrollToHash(hash: string) {
@@ -453,13 +530,39 @@ export function SiteHeader() {
 
         <nav className="desktop-nav" aria-label="Navegação principal">
           {navLinks.map((link) => {
+            if (link.action === "booking-modal") {
+              return (
+                <a
+                  key={link.label}
+                  href="#contato"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setBookingOpen(true);
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+            if (link.action === "surgery-whatsapp") {
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                </a>
+              );
+            }
             const isActive =
               link.href.startsWith("/") &&
               !link.href.includes("#") &&
               pathname === link.href;
             return link.href.startsWith("#") ? (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
@@ -470,7 +573,7 @@ export function SiteHeader() {
               </a>
             ) : (
               <Link
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 onClick={(e) => handleRouteClick(e, link.href)}
                 className={isActive ? "nav-link-active" : ""}
@@ -491,16 +594,6 @@ export function SiteHeader() {
           >
             <InstagramIcon size={15} />
             <span>@raimundo.otorrino</span>
-          </a>
-          <a
-            className="header-cta"
-            href="#contato"
-            onClick={(e) => {
-              e.preventDefault();
-              setBookingOpen(true);
-            }}
-          >
-            Agendar consulta <ArrowUpRight size={16} />
           </a>
         </div>
 
@@ -524,13 +617,43 @@ export function SiteHeader() {
             </SheetDescription>
             <nav aria-label="Navegação móvel">
               {navLinks.map((link) => {
+                if (link.action === "booking-modal") {
+                  return (
+                    <a
+                      key={link.label}
+                      href="#contato"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMenuOpen(false);
+                        setTimeout(() => setBookingOpen(true), 200);
+                      }}
+                    >
+                      {link.label}
+                      <ArrowUpRight size={20} />
+                    </a>
+                  );
+                }
+                if (link.action === "surgery-whatsapp") {
+                  return (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {link.label}
+                      <ArrowUpRight size={20} />
+                    </a>
+                  );
+                }
                 const isActive =
                   link.href.startsWith("/") &&
                   !link.href.includes("#") &&
                   pathname === link.href;
                 return link.href.startsWith("#") ? (
                   <a
-                    key={link.href}
+                    key={link.label}
                     href={link.href}
                     onClick={(e) => handleMobileHashClick(e, link.href)}
                   >
@@ -539,7 +662,7 @@ export function SiteHeader() {
                   </a>
                 ) : (
                   <Link
-                    key={link.href}
+                    key={link.label}
                     href={link.href}
                     className={isActive ? "mobile-nav-active" : ""}
                     onClick={(e) => handleRouteClick(e, link.href, true)}
@@ -559,17 +682,6 @@ export function SiteHeader() {
               <InstagramIcon size={19} />
               <span>@raimundo.otorrino</span>
               <ArrowUpRight size={16} />
-            </a>
-            <a
-              className="button"
-              href="#contato"
-              onClick={(e) => {
-                e.preventDefault();
-                setMenuOpen(false);
-                setTimeout(() => setBookingOpen(true), 200);
-              }}
-            >
-              Agendar consulta <ArrowUpRight size={18} />
             </a>
             <p className="menu-credentials">
               Otorrinolaringologista · CRM-DF 20094 · RQE 13936
@@ -785,17 +897,21 @@ export function FaqSection({
   title = "Dúvidas frequentes",
   subtitle = "no consultório.",
   eyebrow = "ORIENTAÇÕES MÉDICAS",
+  items = faqItems,
+  introText = "Respostas educativas para as principais dúvidas sobre respiração nasal, sono, amígdalas, adenoide e exames em consultório.",
 }: {
   title?: string;
   subtitle?: string;
   eyebrow?: string;
+  items?: FaqItem[];
+  introText?: string;
 }) {
   const [activeFaq, setActiveFaq] = useState<string>("");
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
+    mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -823,11 +939,7 @@ export function FaqSection({
             <br />
             <span className="serif">{subtitle}</span>
           </h2>
-          <p>
-            Respostas educativas para as principais dúvidas de pais e pacientes
-            adultos sobre respiração nasal, sono, amígdalas, adenoide e exames
-            em consultório.
-          </p>
+          <p>{introText}</p>
           <p className="faq-authorship">
             <strong>Autoria médica identificada:</strong>
             <br />
@@ -855,7 +967,7 @@ export function FaqSection({
           className="areas-accordion faq-accordion"
           data-reveal
         >
-          {faqItems.map((item) => (
+          {items.map((item) => (
             <AccordionItem
               value={item.id}
               key={item.id}
@@ -969,7 +1081,14 @@ export function ContactSection() {
                     )}
                   </AccordionTrigger>
                   <AccordionContent className="convenios-content">
-                    <div className="convenios-logos-grid">
+                    <div
+                      className="convenios-logos-grid"
+                      style={{
+                        gridTemplateRows: `repeat(${Math.ceil(
+                          otorhynusConvenios.length / 2
+                        )}, minmax(0, auto))`,
+                      }}
+                    >
                       {otorhynusConvenios.map((conv) => (
                         <div key={conv.name} className="convenio-chip">
                           <span className="convenio-logo-box">
@@ -1065,7 +1184,14 @@ export function ContactSection() {
                     )}
                   </AccordionTrigger>
                   <AccordionContent className="convenios-content">
-                    <div className="convenios-logos-grid">
+                    <div
+                      className="convenios-logos-grid"
+                      style={{
+                        gridTemplateRows: `repeat(${Math.ceil(
+                          otogamaConvenios.length / 2
+                        )}, minmax(0, auto))`,
+                      }}
+                    >
                       {otogamaConvenios.map((conv) => (
                         <div key={conv.name} className="convenio-chip">
                           <span className="convenio-logo-box">
@@ -1159,7 +1285,14 @@ export function ContactSection() {
                     )}
                   </AccordionTrigger>
                   <AccordionContent className="convenios-content">
-                    <div className="convenios-logos-grid">
+                    <div
+                      className="convenios-logos-grid"
+                      style={{
+                        gridTemplateRows: `repeat(${Math.ceil(
+                          cdoConvenios.length / 2
+                        )}, minmax(0, auto))`,
+                      }}
+                    >
                       {cdoConvenios.map((conv) => (
                         <div key={conv.name} className="convenio-chip">
                           <span className="convenio-logo-box">
@@ -1201,7 +1334,9 @@ export function ContactSection() {
 
         <div className="surgery-direct-banner" data-reveal>
           <div className="surgery-direct-text">
-            <span className="eyebrow">CANAL DIRETO DE CIRURGIAS · CRIANÇA E ADULTO</span>
+            <span className="eyebrow">
+              CANAL DIRETO DE CIRURGIAS · CRIANÇA E ADULTO
+            </span>
             <h3>Precisa agendar uma cirurgia ou consultar valores?</h3>
             <p>
               Atendimento exclusivo pelo WhatsApp para orçamento cirúrgico,
@@ -1293,50 +1428,65 @@ export function SiteFooter() {
           </p>
         </div>
 
-        {/* COLUNA 2: NAVEGAÇÃO PELO SITE */}
+        {/* COLUNA 2: NAVEGAÇÃO PELO SITE (8 LINKS OFICIAIS) */}
         <div className="footer-col">
           <span className="eyebrow footer-col-title">NAVEGAÇÃO</span>
           <ul className="footer-links-list">
-            <li>
-              <Link href="/" onClick={(e) => handleFooterNav(e, "/")}>
-                Início
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/atendimento-infantil"
-                onClick={(e) => handleFooterNav(e, "/atendimento-infantil")}
-              >
-                Atendimento e Cirurgia Infantil
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/cirurgia-adulto"
-                onClick={(e) => handleFooterNav(e, "/cirurgia-adulto")}
-              >
-                Cirurgia em Adultos
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/exames-e-procedimentos"
-                onClick={(e) => handleFooterNav(e, "/exames-e-procedimentos")}
-              >
-                Exames e Procedimentos
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/o-medico"
-                onClick={(e) => handleFooterNav(e, "/o-medico")}
-              >
-                O Médico e Trajetória
-              </Link>
-            </li>
-            <li>
-              <Link href="/biolink">Links Rápidos (Biolink)</Link>
-            </li>
+            {navLinks.map((link) => {
+              if (link.action === "booking-modal") {
+                return (
+                  <li key={link.label}>
+                    <a
+                      href="#contato"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openQuickBookingModal();
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              }
+              if (link.action === "surgery-whatsapp") {
+                return (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              }
+              if (link.href.startsWith("#")) {
+                return (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToHash(link.href);
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              }
+              return (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    onClick={(e) => handleFooterNav(e, link.href)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -1392,7 +1542,9 @@ export function SiteFooter() {
               className="footer-unit-item footer-unit-surgery"
             >
               <div>
-                <strong>Cirurgias e Consulta de Valores (Criança e Adulto)</strong>
+                <strong>
+                  Cirurgias e Consulta de Valores (Criança e Adulto)
+                </strong>
                 <span>Canal direto de cirurgias · WhatsApp +55 61 8299-4767</span>
               </div>
               <ArrowUpRight size={15} />

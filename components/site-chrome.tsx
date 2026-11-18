@@ -1449,64 +1449,143 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        {/* COLUNA 3: UNIDADES NA ORDEM DE PRIORIDADE */}
+        {/* COLUNA 3: UNIDADES NA ORDEM DE PRIORIDADE COM IMAGENS E EFEITO */}
         <div className="footer-col">
           <span className="eyebrow footer-col-title">
             AGENDAMENTO DIRETO NO WHATSAPP
           </span>
-          <div className="footer-units-list">
+          <div className="quick-booking-units footer-booking-units">
             <a
               href={whatsapp("61985743764", "Unidade Otorhynus (Asa Norte)")}
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-unit-item"
+              className="quick-unit-link"
             >
-              <div>
-                <strong>1. Asa Norte — Unidade Otorhynus</strong>
-                <span>WhatsApp (61) 98574-3764 · (61) 3340-8859</span>
+              <div
+                className="quick-unit-bg"
+                style={{ backgroundImage: "url('/media/otorhynus.jpg')" }}
+                aria-hidden="true"
+              />
+              <div className="quick-unit-shade" aria-hidden="true" />
+              <img
+                src="/media/otorhynus.jpg"
+                alt="Unidade Otorhynus — Asa Norte"
+                className="quick-unit-thumb"
+                width={52}
+                height={52}
+                loading="lazy"
+              />
+              <div className="quick-unit-info">
+                <strong>Otorhynus — Asa Norte</strong>
+                <span>
+                  SHLN, Bloco J, Ed. Multiclínicas · WhatsApp (61) 98574-3764
+                </span>
               </div>
-              <ArrowUpRight size={15} />
+              <span className="quick-unit-action">
+                <MessageCircle size={16} />
+                <ArrowUpRight size={14} />
+              </span>
             </a>
 
             <a
               href={whatsapp("61983466377", "Clínica Otogama (Gama)")}
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-unit-item"
+              className="quick-unit-link"
             >
-              <div>
-                <strong>2. Gama — Clínica Otogama</strong>
-                <span>WhatsApp (61) 98346-6377 · (61) 3254-0111</span>
+              <div
+                className="quick-unit-bg"
+                style={{ backgroundImage: "url('/media/otogama.jpg')" }}
+                aria-hidden="true"
+              />
+              <div className="quick-unit-shade" aria-hidden="true" />
+              <img
+                src="/media/otogama.jpg"
+                alt="Clínica Otogama — Gama"
+                className="quick-unit-thumb"
+                width={52}
+                height={52}
+                loading="lazy"
+              />
+              <div className="quick-unit-info">
+                <strong>Clínica Otogama — Gama</strong>
+                <span>
+                  Quadra 01, Conjunto A, Lote 4, Gama Sul · WhatsApp (61)
+                  98346-6377
+                </span>
               </div>
-              <ArrowUpRight size={15} />
+              <span className="quick-unit-action">
+                <MessageCircle size={16} />
+                <ArrowUpRight size={14} />
+              </span>
             </a>
 
             <a
               href={whatsapp("61983230103", "CDO Otorrino (Taguatinga)")}
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-unit-item"
+              className="quick-unit-link"
             >
-              <div>
-                <strong>3. Taguatinga — CDO Otorrino</strong>
-                <span>WhatsApp (61) 98323-0103 · (61) 3352-6994</span>
+              <div
+                className="quick-unit-bg"
+                style={{ backgroundImage: "url('/media/cdootorrino.jpg')" }}
+                aria-hidden="true"
+              />
+              <div className="quick-unit-shade" aria-hidden="true" />
+              <img
+                src="/media/cdootorrino.jpg"
+                alt="CDO Otorrino — Taguatinga"
+                className="quick-unit-thumb"
+                width={52}
+                height={52}
+                loading="lazy"
+              />
+              <div className="quick-unit-info">
+                <strong>CDO Otorrino — Taguatinga</strong>
+                <span>
+                  Centro Médico Hospital Anchieta, Salas 111/112 B · WhatsApp
+                  (61) 98323-0103
+                </span>
               </div>
-              <ArrowUpRight size={15} />
+              <span className="quick-unit-action">
+                <MessageCircle size={16} />
+                <ArrowUpRight size={14} />
+              </span>
             </a>
 
             <a
               href={surgeryWhatsapp()}
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-unit-item footer-unit-surgery"
+              className="quick-unit-link quick-unit-surgery"
             >
-              <div>
+              <div
+                className="quick-unit-bg"
+                style={{ backgroundImage: "url('/media/cirurgia.jpg')" }}
+                aria-hidden="true"
+              />
+              <div className="quick-unit-shade" aria-hidden="true" />
+              <img
+                src="/media/cirurgia.jpg"
+                alt="Agendar Cirurgia e Consultar Valores"
+                className="quick-unit-thumb"
+                width={52}
+                height={52}
+                loading="lazy"
+              />
+              <div className="quick-unit-info">
                 <strong>
-                  Cirurgias e Consulta de Valores (Criança e Adulto)
+                  Agendar Cirurgia · Consultar Valores (Criança e Adulto)
                 </strong>
-                <span>Canal direto de cirurgias · WhatsApp +55 61 8299-4767</span>
+                <span>
+                  Canal exclusivo da equipe cirúrgica · WhatsApp +55 61
+                  8299-4767
+                </span>
               </div>
-              <ArrowUpRight size={15} />
+              <span className="quick-unit-action">
+                <MessageCircle size={16} />
+                <ArrowUpRight size={14} />
+              </span>
             </a>
           </div>
         </div>

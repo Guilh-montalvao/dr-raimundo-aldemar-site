@@ -511,7 +511,7 @@ export default function BiolinkPage() {
               </div>
               <div>
                 <h3 className="text-[13.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
-                  Site Oficial Completo
+                  Site Oficial
                 </h3>
                 <p className="text-[11px] text-[#ece3d9]">
                   Atendimento infantil, adulto, exames e trajetória médica.

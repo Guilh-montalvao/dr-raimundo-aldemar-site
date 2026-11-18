@@ -9,7 +9,6 @@ import {
   Globe,
   Share2,
   Check,
-  Sparkles,
   ArrowUpRight,
   ShieldCheck,
   X,
@@ -316,11 +315,11 @@ export default function BiolinkPage() {
         </span>
       </div>
 
-      {/* 1. CINEMATIC BACKGROUND (Dr. Raimundo com a Criança) */}
+      {/* 1. CINEMATIC BACKGROUND (Mesma imagem do background da intro) */}
       <div className="cinematic-bg-container" aria-hidden="true">
         <div
           className="cinematic-bg-layer active"
-          style={{ backgroundImage: "url('/media/infantil.jpg')" }}
+          style={{ backgroundImage: "url('/media/intro-bg.png')" }}
         />
         <div className="cinematic-shade" />
       </div>
@@ -405,8 +404,7 @@ export default function BiolinkPage() {
             id="unidades-header"
             className="flex items-center justify-between gap-2 pb-1 border-b border-[#c1a586]/20"
           >
-            <span className="text-[10.5px] sm:text-[11.5px] font-bold tracking-[0.14em] uppercase text-[#c1a586] flex items-center gap-1.5">
-              <Sparkles size={12} />
+            <span className="text-[10.5px] sm:text-[11.5px] font-bold tracking-[0.14em] uppercase text-[#c1a586]">
               Escolha a Unidade para Agendar no WhatsApp
             </span>
             <span className="text-[10.5px] text-[#dec9ad]">

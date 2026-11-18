@@ -34,6 +34,13 @@ export const whatsapp = (number: string, clinic: string) =>
     `Olá! Gostaria de informações para agendar uma consulta com o Dr. Raimundo Aldemar na ${clinic}.`
   )}`;
 
+export const surgeryWhatsapp = (procedure?: string) =>
+  `https://wa.me/556182994767?text=${encodeURIComponent(
+    procedure
+      ? `Olá! Gostaria de consultar valores e informações sobre agendamento da cirurgia de ${procedure} com o Dr. Raimundo Aldemar.`
+      : `Olá! Gostaria de consultar valores e informações para agendar cirurgia (criança / adulto) com o Dr. Raimundo Aldemar.`
+  )}`;
+
 const instagramUrl =
   "https://www.instagram.com/raimundo.otorrino?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==";
 
@@ -675,6 +682,28 @@ export function SiteHeader() {
                   <ArrowUpRight size={16} />
                 </span>
               </a>
+
+              <a
+                href={surgeryWhatsapp()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="quick-unit-link quick-unit-surgery"
+                onClick={() => setBookingOpen(false)}
+              >
+                <div>
+                  <strong>
+                    Agendar Cirurgia · Consultar Valores (Criança e Adulto)
+                  </strong>
+                  <span>
+                    Canal exclusivo da equipe cirúrgica · WhatsApp +55 61
+                    8299-4767
+                  </span>
+                </div>
+                <span className="quick-unit-action">
+                  <MessageCircle size={18} />
+                  <ArrowUpRight size={16} />
+                </span>
+              </a>
             </div>
 
             <div className="quick-booking-footer">
@@ -1114,6 +1143,26 @@ export function ContactSection() {
           </article>
         </div>
 
+        <div className="surgery-direct-banner" data-reveal>
+          <div className="surgery-direct-text">
+            <span className="eyebrow">CANAL DIRETO DE CIRURGIAS · CRIANÇA E ADULTO</span>
+            <h3>Precisa agendar uma cirurgia ou consultar valores?</h3>
+            <p>
+              Atendimento exclusivo pelo WhatsApp para orçamento cirúrgico,
+              orientações pré-operatórias e agendamento de cirurgias infantis e
+              em adultos (particular e reembolso/convênios).
+            </p>
+          </div>
+          <div className="surgery-direct-cta">
+            <LinkButton href={surgeryWhatsapp()} external light>
+              Consultar valores de cirurgia no WhatsApp
+            </LinkButton>
+            <span className="surgery-direct-phone">
+              Contato direto cirurgias: +55 61 8299-4767
+            </span>
+          </div>
+        </div>
+
         <p className="booking-note" data-reveal>
           Consulte disponibilidade de horários e convênios diretamente com a
           unidade escolhida.
@@ -1276,6 +1325,19 @@ export function SiteFooter() {
               <div>
                 <strong>3. Taguatinga — CDO Otorrino</strong>
                 <span>WhatsApp (61) 98323-0103 · Fixo (61) 3352-6994</span>
+              </div>
+              <ArrowUpRight size={15} />
+            </a>
+
+            <a
+              href={surgeryWhatsapp()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-unit-item footer-unit-surgery"
+            >
+              <div>
+                <strong>Cirurgias e Consulta de Valores (Criança e Adulto)</strong>
+                <span>Canal direto de cirurgias · WhatsApp +55 61 8299-4767</span>
               </div>
               <ArrowUpRight size={15} />
             </a>

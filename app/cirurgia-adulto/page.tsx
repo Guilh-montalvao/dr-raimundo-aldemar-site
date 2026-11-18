@@ -16,6 +16,7 @@ import {
   ContactSection,
   SiteFooter,
   LinkButton,
+  surgeryWhatsapp,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -143,8 +144,20 @@ export default function CirurgiaAdultoPage() {
               sobre as opções de tratamento, benefícios esperados e acompanhamento
               completo no pós-operatório.
             </p>
-            <div className="hero-reveal surgery-hero-cta">
-              <LinkButton href="#contato">Agendar avaliação cirúrgica</LinkButton>
+            <div className="hero-reveal surgery-hero-cta surgery-cta-group">
+              <LinkButton href={surgeryWhatsapp("Cirurgia em Adulto")} external>
+                Consultar valores e agendar cirurgia
+              </LinkButton>
+              <a
+                href="#contato"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("open-quick-booking"));
+                }}
+                className="text-link"
+              >
+                Agendar consulta em consultório <ArrowUpRight size={18} />
+              </a>
             </div>
           </div>
           <span className="surgery-signature hero-reveal">
@@ -223,16 +236,13 @@ export default function CirurgiaAdultoPage() {
                   <AccordionContent className="area-content">
                     <p>{surg.text}</p>
                     <a
-                      href="#contato"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.dispatchEvent(
-                          new CustomEvent("open-quick-booking")
-                        );
-                      }}
+                      href={surgeryWhatsapp(surg.title)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-link"
                     >
-                      Agendar avaliação cirúrgica <ArrowUpRight size={18} />
+                      Consultar valores e agendar cirurgia no WhatsApp{" "}
+                      <ArrowUpRight size={18} />
                     </a>
                   </AccordionContent>
                 </AccordionItem>

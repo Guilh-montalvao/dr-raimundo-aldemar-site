@@ -18,6 +18,7 @@ import {
   SiteFooter,
   LinkButton,
   SmartVideo,
+  surgeryWhatsapp,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -430,10 +431,19 @@ export default function Home() {
               miringotomia com colocação de tubo de ventilação ou frenectomia —
               a família recebe orientação próxima antes, durante e depois.
             </p>
-            <div data-reveal>
+            <div className="surgery-cta-group" data-reveal>
               <LinkButton href="/atendimento-infantil" light>
                 Conhecer atendimento e cirurgia infantil
               </LinkButton>
+              <a
+                href={surgeryWhatsapp("Cirurgia Infantil")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link text-link-light"
+              >
+                Consultar valores e agendar cirurgia infantil{" "}
+                <ArrowUpRight size={18} />
+              </a>
             </div>
           </div>
           <div className="children-footnote" data-reveal>
@@ -671,13 +681,14 @@ export default function Home() {
               cornetos nasais (turbinoplastia / turbinectomia), amigdalectomia,
               cirurgia endoscópica nasal e tratamento do ronco e apneia do sono.
             </p>
-            <Link
-              href="/cirurgia-adulto"
-              className="text-link"
-              data-reveal
-            >
-              Conhecer cirurgias em adultos <ArrowUpRight size={19} />
-            </Link>
+            <div className="surgery-cta-group" data-reveal>
+              <LinkButton href={surgeryWhatsapp("Cirurgia em Adulto")} external>
+                Consultar valores e agendar cirurgia
+              </LinkButton>
+              <Link href="/cirurgia-adulto" className="text-link">
+                Conhecer cirurgias em adultos <ArrowUpRight size={19} />
+              </Link>
+            </div>
           </div>
           <span className="surgery-signature" data-reveal>
             CUIDADO EM CADA ETAPA.

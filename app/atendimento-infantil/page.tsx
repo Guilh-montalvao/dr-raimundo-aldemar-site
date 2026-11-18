@@ -17,6 +17,7 @@ import {
   SiteFooter,
   LinkButton,
   SmartVideo,
+  surgeryWhatsapp,
 } from "@/components/site-chrome";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -166,10 +167,18 @@ export default function AtendimentoInfantilPage() {
               a criança e orientação próxima para a família antes, durante e
               após cada etapa.
             </p>
-            <div className="hero-reveal">
+            <div className="surgery-cta-group hero-reveal">
               <LinkButton href="#contato" light>
                 Agendar consulta infantil
               </LinkButton>
+              <a
+                href={surgeryWhatsapp("Cirurgia Infantil")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link text-link-light"
+              >
+                Consultar valores e agendar cirurgia <ArrowUpRight size={18} />
+              </a>
             </div>
           </div>
           <div className="children-video-float hero-reveal">
@@ -347,16 +356,13 @@ export default function AtendimentoInfantilPage() {
                   <AccordionContent className="area-content">
                     <p>{surg.text}</p>
                     <a
-                      href="#contato"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.dispatchEvent(
-                          new CustomEvent("open-quick-booking")
-                        );
-                      }}
+                      href={surgeryWhatsapp(surg.title)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-link"
                     >
-                      Agendar avaliação infantil <ArrowUpRight size={18} />
+                      Consultar valores e agendar cirurgia no WhatsApp{" "}
+                      <ArrowUpRight size={18} />
                     </a>
                   </AccordionContent>
                 </AccordionItem>

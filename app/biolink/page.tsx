@@ -17,6 +17,7 @@ import {
   otorhynusConvenios,
   otogamaConvenios,
   cdoConvenios,
+  surgeryWhatsapp,
 } from "@/components/site-chrome";
 
 const siteUrl = "https://drraimundoaldemar.com.br";
@@ -498,6 +499,32 @@ export default function BiolinkPage() {
             ))}
           </div>
         </section>
+
+        {/* CANAL DIRETO DE CIRURGIAS E CONSULTA DE VALORES */}
+        <a
+          href={surgeryWhatsapp()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="official-link-card official-card p-3.5 sm:p-4 flex items-center justify-between group transition-all border-[#c1a586]/50 bg-[#2a2018]/90"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-[#25D366]/15 border border-[#25D366]/45 flex items-center justify-center text-[#25D366] shrink-0">
+              <MessageCircle size={17} />
+            </div>
+            <div>
+              <h3 className="text-[13.5px] sm:text-[14.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
+                Agendar Cirurgia · Consultar Valores (Criança e Adulto)
+              </h3>
+              <p className="text-[11px] sm:text-[11.5px] text-[#dec9ad]">
+                Canal direto no WhatsApp para orçamentos e orientações cirúrgicas · (61) 8299-4767
+              </p>
+            </div>
+          </div>
+          <ArrowUpRight
+            size={16}
+            className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-1.5"
+          />
+        </a>
 
         {/* LINKS RÁPIDOS DE 1 LINHA */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">

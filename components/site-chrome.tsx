@@ -1226,7 +1226,7 @@ export function SiteFooter() {
           <p className="footer-tagline">
             Respirar bem,{" "}
             <span className="serif">livre da obstrução nasal</span>
-            <span className="footer-tagline-sub">• Criança • Adulto</span>
+            <span className="footer-tagline-sub">Criança e Adulto</span>
           </p>
           <p className="footer-technical-resp">
             <strong>Responsável Técnico:</strong>

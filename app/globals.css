@@ -356,5 +356,22 @@ h2 .serif,h1 .serif{color:#80664b}
   .surgery-direct-phone{text-align:center}
 }
 
+/* About Section Side-by-Side Photo & Video on Desktop */
+.about-grid-with-video{grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,68px);align-items:center}
+.about-visual-dual{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(18px,2.5vw,32px);align-items:stretch;padding-top:0}
+.about-dual-item{display:flex;flex-direction:column}
+.about-visual-dual .about-photo{aspect-ratio:auto;flex:1;min-height:430px;border-radius:10px}
+.about-video-frame{flex:1;min-height:430px;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:#18120e;box-shadow:0 18px 42px rgba(53,41,31,.18)}
+@media(max-width:1024px){
+  .about-grid-with-video{grid-template-columns:1fr;gap:38px}
+  .about-visual-dual{grid-template-columns:1fr 1fr;gap:20px}
+}
+@media(max-width:640px){
+  .about-visual-dual{grid-template-columns:1fr;gap:28px}
+  .about-visual-dual .about-photo{aspect-ratio:1.05;min-height:0}
+  .about-video-frame{min-height:0;width:min(265px,78vw);margin:0 auto}
+}
+
+
 
 

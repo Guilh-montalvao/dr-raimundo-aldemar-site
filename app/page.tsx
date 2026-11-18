@@ -306,7 +306,7 @@ export default function Home() {
                     heroMode === "crianca" ? "is-active" : ""
                   }`}
                 >
-                  • Criança
+                  Criança
                 </button>
                 <button
                   type="button"
@@ -315,7 +315,7 @@ export default function Home() {
                     heroMode === "adulto" ? "is-active" : ""
                   }`}
                 >
-                  • Adulto
+                  Adulto
                 </button>
               </span>
             </h1>
@@ -528,7 +528,7 @@ export default function Home() {
             <span className="eyebrow">QUEM CUIDA DE VOCÊ</span>
             <span className="small-note">Ciência. Escuta. Proximidade.</span>
           </div>
-          <div className="about-grid">
+          <div className="about-grid about-grid-with-video">
             <div className="about-text">
               <h2 data-reveal>
                 Antes de cuidar,
@@ -551,32 +551,36 @@ export default function Home() {
                 </LinkButton>
               </div>
             </div>
-            <div className="about-visual" data-reveal>
-              <div
-                className="about-photo"
-                role="img"
-                aria-label="Dr. Raimundo Aldemar em seu consultório"
-              >
+            <div className="about-visual about-visual-dual" data-reveal>
+              <div className="about-dual-item">
                 <div
-                  className="photo-background"
-                  data-parallax
-                  style={{
-                    backgroundImage: "url('/media/dr-raimundo-consultorio.jpg')",
-                  }}
-                />
+                  className="about-photo"
+                  role="img"
+                  aria-label="Dr. Raimundo Aldemar em seu consultório"
+                >
+                  <div
+                    className="photo-background"
+                    data-parallax
+                    style={{
+                      backgroundImage:
+                        "url('/media/dr-raimundo-consultorio.jpg')",
+                    }}
+                  />
+                </div>
+                <div className="photo-caption">
+                  <span>Dr. Raimundo Aldemar</span>
+                  <span>CRM-DF 20094 · RQE 13936</span>
+                </div>
               </div>
-              <div className="photo-caption">
-                <span>Dr. Raimundo Aldemar · Otorrinolaringologista</span>
-                <span>CRM-DF 20094 · RQE 13936</span>
-              </div>
-              <div className="about-video-below" data-reveal>
-                <div className="section-video-showcase">
+
+              <div className="about-dual-item about-dual-video">
+                <div className="about-video-frame">
                   <SmartVideo
                     src="/videos/ser-medico.mp4"
                     ariaLabel="Vídeo Dr. Raimundo Aldemar — Ser médico"
                   />
                 </div>
-                <div className="photo-caption video-caption">
+                <div className="photo-caption">
                   <span>O significado de ser médico</span>
                   <span>Vocação e propósito</span>
                 </div>

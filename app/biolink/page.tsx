@@ -395,7 +395,7 @@ export default function BiolinkPage() {
             <span className="serif text-[#dec9ad]">
               livre da obstrução nasal
             </span>{" "}
-            <span className="text-[#c1a586]">• Criança • Adulto</span>
+            <span className="text-[#c1a586]">— Criança e Adulto</span>
           </p>
         </section>
 

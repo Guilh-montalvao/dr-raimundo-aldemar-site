@@ -734,7 +734,7 @@ export function FaqSection({
   subtitle?: string;
   eyebrow?: string;
 }) {
-  const [activeFaq, setActiveFaq] = useState<string>(faqItems[0].id);
+  const [activeFaq, setActiveFaq] = useState<string>("");
 
   const faqSchema = {
     "@context": "https://schema.org",

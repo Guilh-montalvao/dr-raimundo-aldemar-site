@@ -126,7 +126,7 @@ export default function OMedicoPage() {
         <div className="intro-strip" data-reveal>
           <span>Graduação UFG.</span>
           <span>Residência HFA · Brasília.</span>
-          <span>Sociedade Brasília de Otorrinolaringologia.</span>
+          <span>Membro Especialista ABORL-CCF.</span>
         </div>
 
         {/* FORMAÇÃO E CREDENCIAIS */}
@@ -205,9 +205,12 @@ export default function OMedicoPage() {
                     />
                   </span>
                   <p>
-                    <strong>Sociedade Brasília de Otorrinolaringologia</strong>
+                    <strong>
+                      Associação Brasileira de Otorrinolaringologia e Cirurgia
+                      Cérvico-Facial — ABORL-CCF
+                    </strong>
                     <small>
-                      Membro da Sociedade Brasília de Otorrinolaringologia
+                      Membro Especialista da ABORL-CCF
                     </small>
                   </p>
                 </div>
@@ -223,10 +226,10 @@ export default function OMedicoPage() {
                     />
                   </span>
                   <p>
-                    <strong>CRM-DF 20094 e RQE 13936</strong>
+                    <strong>CRM-DF 20094 · RQE 13936</strong>
                     <small>
-                      Registro no Conselho Regional de Medicina do DF e
-                      Qualificação de Especialista
+                      Médico Otorrinolaringologista com Título de Especialista
+                      registrado no CRM-DF
                     </small>
                   </p>
                 </div>

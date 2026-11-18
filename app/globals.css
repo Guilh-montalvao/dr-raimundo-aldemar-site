@@ -85,7 +85,7 @@
  .specialty-backgrounds{top:245px;height:475px}
  .specialty-backgrounds .area-image{background-size:auto 475px;background-position:center top}
  .specialty-shade{background:linear-gradient(180deg,#eee8de 0px,#eee8de 265px,#eee8def5 310px,#eee8de26 370px,#eee8de0a 580px,#eee8def0 665px,#eee8de 710px)}
- .intro-logo{width:215px}
+ .intro-logo{width:clamp(275px,78vw,345px)}
  .intro-skip-hint{bottom:18px;font-size:9px}
 }
 
@@ -93,9 +93,9 @@
 .site-intro{position:fixed;inset:0;z-index:99999;background:#f4ebe0;display:flex;align-items:center;justify-content:flex-start;padding-left:clamp(32px,10vw,160px);overflow:hidden;cursor:pointer;user-select:none;isolation:isolate}
 .intro-bg-photo{position:absolute;inset:0;background:#f4ebe0 url('/media/intro-bg.png') right center/cover no-repeat;opacity:0;transform:scale(1.08);will-change:transform,opacity;z-index:-2}
 .intro-bg-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,245,239,.94) 0%,rgba(248,245,239,.82) 38%,rgba(248,245,239,.15) 68%,rgba(248,245,239,0) 100%);z-index:-1}
-.intro-content{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;width:100%;max-width:480px}
-@media(max-width:768px){.site-intro{justify-content:center;align-items:flex-end;padding:0 24px 72px}.intro-bg-photo{background-position:72% top}.intro-bg-shade{background:linear-gradient(0deg,rgba(248,245,239,.96) 0%,rgba(248,245,239,.9) 38%,rgba(248,245,239,.25) 75%)}}
-.intro-logo{width:clamp(230px,36vw,400px);height:auto;display:block;filter:drop-shadow(0 8px 24px rgba(53,41,31,.06));opacity:0;transform:translateY(18px) scale(0.95);will-change:opacity,transform}
+.intro-content{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;width:100%;max-width:540px}
+@media(max-width:768px){.site-intro{justify-content:center;align-items:flex-end;padding:0 24px 72px}.intro-bg-photo{background-position:72% top}.intro-bg-shade{background:linear-gradient(0deg,rgba(248,245,239,.92) 0%,rgba(248,245,239,.58) 20%,rgba(248,245,239,.05) 44%,rgba(248,245,239,0) 100%)}}
+.intro-logo{width:clamp(310px,46vw,500px);height:auto;display:block;filter:drop-shadow(0 8px 24px rgba(53,41,31,.06));opacity:0;transform:translateY(18px) scale(0.95);will-change:opacity,transform}
 .intro-divider{width:52px;height:1.5px;background:var(--gold);margin:24px 0 16px;transform-origin:center;opacity:0;transform:scaleX(0);will-change:opacity,transform}
 .intro-subtitle{font-size:11px;letter-spacing:.26em;font-weight:500;color:var(--muted-foreground);text-transform:uppercase;opacity:0;transform:translateY(8px);will-change:opacity,transform}
 .intro-skip-hint{position:absolute;bottom:24px;font-size:10px;letter-spacing:.12em;color:#a5978a;opacity:0;transition:opacity .4s;pointer-events:none}
@@ -197,3 +197,142 @@ h2 .serif,h1 .serif{color:#80664b}
   .video-caption{max-width:min(245px,74vw)}
   .superhero-mosaic{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 }
+
+/* Specialist Hero Phrase ("Respirar bem, livre da obstrução nasal • Criança • Adulto") & Kids-First Hero */
+.hero-title-specialist{font-size:clamp(2.35rem,4.05vw,4.05rem);line-height:1.09;margin:20px 0 20px}
+.hero-title-specialist .hero-audience-line{display:block;font-family:'Manrope',sans-serif;font-style:normal;font-size:clamp(1.1rem,1.65vw,1.5rem);font-weight:500;letter-spacing:.04em;color:#5c5043;margin-top:14px}
+.hero.hero-kids-primary{min-height:740px;height:calc(100svh - 76px);max-height:860px;background-color:#201a15;color:var(--cream)}
+.hero-photo-layer{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;opacity:0;transform:scale(1.04);transition:opacity .7s ease,transform 1.2s ease;z-index:-3}
+.hero-photo-layer.is-active{opacity:1;transform:scale(1)}
+.hero-photo-crianca{background-image:url('/media/infantil.jpg');background-position:64% center}
+.hero-photo-adulto{background-image:url('/media/background-hero-section.jpg');background-position:76% center}
+.hero-kids-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(28,22,18,.93) 0%,rgba(32,25,20,.78) 38%,rgba(28,22,18,.14) 72%,rgba(28,22,18,.38) 100%)}
+.hero-kids-primary .eyebrow{color:#d5c1a8}
+.hero-kids-primary h1{color:var(--cream)}
+.hero-kids-primary h1>span:first-of-type{color:#dec9ad}
+.hero-audience-switcher{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:18px;font-family:'Manrope',sans-serif;font-style:normal}
+.audience-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:100px;font-size:clamp(.95rem,1.25vw,1.12rem);font-weight:500;letter-spacing:.02em;border:1px solid rgba(213,193,168,.35);background:rgba(255,255,255,.06);color:#d5c1a8;transition:all .25s ease}
+.audience-pill:hover{background:rgba(255,255,255,.14);color:#fffefa}
+.audience-pill.is-active{background:rgba(222,201,173,.22);border-color:#dec9ad;color:#fffefa;box-shadow:0 4px 16px rgba(0,0,0,.24)}
+.hero-kids-primary .hero-description{color:#ece3d9;max-width:500px;margin-bottom:26px}
+.hero-cta-row{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
+.hero-kids-preview-badge{display:inline-flex;align-items:center;gap:12px;padding:7px 16px 7px 9px;border-radius:100px;background:rgba(24,18,14,.68);border:1px solid rgba(213,193,168,.32);backdrop-filter:blur(10px);transition:transform .25s,border-color .25s,background .25s}
+.hero-kids-preview-badge:hover{transform:translateY(-2px);border-color:#dec9ad;background:rgba(24,18,14,.84)}
+.hero-kids-avatars{display:flex;align-items:center}
+.hero-kids-avatars img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center top;border:1.5px solid #dec9ad;margin-left:-8px;background:#241b14}
+.hero-kids-avatars img:first-child{margin-left:0}
+.hero-kids-preview-text{display:flex;flex-direction:column;line-height:1.25;text-align:left}
+.hero-kids-preview-text strong{font-size:12.5px;font-weight:600;color:#f8f5ef}
+.hero-kids-preview-text small{font-size:11px;color:#d5c1a8}
+.hero-video-float{position:absolute;right:clamp(28px,5vw,86px);bottom:36px;width:clamp(205px,16.5vw,258px);aspect-ratio:9/16;border-radius:16px;overflow:hidden;box-shadow:0 22px 48px rgba(0,0,0,.52);background:#18120e;z-index:2}
+.hero-kids-primary .scroll-link{color:#e9dfd0}
+.hero-kids-primary .hero-credentials{background:rgba(24,18,14,.76);color:#f8f5ef;border:1px solid rgba(213,193,168,.22)}
+.hero-kids-primary .hero-credentials small{color:#d5c1a8}
+.hero-kids-primary .hero-caption{color:#d5c1a8}
+.children-consultorio-bg .children-photo{background-position:62% 24%}
+
+@media(max-width:1080px){
+  .hero-video-float{width:190px;right:24px;bottom:76px}
+}
+@media(max-width:768px){
+  .hero.hero-kids-primary{display:flex;flex-direction:column;justify-content:flex-end;height:auto;min-height:0;max-height:none;padding-bottom:68px;background-color:#241d17;margin:0 8px}
+  .hero-kids-primary .hero-photo-layer{top:0;bottom:auto;height:430px;background-size:cover;background-position:62% top}
+  .hero-kids-primary .hero-kids-shade{background:linear-gradient(180deg,rgba(36,29,23,.12) 0px,rgba(36,29,23,.38) 225px,rgba(36,29,23,.95) 370px,#241d17 430px)}
+  .hero-kids-primary .hero-content{position:relative;left:auto;right:auto;bottom:auto;padding:305px 22px 16px;max-width:none}
+  .hero-kids-primary .hero-description{max-width:440px}
+  .hero-cta-row{flex-direction:column;align-items:stretch;max-width:340px}
+  .hero-cta-row .button{width:100%;justify-content:space-between}
+  .hero-kids-preview-badge{justify-content:flex-start}
+  .hero-video-float{position:relative;right:auto;bottom:auto;margin:18px auto 14px;width:min(275px,calc(100% - 44px))}
+}
+@media(max-width:640px){
+  .hero-title-specialist{font-size:clamp(1.95rem,7.8vw,2.45rem);line-height:1.12;margin:14px 0 14px}
+  .hero-title-specialist .hero-audience-line{font-size:1.02rem;margin-top:10px}
+  .audience-pill{padding:7px 15px;font-size:.92rem}
+}
+
+/* Editorial FAQ Section (Sem Cards Quadrados) */
+.faq-section{background:var(--cream)}
+.faq-layout{display:grid;grid-template-columns:.88fr 1.12fr;gap:clamp(38px,7vw,105px);align-items:start}
+.faq-intro h2{margin-bottom:24px}
+.faq-intro>p{font-size:16px;color:#74685d;line-height:1.8;max-width:430px;margin-bottom:22px}
+.faq-intro .faq-authorship{font-size:13px;line-height:1.65;color:#5c5043;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;margin:24px 0 26px}
+.faq-intro .faq-authorship strong{font-weight:600;color:var(--brown)}
+.faq-accordion{width:100%}
+.faq-trigger{font-size:clamp(1.12rem,1.55vw,1.38rem)!important;padding:24px 0!important}
+.faq-content{padding-left:0!important;padding-bottom:24px!important}
+.faq-content p{font-size:15.5px;color:#62574b;line-height:1.85;margin-bottom:0}
+@media(max-width:900px){
+  .faq-layout{grid-template-columns:1fr;gap:32px}
+  .faq-intro>p{max-width:none}
+}
+
+/* Discrete Mobile Floating Schedule Button & Quick Booking Modal */
+.mobile-floating-schedule{display:none}
+@media(max-width:960px){
+  .mobile-floating-schedule{position:fixed;right:16px;bottom:16px;z-index:45;display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:100px;background:rgba(41,32,25,.94);color:#f8f5ef;border:1px solid rgba(193,165,134,.45);backdrop-filter:blur(12px);font-size:13px;font-weight:500;box-shadow:0 12px 30px rgba(20,14,10,.32);transition:transform .25s,background .25s}
+  .mobile-floating-schedule:active{transform:scale(.97)}
+}
+.quick-booking-backdrop{position:fixed;inset:0;z-index:120;background:rgba(24,18,14,.68);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;animation:quickFadeIn .2s ease-out}
+.quick-booking-dialog{width:100%;max-width:510px;background:#241b14;color:#f8f5ef;border:1px solid rgba(193,165,134,.35);border-radius:20px;padding:28px;box-shadow:0 26px 64px rgba(0,0,0,.5)}
+.quick-booking-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.quick-booking-header .eyebrow{color:#c1a586;display:block;margin-bottom:6px;font-size:11px}
+.quick-booking-header h3{font-size:clamp(1.3rem,2.2vw,1.55rem);color:#f8f5ef;margin-bottom:8px}
+.quick-booking-header p{font-size:14px;color:#d5c6b6;line-height:1.55}
+.quick-booking-close{background:rgba(255,255,255,.06);border:1px solid rgba(193,165,134,.25);color:#f8f5ef;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;transition:background .2s}
+.quick-booking-close:hover{background:rgba(255,255,255,.14)}
+.quick-booking-units{display:flex;flex-direction:column;gap:12px}
+.quick-unit-link{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(193,165,134,.32);transition:background .25s,border-color .25s,transform .25s}
+.quick-unit-link:hover{background:rgba(193,165,134,.14);border-color:#c1a586;transform:translateY(-2px)}
+.quick-unit-link strong{display:block;font-size:16px;font-weight:600;color:#f8f5ef;margin-bottom:3px}
+.quick-unit-link span{display:block;font-size:13px;color:#ccbeb0;line-height:1.45}
+.quick-unit-action{display:inline-flex;align-items:center;gap:6px;color:#c1a586;flex-shrink:0}
+.quick-booking-footer{margin-top:20px;padding-top:16px;border-top:1px solid rgba(193,165,134,.2);text-align:center}
+.quick-booking-scroll-link{background:none;border:0;color:#d5c1a8;font-size:13px;text-decoration:underline;text-underline-offset:4px;padding:4px 8px}
+.quick-booking-scroll-link:hover{color:#fff}
+@keyframes quickFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* Convenios Logos Grid Inside Clinic Card */
+.convenios-logos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:270px;overflow-y:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c1a586 rgba(255,255,255,.06)}
+.convenio-chip{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(193,165,134,.22);min-width:0}
+.convenio-logo-box{width:24px;height:24px;border-radius:5px;background:#fff;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.convenio-logo-box img{width:100%;height:100%;object-fit:contain;display:block}
+.convenio-chip-name{font-size:11.5px;color:#ede4d8;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Upgraded 3-Column Editorial Footer */
+.site-footer{padding:68px clamp(24px,6vw,104px) 32px;background:var(--cream);border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:1.15fr .75fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.footer-col{display:flex;flex-direction:column}
+.footer-brand{width:clamp(220px,22vw,285px);display:block;margin-bottom:20px}
+.footer-brand img{width:100%;height:auto;display:block}
+.footer-tagline{font-family:'Manrope',sans-serif;font-size:18px;line-height:1.45;color:var(--brown);margin-bottom:18px}
+.footer-tagline .serif{font-size:20px;color:#80664b}
+.footer-tagline-sub{display:block;font-size:13px;font-weight:500;letter-spacing:.04em;color:#74685d;margin-top:4px}
+.footer-technical-resp{font-size:12.5px;line-height:1.6;color:#74685d;border-top:1px solid var(--border);padding-top:14px;max-width:340px}
+.footer-technical-resp strong{color:var(--brown);font-weight:600}
+.footer-col-title{color:#80664b;margin-bottom:18px;display:block}
+.footer-links-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
+.footer-links-list a{font-size:14px;color:#5c5043;transition:color .2s,padding-left .2s;display:inline-block}
+.footer-links-list a:hover{color:var(--brown);padding-left:4px}
+.footer-units-list{display:flex;flex-direction:column;border-top:1px solid var(--border)}
+.footer-unit-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.footer-unit-item strong{display:block;font-size:13.5px;font-weight:600;color:var(--brown);margin-bottom:2px}
+.footer-unit-item span{display:block;font-size:12px;color:#74685d}
+.footer-unit-item svg{color:#80664b;flex-shrink:0;transition:transform .25s}
+.footer-unit-item:hover svg{transform:translate(2px,-2px)}
+.footer-bottom{border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:48px;padding-top:24px;font-size:12px;color:#74685d}
+.footer-back-top-link{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:var(--brown)}
+.footer-back-top-link .back-top{width:36px;height:36px}
+@media(max-width:960px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .footer-col-brand{grid-column:1/-1}
+  .footer-technical-resp{max-width:none}
+}
+@media(max-width:640px){
+  .site-footer{padding:48px 24px 86px}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .convenios-logos-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start;margin-top:32px;gap:12px}
+}
+
+

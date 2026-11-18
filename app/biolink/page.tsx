@@ -11,9 +11,14 @@ import {
   Check,
   Sparkles,
   ArrowUpRight,
-  Activity,
-  HeartHandshake,
+  ShieldCheck,
+  X,
 } from "lucide-react";
+import {
+  otorhynusConvenios,
+  otogamaConvenios,
+  cdoConvenios,
+} from "@/components/site-chrome";
 
 const siteUrl = "https://drraimundoaldemar.com.br";
 const instagramUrl =
@@ -36,6 +41,7 @@ interface Clinic {
   phoneRaw: string;
   mapUrl: string;
   image: string;
+  convenios: { name: string; logo: string }[];
   featured?: boolean;
 }
 
@@ -43,7 +49,7 @@ const clinics: Clinic[] = [
   {
     id: "asanorte",
     region: "ASA NORTE",
-    name: "Otorhynus Clínica",
+    name: "Unidade Otorhynus",
     badge: "Ed. Multiclínicas",
     address: "SHLN, Bloco J, Edifício Multiclínicas, Salas 102 a 104",
     neighborhood: "Asa Norte · Brasília, DF",
@@ -52,6 +58,7 @@ const clinics: Clinic[] = [
     phoneRaw: "+556133408859",
     mapUrl: "https://maps.app.goo.gl/aCMiRG8jYqY3nrcW8",
     image: "/media/otorhynus.jpg",
+    convenios: otorhynusConvenios,
     featured: true,
   },
   {
@@ -64,12 +71,35 @@ const clinics: Clinic[] = [
     whatsapp: "61983466377",
     phone: "(61) 3254-0111",
     phoneRaw: "+556132540111",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Clinica+Otogama+Quadra+1+Gama+Sul",
     image: "/media/otogama.jpg",
+    convenios: otogamaConvenios,
+  },
+  {
+    id: "taguatinga",
+    region: "TAGUATINGA",
+    name: "CDO Otorrino",
+    badge: "Hospital Anchieta",
+    address: "Centro Médico Hospital Anchieta, Salas 111/112 B",
+    neighborhood: "Área Especial 08/09/10, Setor C Norte",
+    whatsapp: "61983230103",
+    phone: "(61) 3352-6994",
+    phoneRaw: "+556133526994",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=CDO+Otorrino+Hospital+Anchieta+Taguatinga",
+    image: "/media/cdootorrino.jpg",
+    convenios: cdoConvenios,
   },
 ];
 
-function InstagramIcon({ size = 18, className = "" }: { size?: number; className?: string }) {
+function InstagramIcon({
+  size = 18,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
   return (
     <svg
       width={size}
@@ -96,11 +126,15 @@ export default function BiolinkPage() {
   const introStartedRef = useRef(false);
   const introTlRef = useRef<gsap.core.Timeline | null>(null);
   const [copied, setCopied] = useState(false);
+  const [selectedClinicConvenios, setSelectedClinicConvenios] =
+    useState<Clinic | null>(null);
 
   useEffect(() => {
     if (!introStartedRef.current) {
       introStartedRef.current = true;
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
       if (prefersReduced) {
         if (introRef.current) introRef.current.style.display = "none";
       } else {
@@ -115,16 +149,48 @@ export default function BiolinkPage() {
           .fromTo(
             ".intro-bg-photo",
             { opacity: 0, scale: 1.08, x: 22 },
-            { opacity: 1, scale: 1.02, x: 0, duration: 1.35, ease: "power2.out" },
+            {
+              opacity: 1,
+              scale: 1.02,
+              x: 0,
+              duration: 1.35,
+              ease: "power2.out",
+            },
             0
           )
-          .to(".intro-logo", { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power2.out" }, 0.15)
-          .to(".intro-divider", { scaleX: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, "-=0.35")
-          .to(".intro-subtitle", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.35")
+          .to(
+            ".intro-logo",
+            { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power2.out" },
+            0.15
+          )
+          .to(
+            ".intro-divider",
+            { scaleX: 1, opacity: 1, duration: 0.5, ease: "power2.out" },
+            "-=0.35"
+          )
+          .to(
+            ".intro-subtitle",
+            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+            "-=0.35"
+          )
           .to(".intro-skip-hint", { opacity: 0.75, duration: 0.4 }, "-=0.2")
-          .to(".intro-content", { opacity: 0, y: -16, duration: 0.45, ease: "power2.in", delay: 0.45 })
-          .to(".intro-bg-photo", { scale: 1, yPercent: 18, duration: 0.85, ease: "power4.inOut" }, "-=0.12")
-          .to(".site-intro", { yPercent: -100, duration: 0.85, ease: "power4.inOut" }, "<")
+          .to(".intro-content", {
+            opacity: 0,
+            y: -16,
+            duration: 0.45,
+            ease: "power2.in",
+            delay: 0.45,
+          })
+          .to(
+            ".intro-bg-photo",
+            { scale: 1, yPercent: 18, duration: 0.85, ease: "power4.inOut" },
+            "-=0.12"
+          )
+          .to(
+            ".site-intro",
+            { yPercent: -100, duration: 0.85, ease: "power4.inOut" },
+            "<"
+          )
           .fromTo(
             ".cinematic-cover-img",
             { scale: 1.06, opacity: 0.85 },
@@ -140,7 +206,13 @@ export default function BiolinkPage() {
           .fromTo(
             ".profile-meta-item",
             { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.45, stagger: 0.07, ease: "power2.out" },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.07,
+              ease: "power2.out",
+            },
             "-=0.45"
           )
           .fromTo(
@@ -152,19 +224,25 @@ export default function BiolinkPage() {
           .fromTo(
             ".cinematic-clinic-card",
             { opacity: 0, y: 18 },
-            { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "power2.out" },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.55,
+              stagger: 0.08,
+              ease: "power2.out",
+            },
             "-=0.3"
-          )
-          .fromTo(
-            ".surgical-spotlight-card",
-            { opacity: 0, y: 16 },
-            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-            "-=0.2"
           )
           .fromTo(
             ".official-link-card",
             { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: "power2.out" },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.06,
+              ease: "power2.out",
+            },
             "-=0.2"
           )
           .fromTo(
@@ -179,8 +257,8 @@ export default function BiolinkPage() {
 
   const handleShare = async () => {
     const shareData = {
-      title: "Dr. Raimundo Aldemar — Otorrinolaringologia em Brasília",
-      text: "Agende sua consulta de Otorrino com Dr. Raimundo Aldemar (Asa Norte e Gama).",
+      title: "Dr. Raimundo Aldemar — Otorrinolaringologista em Brasília",
+      text: "Respirar bem, livre da obstrução nasal • Criança • Adulto. Agende sua consulta com o Dr. Raimundo Aldemar (Asa Norte, Gama e Taguatinga).",
       url: typeof window !== "undefined" ? window.location.href : siteUrl,
     };
 
@@ -198,7 +276,10 @@ export default function BiolinkPage() {
   };
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-screen flex flex-col justify-between">
+    <div
+      ref={containerRef}
+      className="relative w-full min-h-screen flex flex-col justify-between"
+    >
       {/* 0. SITE INTRO OVERLAY (Matches Home Page) */}
       <div
         ref={introRef}
@@ -220,42 +301,46 @@ export default function BiolinkPage() {
         <div className="intro-content">
           <img
             src="/media/logo.png"
-            alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
+            alt="Dr. Raimundo Aldemar — Médico Otorrinolaringologista"
             className="intro-logo"
             width="640"
             height="213"
           />
           <div className="intro-divider" />
-          <span className="intro-subtitle">OTORRINOLARINGOLOGIA · BRASÍLIA, DF</span>
+          <span className="intro-subtitle">
+            OTORRINOLARINGOLOGISTA · BRASÍLIA, DF
+          </span>
         </div>
-        <span className="intro-skip-hint">Clique em qualquer lugar para avançar</span>
+        <span className="intro-skip-hint">
+          Clique em qualquer lugar para avançar
+        </span>
       </div>
 
-      {/* 1. CINEMATIC BACKGROUND */}
+      {/* 1. CINEMATIC BACKGROUND (Dr. Raimundo com a Criança) */}
       <div className="cinematic-bg-container" aria-hidden="true">
         <div
           className="cinematic-bg-layer active"
-          style={{ backgroundImage: "url('/media/background-hero-section.jpg')" }}
+          style={{ backgroundImage: "url('/media/infantil.jpg')" }}
         />
         <div className="cinematic-shade" />
       </div>
 
-      {/* 2. STREAMLINED COMPACT COVER BANNER */}
-      <div className="cinematic-hero-cover relative w-full h-28 sm:h-36 md:h-40 overflow-hidden">
+      {/* 2. CAPA COM DR. RAIMUNDO E A CRIANÇA */}
+      <div className="cinematic-hero-cover relative w-full h-32 sm:h-40 md:h-44 overflow-hidden">
         <img
-          src="/media/background-hero-section.jpg"
-          alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
-          className="cinematic-cover-img w-full h-full object-cover object-[right_28%] filter contrast-105 brightness-95"
+          src="/media/infantil.jpg"
+          alt="Dr. Raimundo Aldemar acolhendo pequeno paciente"
+          className="cinematic-cover-img w-full h-full object-cover object-[center_24%] filter contrast-105 brightness-95"
         />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, rgba(32, 24, 19, 0) 0%, rgba(32, 24, 19, 0.25) 40%, rgba(32, 24, 19, 0.8) 80%, #201813 100%)",
+              "linear-gradient(180deg, rgba(32, 24, 19, 0.05) 0%, rgba(32, 24, 19, 0.28) 45%, rgba(32, 24, 19, 0.85) 82%, #201813 100%)",
           }}
         />
 
-        {/* Floating Quick Action: Share Button */}
+        {/* Botão Compartilhar */}
         <button
           type="button"
           onClick={handleShare}
@@ -277,12 +362,11 @@ export default function BiolinkPage() {
         </button>
       </div>
 
-      {/* 3. MAIN CONTENT STAGE - STREAMLINED VERTICAL RHYTHM */}
-      <main className="w-full max-w-[1180px] mx-auto px-3.5 sm:px-6 pb-6 z-10 flex-1 flex flex-col gap-3.5 sm:gap-4.5">
-        {/* DOCTOR PROFILE HEADER */}
+      {/* 3. CONTEÚDO ENXUTO E RÁPIDO DO BIOLINK */}
+      <main className="w-full max-w-[1120px] mx-auto px-3.5 sm:px-6 pb-6 z-10 flex-1 flex flex-col gap-3.5 sm:gap-4">
+        {/* IDENTIDADE DO MÉDICO */}
         <section className="w-full flex flex-col items-center text-center">
-          {/* Avatar popping with spring */}
-          <div className="profile-avatar-wrap -mt-11 sm:-mt-13 mb-1.5 z-20">
+          <div className="profile-avatar-wrap -mt-12 sm:-mt-14 mb-1.5 z-20">
             <a
               href={instagramUrl}
               target="_blank"
@@ -300,35 +384,37 @@ export default function BiolinkPage() {
             </a>
           </div>
 
-          {/* Clean 1-Line Identity & Badges */}
           <div className="profile-meta-item flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-[11px] sm:text-[12px] text-[#dec9ad] mb-1">
-            <span className="font-semibold text-[#f8f5ef] bg-white/10 px-2 py-0.5 rounded-full border border-white/15">
-              CRM-DF 20094 · RQE 13936
+            <span className="font-semibold text-[#f8f5ef] bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">
+              Médico Otorrinolaringologista · CRM-DF 20094 · RQE 13936
             </span>
-            <span className="opacity-30">·</span>
-            <span>Otorrinolaringologia (UFG · HFA)</span>
-            <span className="opacity-30 hidden xs:inline">·</span>
-            <span className="text-[#c1a586] font-medium">Adultos e Crianças</span>
           </div>
 
-          <p className="profile-meta-item text-[11.5px] sm:text-[12.5px] text-[#ece3d9] max-w-[560px]">
-            Escolha uma das unidades abaixo para agendamento direto no WhatsApp:
+          <p className="profile-meta-item text-[13px] sm:text-[14px] font-medium text-[#f8f5ef] max-w-[540px]">
+            Respirar bem,{" "}
+            <span className="serif text-[#dec9ad]">
+              livre da obstrução nasal
+            </span>{" "}
+            <span className="text-[#c1a586]">• Criança • Adulto</span>
           </p>
         </section>
 
-        {/* SECTION: CLINIC CONSULTATIONS (COMPACT & HIGH IMPACT) */}
+        {/* AS 3 UNIDADES DE ATENDIMENTO (1. ASA NORTE · 2. GAMA · 3. TAGUATINGA) */}
         <section id="unidades" className="flex flex-col gap-2.5">
-          {/* Header */}
-          <div id="unidades-header" className="flex items-center justify-between gap-2 pb-1 border-b border-[#c1a586]/20">
+          <div
+            id="unidades-header"
+            className="flex items-center justify-between gap-2 pb-1 border-b border-[#c1a586]/20"
+          >
             <span className="text-[10.5px] sm:text-[11.5px] font-bold tracking-[0.14em] uppercase text-[#c1a586] flex items-center gap-1.5">
               <Sparkles size={12} />
-              Unidades de Atendimento em Brasília
+              Escolha a Unidade para Agendar no WhatsApp
             </span>
-            <span className="text-[10.5px] text-[#dec9ad]">Particular e Convênios</span>
+            <span className="text-[10.5px] text-[#dec9ad]">
+              Particular e Convênios
+            </span>
           </div>
 
-          {/* 2 Compact Clinic Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 items-stretch">
             {clinics.map((clinic) => (
               <article
                 key={clinic.id}
@@ -336,14 +422,12 @@ export default function BiolinkPage() {
                   clinic.featured ? "featured" : ""
                 }`}
               >
-                {/* Full Photographic Background Layer */}
                 <div
                   className="clinic-card-bg-photo"
                   style={{ backgroundImage: `url('${clinic.image}')` }}
                 />
                 <div className="clinic-card-bg-shade" />
 
-                {/* Card Top: Region Tag & Badge */}
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-[#d5c1a8] bg-black/60 px-2 py-0.5 rounded-full border border-[#c1a586]/40">
                     {clinic.region}
@@ -353,11 +437,10 @@ export default function BiolinkPage() {
                   </span>
                 </div>
 
-                {/* Card Middle: Clinic Info */}
                 <div className="my-auto py-1">
-                  <h3 className="text-[17px] sm:text-[18px] font-bold text-[#f8f5ef] leading-tight mb-1">
+                  <h2 className="text-[17px] sm:text-[18px] font-bold text-[#f8f5ef] leading-tight mb-1">
                     {clinic.name}
-                  </h3>
+                  </h2>
                   <p className="text-[11.5px] text-[#ece3d9] leading-snug">
                     {clinic.address}
                   </p>
@@ -366,7 +449,6 @@ export default function BiolinkPage() {
                   </p>
                 </div>
 
-                {/* Card Bottom: Primary WhatsApp CTA & Secondary Links */}
                 <div className="flex flex-col gap-1.5 pt-2.5 border-t border-[#c1a586]/30 mt-1.5">
                   <a
                     href={whatsappUrl(clinic.whatsapp, clinic.name)}
@@ -381,7 +463,7 @@ export default function BiolinkPage() {
                     <ArrowUpRight size={15} />
                   </a>
 
-                  <div className="flex items-center justify-between text-[11px] text-[#dec9ad] px-1 pt-0.5">
+                  <div className="flex items-center justify-between text-[11px] text-[#dec9ad] px-0.5 pt-0.5 gap-2">
                     <a
                       href={clinic.mapUrl}
                       target="_blank"
@@ -390,9 +472,20 @@ export default function BiolinkPage() {
                     >
                       <MapPin size={11} className="text-[#c1a586]" />
                       <span className="underline underline-offset-4 decoration-[#c1a586]/60 hover:decoration-white">
-                        Ver no mapa
+                        Mapa
                       </span>
                     </a>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedClinicConvenios(clinic)}
+                      className="inline-flex items-center gap-1 text-[#f8f5ef] hover:text-[#dec9ad] transition-colors cursor-pointer"
+                    >
+                      <ShieldCheck size={12} className="text-[#c1a586]" />
+                      <span className="underline underline-offset-4 decoration-[#c1a586]/60">
+                        Convênios ({clinic.convenios.length})
+                      </span>
+                    </button>
 
                     <a
                       href={`tel:${clinic.phoneRaw}`}
@@ -408,70 +501,7 @@ export default function BiolinkPage() {
           </div>
         </section>
 
-        {/* SECTION: SURGICAL SPOTLIGHT (STREAMLINED) */}
-        <section className="surgical-spotlight-card surgical-card-bg group">
-          <div
-            className="surgical-card-bg-photo filter contrast-105 brightness-95"
-            style={{ backgroundImage: "url('/media/cirurgia.jpg')" }}
-          />
-          <div className="surgical-card-bg-shade" />
-
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 sm:gap-4 relative z-10">
-            <div className="max-w-[620px]">
-              <div className="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
-                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-[#f8f5ef] bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-[#c1a586]/40 flex items-center gap-1.5 shadow-xs">
-                  <Activity size={12} className="text-[#c1a586]" />
-                  Procedimentos e Avaliação Cirúrgica
-                </span>
-
-                <span className="text-[10.5px] font-medium text-[#dec9ad] bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15 flex items-center gap-1">
-                  <Sparkles size={11} className="text-[#c1a586]" />
-                  Adultos e Crianças
-                </span>
-              </div>
-
-              <h3 className="text-[16px] sm:text-[18px] font-bold text-[#f8f5ef] leading-snug mb-1">
-                Exames em Consultório e Cirurgias{" "}
-                <span className="serif text-[#dec9ad]">com Clareza e Segurança</span>
-              </h3>
-              <p className="text-[12px] sm:text-[12.5px] text-[#ece3d9] leading-relaxed mb-2">
-                Videoendoscopia nasal flexível, laringoscopia, desvio de septo, cornetos nasais, amígdalas, adenoide, tubo de ventilação, frenectomia, sinusite e ronco/apneia.
-              </p>
-
-              <div className="flex flex-wrap gap-1.5">
-                {[
-                  "Videoendoscopia Flexível",
-                  "Desvio de Septo & Cornetos",
-                  "Amígdalas & Adenoide",
-                  "Cirurgia Endoscópica Nasal",
-                  "Ronco & Apneia",
-                ].map((proc) => (
-                  <span
-                    key={proc}
-                    className="text-[10.5px] px-2 py-0.5 rounded-md bg-black/45 text-[#dec9ad] border border-[#c1a586]/25 font-medium"
-                  >
-                    {proc}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <a
-              href={whatsappUrl("61985743764", "Otorhynus Clínica — Avaliação Cirúrgica")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button button-gold shrink-0 w-full sm:w-auto !justify-between !min-h-[42px] !text-[12.5px] !py-2.5 !px-4 shadow-md mt-1 lg:mt-0"
-            >
-              <span className="flex items-center gap-2">
-                <HeartHandshake size={15} />
-                <span>Solicitar Avaliação no WhatsApp</span>
-              </span>
-              <ArrowUpRight size={15} />
-            </a>
-          </div>
-        </section>
-
-        {/* SECTION: OFFICIAL LINKS (COMPACT 2-COLUMN GRID) */}
+        {/* LINKS RÁPIDOS DE 1 LINHA */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
           <a
             href="/"
@@ -486,7 +516,7 @@ export default function BiolinkPage() {
                   Site Oficial Completo
                 </h3>
                 <p className="text-[11px] text-[#ece3d9]">
-                  Formação médica, artigos e detalhes dos tratamentos.
+                  Atendimento infantil, adulto, exames e trajetória médica.
                 </p>
               </div>
             </div>
@@ -511,7 +541,7 @@ export default function BiolinkPage() {
                   @raimundo.otorrino
                 </h3>
                 <p className="text-[11px] text-[#ece3d9]">
-                  Orientações de saúde e rotina médica em Brasília.
+                  Acompanhe conteúdos e orientações no Instagram.
                 </p>
               </div>
             </div>
@@ -521,30 +551,96 @@ export default function BiolinkPage() {
             />
           </a>
         </div>
-
-        <p className="text-center text-[11px] text-[#d5c1a8] border-t border-[rgba(193,165,134,0.18)] pt-2.5">
-          Horários, convênios atendidos e valores informados diretamente pela recepção de cada unidade.
-        </p>
       </main>
 
-      {/* 4. FOOTER */}
-      <footer className="cinematic-footer w-full border-t border-[rgba(193,165,134,0.18)] bg-[#18120e] py-4 px-4 sm:px-6 mt-4 text-center flex flex-col items-center z-10">
-        <a
-          href="/"
-          className="mb-1.5 block opacity-90 hover:opacity-100 transition-opacity"
-          aria-label="Voltar para a página inicial"
+      {/* MODAL LEVE DE CONVÊNIOS (SÓ ABRE SE O PACIENTE CLICAR) */}
+      {selectedClinicConvenios && (
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedClinicConvenios(null)}
         >
-          <img
-            src="/media/logo.png"
-            alt="Dr. Raimundo Aldemar — Otorrinolaringologia"
-            className="h-7 w-auto object-contain"
-          />
-        </a>
-        <p className="text-[11.5px] text-[#ece3d9] font-medium mb-0.5">
-          Dr. Raimundo Aldemar de Morais Lima · CRM-DF 20094 · RQE 13936
+          <div
+            className="w-full max-w-[520px] bg-[#241b14] border border-[#c1a586]/40 rounded-2xl p-5 text-[#f8f5ef] shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-3 mb-3 pb-3 border-b border-[#c1a586]/20">
+              <div>
+                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-[#c1a586] block">
+                  {selectedClinicConvenios.region}
+                </span>
+                <h3 className="text-[17px] font-bold text-[#f8f5ef]">
+                  Convênios — {selectedClinicConvenios.name}
+                </h3>
+                <p className="text-[12px] text-[#dec9ad]">
+                  {selectedClinicConvenios.convenios.length} planos atendidos
+                  nesta unidade
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedClinicConvenios(null)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-[#f8f5ef] cursor-pointer"
+                aria-label="Fechar lista de convênios"
+              >
+                <X size={17} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 max-h-[320px] overflow-y-auto pr-1">
+              {selectedClinicConvenios.convenios.map((conv) => (
+                <div
+                  key={conv.name}
+                  className="flex items-center gap-2 p-1.5 rounded-lg bg-white/5 border border-[#c1a586]/20"
+                >
+                  <span className="w-6 h-6 rounded bg-white p-0.5 flex items-center justify-center shrink-0 overflow-hidden">
+                    <img
+                      src={conv.logo}
+                      alt={conv.name}
+                      width={20}
+                      height={20}
+                      loading="lazy"
+                      className="w-full h-full object-contain"
+                    />
+                  </span>
+                  <span className="text-[11.5px] text-[#ece3d9] truncate">
+                    {conv.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-[#c1a586]/20">
+              <a
+                href={whatsappUrl(
+                  selectedClinicConvenios.whatsapp,
+                  selectedClinicConvenios.name
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button-whatsapp w-full !justify-between !min-h-[40px] !text-[12.5px] !py-2 !px-4"
+              >
+                <span className="flex items-center gap-1.5">
+                  <MessageCircle size={15} />
+                  <span>
+                    Agendar em {selectedClinicConvenios.name} no WhatsApp
+                  </span>
+                </span>
+                <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 4. RODAPÉ COMPACTO */}
+      <footer className="cinematic-footer w-full border-t border-[rgba(193,165,134,0.18)] bg-[#18120e] py-3.5 px-4 sm:px-6 text-center flex flex-col items-center z-10">
+        <p className="text-[11.5px] text-[#ece3d9] font-medium">
+          Dr. Raimundo Aldemar de Morais Lima · Médico Otorrinolaringologista
         </p>
-        <p className="text-[10.5px] text-[#dec9ad] font-serif">
-          Medicina com ciência, escuta e proximidade. Brasília — DF.
+        <p className="text-[10.5px] text-[#dec9ad]">
+          CRM-DF 20094 · RQE 13936 · Brasília — DF
         </p>
       </footer>
     </div>

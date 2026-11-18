@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import {
   SiteHeader,
+  FaqSection,
   ContactSection,
   SiteFooter,
   LinkButton,
@@ -30,20 +31,20 @@ const pediatricSurgeries = [
   {
     id: "adenoide",
     title: "Remoção da adenoide (Adenoidectomia)",
-    text: "Desobstrução da passagem de ar nasal na infância, contribuindo para o sono tranquilo, respiração pelo nariz e prevenção de otites e sinusites.",
+    text: "Desobstrução da passagem de ar nasal na infância, contribuindo para a respiração livre pelo nariz, a melhora da qualidade do sono e a prevenção de otites e sinusites de repetição.",
     image: "/media/adenoide-infantil.jpg",
     className: "area-image-adenoide",
   },
   {
     id: "tubo",
-    title: "Colocação de tubo de ventilação (Miringotomia)",
-    text: "Procedimento delicado para drenagem de secreção e ventilação do ouvido médio em crianças com otites de repetição ou líquido acumulado no ouvido.",
+    title: "Miringotomia e colocação de tubo de ventilação",
+    text: "Procedimento delicado em que é realizada a miringotomia (pequena abertura na membrana timpânica) seguida da inserção do tubo de ventilação, indicado para drenagem de secreção e aeração do ouvido médio em crianças com otites de repetição ou líquido acumulado.",
     image: "/media/area-ouvido.jpg",
   },
   {
     id: "frenectomia",
-    title: "Frenectomia — retirada do frênulo lingual",
-    text: "Correção cirúrgica da 'língua presa' para favorecer a amamentação em bebês, a deglutição e o desenvolvimento livre da fala na infância.",
+    title: "Frenectomia — correção do frênulo lingual",
+    text: "Correção cirúrgica da 'língua presa' quando indicada para favorecer a amamentação em bebês, a deglutição e o desenvolvimento livre da fala na infância.",
     image: "/media/area-garganta.jpg",
   },
 ];
@@ -153,7 +154,7 @@ export default function AtendimentoInfantilPage() {
           <div className="children-shade" />
           <div className="children-content">
             <span className="eyebrow hero-reveal">
-              ATENDIMENTO E CIRURGIA INFANTIL
+              OTORRINOLARINGOLOGISTA · ATENDIMENTO E CIRURGIA INFANTIL
             </span>
             <h1 className="hero-reveal">
               Para os pequenos,
@@ -161,8 +162,9 @@ export default function AtendimentoInfantilPage() {
               <span className="serif">atenção em cada descoberta.</span>
             </h1>
             <p className="hero-reveal">
-              Atendimento e cirurgias infantis com acolhimento lúdico para a
-              criança e orientação próxima para a família em todas as etapas.
+              Avaliação clínica e cirurgias infantis com acolhimento lúdico para
+              a criança e orientação próxima para a família antes, durante e
+              após cada etapa.
             </p>
             <div className="hero-reveal">
               <LinkButton href="#contato" light>
@@ -177,21 +179,108 @@ export default function AtendimentoInfantilPage() {
             />
           </div>
           <div className="children-footnote hero-reveal">
-            <a href="#cirurgias-infantis" className="scroll-link">
+            <a href="#sinais-infantis" className="scroll-link">
               <span className="circle-icon circle-icon-light">
                 <ArrowDown size={16} />
               </span>
-              Ver cirurgias infantis
+              Quando avaliar a respiração da criança
             </a>
             <span className="footnote-right">ATENÇÃO QUE ACOLHE.</span>
           </div>
         </section>
 
         <div className="intro-strip" data-reveal>
-          <span>Amigdalectomia e adenoide.</span>
-          <span>Tubo de ventilação e frenectomia.</span>
+          <span>Respiração nasal e sono na infância.</span>
+          <span>Amigdalectomia, adenoide e tubo de ventilação.</span>
           <span>Pequenos super-heróis.</span>
         </div>
+
+        {/* SEÇÃO DE EMPATIA E ORIENTAÇÃO AOS PAIS (PRINT 3) */}
+        <section id="sinais-infantis" className="about section-pad">
+          <div className="section-top" data-reveal>
+            <span className="eyebrow">QUANDO PROCURAR AVALIAÇÃO</span>
+            <span className="small-note">Escuta tranquila para os pais.</span>
+          </div>
+          <div className="about-grid">
+            <div className="about-text">
+              <h2 data-reveal>
+                Seu filho ronca, dorme de boca aberta
+                <br />
+                <span className="serif">
+                  ou tem dificuldade para respirar pelo nariz?
+                </span>
+              </h2>
+              <p data-reveal>
+                Respiração oral constante, ronco noturno, sono agitado, nariz
+                frequentemente obstruído ou infecções repetidas de ouvido e
+                garganta são sinais que merecem uma avaliação
+                otorrinolaringológica detalhada.
+              </p>
+              <p data-reveal>
+                Investigar esses sinais não significa que toda criança precisa
+                de cirurgia. Muitos quadros respondem muito bem ao tratamento
+                clínico e ao controle da rinite; e, quando a cirurgia é
+                realmente indicada, a decisão é construída junto à família com
+                clareza e segurança.
+              </p>
+              <div className="credentials" data-reveal>
+                <div>
+                  <p>
+                    <strong>Avaliação cuidadosa e sem pressa</strong>
+                    <small>
+                      Escuta da rotina do sono, da alimentação e do
+                      desenvolvimento da criança, com exame físico delicado em
+                      consultório.
+                    </small>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Indicação ética: tratamento clínico ou cirúrgico</strong>
+                    <small>
+                      Explicação transparente sobre o diagnóstico para que os
+                      pais compreendam se o caso é de acompanhamento clínico ou
+                      cirúrgico.
+                    </small>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Acompanhamento da família antes e depois</strong>
+                    <small>
+                      Suporte próximo desde o preparo pré-operatório até a
+                      recuperação completa em casa.
+                    </small>
+                  </p>
+                </div>
+              </div>
+              <LinkButton href="#contato">
+                Agendar avaliação infantil
+              </LinkButton>
+            </div>
+
+            <div className="about-visual" data-reveal>
+              <div
+                className="about-photo"
+                role="img"
+                aria-label="Dr. Raimundo Aldemar acolhendo paciente infantil"
+              >
+                <div
+                  className="photo-background"
+                  data-parallax
+                  style={{
+                    backgroundImage: "url('/media/adenoide-infantil.jpg')",
+                    backgroundPosition: "center top",
+                  }}
+                />
+              </div>
+              <div className="photo-caption">
+                <span>Avaliação respiratória na infância</span>
+                <span>Dr. Raimundo Aldemar · RQE 13936</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* CIRURGIAS INFANTIS */}
         <section
@@ -219,12 +308,12 @@ export default function AtendimentoInfantilPage() {
           </div>
           <div className="specialties-heading" data-reveal>
             <h2>
-              Cirurgias realizadas
+              Procedimentos cirúrgicos
               <br />
               <span className="serif">na infância.</span>
             </h2>
             <p>
-              Avaliação cuidadosa e explicação clara de cada etapa para os pais
+              Avaliação criteriosa e explicação clara de cada etapa para os pais
               e responsáveis.
             </p>
           </div>
@@ -257,7 +346,16 @@ export default function AtendimentoInfantilPage() {
                   </AccordionTrigger>
                   <AccordionContent className="area-content">
                     <p>{surg.text}</p>
-                    <a href="#contato" className="text-link">
+                    <a
+                      href="#contato"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.dispatchEvent(
+                          new CustomEvent("open-quick-booking")
+                        );
+                      }}
+                      className="text-link"
+                    >
                       Agendar avaliação infantil <ArrowUpRight size={18} />
                     </a>
                   </AccordionContent>
@@ -271,7 +369,7 @@ export default function AtendimentoInfantilPage() {
         <section id="super-herois" className="about section-pad">
           <div className="section-top" data-reveal>
             <span className="eyebrow">PEQUENOS SUPER-HERÓIS</span>
-            <span className="small-note">Acolhimento lúdico e coragem.</span>
+            <span className="small-note">Acolhimento lúdico e família presente.</span>
           </div>
           <div className="about-grid">
             <div className="about-text">
@@ -281,36 +379,45 @@ export default function AtendimentoInfantilPage() {
                 <span className="serif">cada criança é um super-herói.</span>
               </h2>
               <p data-reveal>
-                Para tornar a experiência hospitalar leve e acolhedora, as
-                crianças são recebidas como verdadeiros super-heróis — com capa,
-                carinho e atenção em cada detalhe.
+                Para ajudar a tornar a experiência hospitalar mais leve e
+                acolhedora, as crianças são recebidas como pequenos
+                super-heróis — com capa, carinho e atenção em cada detalhe.
               </p>
               <p data-reveal>
-                Esse cuidado reduz a ansiedade infantil e transforma o momento
-                do procedimento em uma lembrança tranquila para a criança e
-                para toda a família.
+                Essa estratégia lúdica foi pensada para ajudar a tornar o
+                ambiente cirúrgico menos assustador para a criança, com
+                acompanhamento próximo dos pais antes e depois do procedimento.
               </p>
               <div className="credentials" data-reveal>
                 <div>
                   <p>
                     <strong>Acolhimento lúdico no centro cirúrgico</strong>
                     <small>
-                      Capas e máscaras de super-heróis que tornam a chegada ao
-                      centro cirúrgico mais leve, acolhedora e cheia de coragem.
+                      Capas e máscaras de super-heróis como forma carinhosa de
+                      receber a criança e tornar o momento mais acolhedor.
                     </small>
                   </p>
                 </div>
                 <div>
                   <p>
-                    <strong>O cuidado que acompanha a família</strong>
+                    <strong>Acompanhamento da família antes e após a cirurgia</strong>
                     <small>
-                      Orientação próxima aos pais antes, durante e após o
-                      procedimento, respeitando o tempo de cada criança.
+                      Orientação direta aos pais no preparo pré-operatório, no
+                      centro cirúrgico e em todo o pós-operatório, respeitando o
+                      tempo de cada criança.
                     </small>
                   </p>
                 </div>
               </div>
-              <a className="text-link" href="#contato" data-reveal>
+              <a
+                className="text-link"
+                href="#contato"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("open-quick-booking"));
+                }}
+                data-reveal
+              >
                 Agendar consulta infantil <ArrowUpRight size={19} />
               </a>
             </div>
@@ -324,11 +431,17 @@ export default function AtendimentoInfantilPage() {
               </div>
               <div className="photo-caption">
                 <span>Pequenos Super-Heróis</span>
-                <span>Acolhimento infantil</span>
+                <span>Fotografias reais com autorização dos responsáveis</span>
               </div>
             </div>
           </div>
         </section>
+
+        <FaqSection
+          eyebrow="DÚVIDAS DOS PAIS"
+          title="Perguntas frequentes sobre"
+          subtitle="respiração e sono infantil."
+        />
 
         <ContactSection />
       </main>
@@ -337,4 +450,3 @@ export default function AtendimentoInfantilPage() {
     </div>
   );
 }
-

@@ -103,16 +103,32 @@ body:has(.biolink-theme) {
   text-align: center;
   padding: 24px;
   width: 100%;
-  max-width: 480px;
+  max-width: 540px;
 }
 .biolink-theme .intro-logo {
-  width: clamp(230px, 36vw, 400px);
+  width: clamp(310px, 46vw, 500px);
   height: auto;
   display: block;
   filter: drop-shadow(0 8px 24px rgba(53, 41, 31, 0.06));
   opacity: 0;
   transform: translateY(18px) scale(0.95);
   will-change: opacity, transform;
+}
+@media (max-width: 768px) {
+  .biolink-theme .site-intro {
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 24px 72px;
+  }
+  .biolink-theme .intro-bg-photo {
+    background-position: 72% top;
+  }
+  .biolink-theme .intro-bg-shade {
+    background: linear-gradient(0deg, rgba(248, 245, 239, 0.92) 0%, rgba(248, 245, 239, 0.58) 20%, rgba(248, 245, 239, 0.05) 44%, rgba(248, 245, 239, 0) 100%);
+  }
+  .biolink-theme .intro-logo {
+    width: clamp(275px, 78vw, 345px);
+  }
 }
 .biolink-theme .intro-divider {
   width: 52px;

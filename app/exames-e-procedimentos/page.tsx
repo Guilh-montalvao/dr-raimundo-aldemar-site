@@ -124,7 +124,7 @@ export default function ExamesEProcedimentosPage() {
           <div className="hero-shade" />
           <div className="hero-content">
             <p className="eyebrow hero-reveal">
-              EXAMES E PROCEDIMENTOS · CRIANÇAS E ADULTOS
+              OTORRINOLARINGOLOGISTA · EXAMES E PROCEDIMENTOS
             </p>
             <h1 className="hero-reveal">
               Diagnóstico preciso.
@@ -147,7 +147,7 @@ export default function ExamesEProcedimentosPage() {
               Ver exames realizados
             </a>
             <span className="hero-credentials">
-              Dr. Raimundo Aldemar
+              Dr. Raimundo Aldemar · Otorrinolaringologista
               <br />
               <small>CRM-DF 20094 · RQE 13936</small>
             </span>
@@ -189,8 +189,8 @@ export default function ExamesEProcedimentosPage() {
                     </strong>
                     <small>
                       Realizada em crianças e adultos. O uso da fibra óptica
-                      flexível garante muito mais conforto e tranquilidade
-                      durante todo o exame.
+                      flexível pode proporcionar maior conforto e tranquilidade
+                      durante a avaliação das estruturas nasais e da adenoide.
                     </small>
                   </p>
                 </div>
@@ -206,8 +206,16 @@ export default function ExamesEProcedimentosPage() {
                 </div>
               </div>
 
-              <a className="text-link" href="#contato" data-reveal>
-                Agendar exame nas unidades Asa Norte ou Gama{" "}
+              <a
+                className="text-link"
+                href="#contato"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent("open-quick-booking"));
+                }}
+                data-reveal
+              >
+                Agendar exame nas unidades Asa Norte, Gama ou Taguatinga{" "}
                 <ArrowUpRight size={19} />
               </a>
             </div>

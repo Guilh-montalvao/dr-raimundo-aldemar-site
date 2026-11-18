@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import {
   SiteHeader,
+  FaqSection,
   ContactSection,
   SiteFooter,
   LinkButton,
@@ -28,8 +29,8 @@ const adultSurgeries = [
   },
   {
     id: "turbinectomia",
-    title: "Remoção dos cornetos nasais (Turbinectomia)",
-    text: "Redução cirúrgica dos cornetos nasais hipertrofiados para aliviar a obstrução nasal crônica e potencializar o controle da rinite.",
+    title: "Redução dos cornetos nasais (Turbinoplastia / Turbinectomia)",
+    text: "Redução cirúrgica funcional do volume dos cornetos nasais hipertrofiados para aliviar a obstrução nasal crônica e auxiliar no controle da rinite, preservando a fisiologia nasal.",
     image: "/media/exame-nasal.jpg",
   },
   {
@@ -130,7 +131,7 @@ export default function CirurgiaAdultoPage() {
           <div className="surgery-shade" aria-hidden="true" />
           <div className="surgery-text">
             <span className="eyebrow hero-reveal">
-              ATENDIMENTO ADULTO · CIRURGIAS
+              OTORRINOLARINGOLOGISTA · CIRURGIAS EM ADULTO
             </span>
             <h1 className="hero-reveal">
               Quando a cirurgia é indicada,
@@ -221,7 +222,16 @@ export default function CirurgiaAdultoPage() {
                   </AccordionTrigger>
                   <AccordionContent className="area-content">
                     <p>{surg.text}</p>
-                    <a href="#contato" className="text-link">
+                    <a
+                      href="#contato"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.dispatchEvent(
+                          new CustomEvent("open-quick-booking")
+                        );
+                      }}
+                      className="text-link"
+                    >
                       Agendar avaliação cirúrgica <ArrowUpRight size={18} />
                     </a>
                   </AccordionContent>
@@ -230,6 +240,12 @@ export default function CirurgiaAdultoPage() {
             </Accordion>
           </div>
         </section>
+
+        <FaqSection
+          eyebrow="DÚVIDAS FREQUENTES"
+          title="Perguntas comuns sobre"
+          subtitle="obstrução nasal e cirurgias."
+        />
 
         <ContactSection />
       </main>

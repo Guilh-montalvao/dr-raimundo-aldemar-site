@@ -631,15 +631,29 @@ export function SiteHeader() {
                 className="quick-unit-link"
                 onClick={() => setBookingOpen(false)}
               >
-                <div>
+                <div
+                  className="quick-unit-bg"
+                  style={{ backgroundImage: "url('/media/otorhynus.jpg')" }}
+                  aria-hidden="true"
+                />
+                <div className="quick-unit-shade" aria-hidden="true" />
+                <img
+                  src="/media/otorhynus.jpg"
+                  alt="Unidade Otorhynus — Asa Norte"
+                  className="quick-unit-thumb"
+                  width={60}
+                  height={60}
+                  loading="lazy"
+                />
+                <div className="quick-unit-info">
                   <strong>Otorhynus — Asa Norte</strong>
                   <span>
                     SHLN, Bloco J, Ed. Multiclínicas · WhatsApp (61) 98574-3764
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={18} />
-                  <ArrowUpRight size={16} />
+                  <MessageCircle size={17} />
+                  <ArrowUpRight size={15} />
                 </span>
               </a>
 
@@ -650,7 +664,21 @@ export function SiteHeader() {
                 className="quick-unit-link"
                 onClick={() => setBookingOpen(false)}
               >
-                <div>
+                <div
+                  className="quick-unit-bg"
+                  style={{ backgroundImage: "url('/media/otogama.jpg')" }}
+                  aria-hidden="true"
+                />
+                <div className="quick-unit-shade" aria-hidden="true" />
+                <img
+                  src="/media/otogama.jpg"
+                  alt="Clínica Otogama — Gama"
+                  className="quick-unit-thumb"
+                  width={60}
+                  height={60}
+                  loading="lazy"
+                />
+                <div className="quick-unit-info">
                   <strong>Clínica Otogama — Gama</strong>
                   <span>
                     Quadra 01, Conjunto A, Lote 4, Gama Sul · WhatsApp (61)
@@ -658,8 +686,8 @@ export function SiteHeader() {
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={18} />
-                  <ArrowUpRight size={16} />
+                  <MessageCircle size={17} />
+                  <ArrowUpRight size={15} />
                 </span>
               </a>
 
@@ -670,7 +698,21 @@ export function SiteHeader() {
                 className="quick-unit-link"
                 onClick={() => setBookingOpen(false)}
               >
-                <div>
+                <div
+                  className="quick-unit-bg"
+                  style={{ backgroundImage: "url('/media/cdootorrino.jpg')" }}
+                  aria-hidden="true"
+                />
+                <div className="quick-unit-shade" aria-hidden="true" />
+                <img
+                  src="/media/cdootorrino.jpg"
+                  alt="CDO Otorrino — Taguatinga"
+                  className="quick-unit-thumb"
+                  width={60}
+                  height={60}
+                  loading="lazy"
+                />
+                <div className="quick-unit-info">
                   <strong>CDO Otorrino — Taguatinga</strong>
                   <span>
                     Centro Médico Hospital Anchieta, Salas 111/112 B · WhatsApp
@@ -678,8 +720,8 @@ export function SiteHeader() {
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={18} />
-                  <ArrowUpRight size={16} />
+                  <MessageCircle size={17} />
+                  <ArrowUpRight size={15} />
                 </span>
               </a>
 
@@ -690,7 +732,21 @@ export function SiteHeader() {
                 className="quick-unit-link quick-unit-surgery"
                 onClick={() => setBookingOpen(false)}
               >
-                <div>
+                <div
+                  className="quick-unit-bg"
+                  style={{ backgroundImage: "url('/media/cirurgia.jpg')" }}
+                  aria-hidden="true"
+                />
+                <div className="quick-unit-shade" aria-hidden="true" />
+                <img
+                  src="/media/cirurgia.jpg"
+                  alt="Agendar Cirurgia e Consultar Valores"
+                  className="quick-unit-thumb"
+                  width={60}
+                  height={60}
+                  loading="lazy"
+                />
+                <div className="quick-unit-info">
                   <strong>
                     Agendar Cirurgia · Consultar Valores (Criança e Adulto)
                   </strong>
@@ -700,8 +756,8 @@ export function SiteHeader() {
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={18} />
-                  <ArrowUpRight size={16} />
+                  <MessageCircle size={17} />
+                  <ArrowUpRight size={15} />
                 </span>
               </a>
             </div>
@@ -715,7 +771,7 @@ export function SiteHeader() {
                   setTimeout(() => scrollToHash("#contato"), 120);
                 }}
               >
-                Ver endereços completos, telefones fixos e mapa na página ↓
+                Ver endereços completos, telefones e mapa na página ↓
               </button>
             </div>
           </div>
@@ -889,7 +945,7 @@ export function ContactSection() {
               </a>
               <a href="tel:+556133408859" className="phone-link">
                 <Phone size={15} />
-                Fixo: (61) 3340-8859
+                (61) 3340-8859
               </a>
 
               <Accordion
@@ -985,7 +1041,7 @@ export function ContactSection() {
               </a>
               <a href="tel:+556132540111" className="phone-link">
                 <Phone size={15} />
-                Fixo: (61) 3254-0111
+                (61) 3254-0111
               </a>
 
               <Accordion
@@ -1081,7 +1137,7 @@ export function ContactSection() {
               </a>
               <a href="tel:+556133526994" className="phone-link">
                 <Phone size={15} />
-                Fixo: (61) 3352-6994
+                (61) 3352-6994
               </a>
 
               <Accordion
@@ -1298,7 +1354,7 @@ export function SiteFooter() {
             >
               <div>
                 <strong>1. Asa Norte — Unidade Otorhynus</strong>
-                <span>WhatsApp (61) 98574-3764 · Fixo (61) 3340-8859</span>
+                <span>WhatsApp (61) 98574-3764 · (61) 3340-8859</span>
               </div>
               <ArrowUpRight size={15} />
             </a>
@@ -1311,7 +1367,7 @@ export function SiteFooter() {
             >
               <div>
                 <strong>2. Gama — Clínica Otogama</strong>
-                <span>WhatsApp (61) 98346-6377 · Fixo (61) 3254-0111</span>
+                <span>WhatsApp (61) 98346-6377 · (61) 3254-0111</span>
               </div>
               <ArrowUpRight size={15} />
             </a>
@@ -1324,7 +1380,7 @@ export function SiteFooter() {
             >
               <div>
                 <strong>3. Taguatinga — CDO Otorrino</strong>
-                <span>WhatsApp (61) 98323-0103 · Fixo (61) 3352-6994</span>
+                <span>WhatsApp (61) 98323-0103 · (61) 3352-6994</span>
               </div>
               <ArrowUpRight size={15} />
             </a>

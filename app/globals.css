@@ -345,9 +345,15 @@ h2 .serif,h1 .serif{color:#80664b}
 .site-header .desktop-nav a{font-size:clamp(11.5px,.82vw,13px);white-space:nowrap}
 
 /* Direct Surgery & Pricing Consultation Channel */
-.surgery-cta-group{display:flex;align-items:center;flex-wrap:wrap;gap:22px}
-.text-link-light{color:#f8f5ef;border-bottom-color:rgba(222,201,173,.65)}
-.text-link-light:hover{color:#dec9ad}
+.surgery-cta-group{display:flex;align-items:center;flex-wrap:wrap;gap:14px}
+.text-link{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-height:50px;padding:12px 22px;border-radius:100px;background:var(--brown);border:1px solid var(--brown);color:var(--cream);font-size:14px;font-weight:500;transition:background .3s,transform .3s,color .3s,border-color .3s}
+.text-link svg{transition:transform .3s;flex-shrink:0}
+.text-link:hover{background:#594331;border-color:#594331;transform:translateY(-2px);gap:22px}
+.text-link:hover svg{transform:translate(2px,-2px)}
+.surgery-cta-group .text-link:not(.text-link-light){background:#dfd2c0;border-color:#c4b197;color:var(--brown)}
+.surgery-cta-group .text-link:not(.text-link-light):hover{background:#d2c1aa;border-color:#b09b7e}
+.text-link-light{background:#8f7355;border-color:#b89c7d;color:#fffefa}
+.text-link-light:hover{background:#a68868;border-color:#dec9ad;color:#fffefa}
 .quick-unit-surgery{background:rgba(193,165,134,.14);border-color:rgba(222,201,173,.55)}
 .quick-unit-surgery:hover{background:rgba(193,165,134,.24);border-color:#dec9ad}
 .surgery-direct-banner{margin-top:38px;padding:28px 32px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(193,165,134,.38);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;gap:28px}

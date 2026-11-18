@@ -284,9 +284,9 @@ h2 .serif,h1 .serif{color:#80664b}
 .quick-booking-units{display:flex;flex-direction:column;gap:12px}
 .quick-unit-link{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border-radius:14px;background:#1c140f;border:1px solid rgba(193,165,134,.35);transition:border-color .25s,transform .25s,box-shadow .25s}
 .quick-unit-link:hover{border-color:#dec9ad;transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.38)}
-.quick-unit-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.28;z-index:-2;transition:transform .5s ease,opacity .3s ease}
-.quick-unit-link:hover .quick-unit-bg{transform:scale(1.05);opacity:.38}
-.quick-unit-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(26,19,14,.94) 0%,rgba(26,19,14,.84) 58%,rgba(26,19,14,.52) 100%)}
+.quick-unit-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.72;z-index:-2;transition:transform .5s ease,opacity .3s ease}
+.quick-unit-link:hover .quick-unit-bg{transform:scale(1.05);opacity:.85}
+.quick-unit-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(26,19,14,.84) 0%,rgba(26,19,14,.56) 52%,rgba(26,19,14,.16) 100%)}
 .quick-unit-thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;border:1px solid rgba(222,201,173,.4);flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.35)}
 .quick-unit-info{flex:1;min-width:0}
 .quick-unit-info strong{display:block;font-size:15.5px;font-weight:600;color:#f8f5ef;margin-bottom:3px;line-height:1.25}
@@ -356,10 +356,15 @@ h2 .serif,h1 .serif{color:#80664b}
 .text-link-light{background:#8f7355;border-color:#b89c7d;color:#fffefa}
 .text-link-light:hover{background:#a68868;border-color:#dec9ad;color:#fffefa}
 .footer-booking-units{gap:10px}
-.footer-booking-units .quick-unit-link{padding:11px 14px}
-.footer-booking-units .quick-unit-thumb{width:48px;height:48px}
-.footer-booking-units .quick-unit-info strong{font-size:14px}
-.footer-booking-units .quick-unit-info span{font-size:11.5px}
+.footer-booking-units .quick-unit-link{padding:11px 14px;background:#f2ebe0;border:1px solid #d4c3ad;box-shadow:0 4px 14px rgba(53,41,31,.06)}
+.footer-booking-units .quick-unit-link:hover{border-color:#9a8064;box-shadow:0 10px 24px rgba(53,41,31,.12)}
+.footer-booking-units .quick-unit-bg{opacity:.9}
+.footer-booking-units .quick-unit-link:hover .quick-unit-bg{opacity:1}
+.footer-booking-units .quick-unit-shade{background:linear-gradient(90deg,rgba(246,241,233,.93) 0%,rgba(246,241,233,.74) 52%,rgba(246,241,233,.14) 100%)}
+.footer-booking-units .quick-unit-thumb{width:48px;height:48px;border-color:#c8b59c;box-shadow:0 3px 10px rgba(53,41,31,.15)}
+.footer-booking-units .quick-unit-info strong{font-size:14px;color:var(--brown)}
+.footer-booking-units .quick-unit-info span{font-size:11.5px;color:#5c5043}
+.footer-booking-units .quick-unit-action{color:var(--brown);background:rgba(248,245,239,.85);border-color:#c8b59c}
 .quick-unit-surgery{background:rgba(193,165,134,.14);border-color:rgba(222,201,173,.55)}
 .quick-unit-surgery:hover{background:rgba(193,165,134,.24);border-color:#dec9ad}
 .surgery-direct-banner{margin-top:38px;padding:28px 32px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(193,165,134,.38);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;gap:28px}

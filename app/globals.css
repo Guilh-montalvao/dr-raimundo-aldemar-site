@@ -341,8 +341,8 @@ h2 .serif,h1 .serif{color:#80664b}
 }
 
 /* Desktop Navigation 8-Link Structure Refinement */
-.site-header .desktop-nav{gap:clamp(11px,1.15vw,20px)}
-.site-header .desktop-nav a{font-size:clamp(11.5px,.82vw,13px);white-space:nowrap}
+.site-header .desktop-nav{gap:clamp(14px,1.5vw,24px)}
+.site-header .desktop-nav a{font-size:13px;white-space:nowrap}
 
 /* Direct Surgery & Pricing Consultation Channel */
 .surgery-cta-group{display:flex;align-items:center;flex-wrap:wrap;gap:14px}

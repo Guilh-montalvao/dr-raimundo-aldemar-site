@@ -46,24 +46,47 @@ const instagramUrl =
 
 export interface NavItem {
   label: string;
+  shortLabel: string;
   href: string;
   action?: "booking-modal" | "surgery-whatsapp";
 }
 
 export const navLinks: NavItem[] = [
-  { label: "Início", href: "/" },
-  { label: "Conheça o Dr. Raimundo Aldemar", href: "/o-medico" },
-  { label: "Consultas e cirurgias - Infantil", href: "/atendimento-infantil" },
-  { label: "Consultas e cirurgias - Adulto", href: "/cirurgia-adulto" },
-  { label: "Exames e procedimentos", href: "/exames-e-procedimentos" },
-  { label: "Locais de atendimento", href: "#contato" },
+  { label: "Início", shortLabel: "Início", href: "/" },
+  {
+    label: "Conheça o Dr. Raimundo Aldemar",
+    shortLabel: "Dr. Raimundo",
+    href: "/o-medico",
+  },
+  {
+    label: "Consultas e cirurgias - Infantil",
+    shortLabel: "Infantil",
+    href: "/atendimento-infantil",
+  },
+  {
+    label: "Consultas e cirurgias - Adulto",
+    shortLabel: "Adulto",
+    href: "/cirurgia-adulto",
+  },
+  {
+    label: "Exames e procedimentos",
+    shortLabel: "Exames",
+    href: "/exames-e-procedimentos",
+  },
+  {
+    label: "Locais de atendimento",
+    shortLabel: "Locais de atendimento",
+    href: "#contato",
+  },
   {
     label: "Agendamento consultas",
+    shortLabel: "Agendar Consulta",
     href: "#agendar-consulta",
     action: "booking-modal",
   },
   {
     label: "Agendamento cirurgia",
+    shortLabel: "Agendar Cirurgia",
     href: surgeryWhatsapp(),
     action: "surgery-whatsapp",
   },
@@ -476,7 +499,7 @@ export function SiteHeader() {
                     setBookingOpen(true);
                   }}
                 >
-                  {link.label}
+                  {link.shortLabel}
                 </a>
               );
             }
@@ -488,7 +511,7 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {link.label}
+                  {link.shortLabel}
                 </a>
               );
             }
@@ -505,7 +528,7 @@ export function SiteHeader() {
                   scrollToHash(link.href);
                 }}
               >
-                {link.label}
+                {link.shortLabel}
               </a>
             ) : (
               <Link
@@ -514,7 +537,7 @@ export function SiteHeader() {
                 onClick={(e) => handleRouteClick(e, link.href)}
                 className={isActive ? "nav-link-active" : ""}
               >
-                {link.label}
+                {link.shortLabel}
               </Link>
             );
           })}

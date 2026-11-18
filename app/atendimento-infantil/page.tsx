@@ -28,7 +28,8 @@ const pediatricSurgeries = [
     id: "amigdalectomia",
     title: "Amigdalectomia",
     text: "Cirurgia das amígdalas indicada em quadros de amigdalites de repetição ou aumento acentuado que prejudica a respiração, o sono e a alimentação da criança.",
-    image: "/media/area-garganta.jpg",
+    image: "/media/super-herois-kids3.jpeg",
+    className: "area-image-adenoide",
   },
   {
     id: "adenoide",
@@ -41,13 +42,15 @@ const pediatricSurgeries = [
     id: "tubo",
     title: "Miringotomia e colocação de tubo de ventilação",
     text: "Procedimento delicado em que é realizada a miringotomia (pequena abertura na membrana timpânica) seguida da inserção do tubo de ventilação, indicado para drenagem de secreção e aeração do ouvido médio em crianças com otites de repetição ou líquido acumulado.",
-    image: "/media/area-ouvido.jpg",
+    image: "/media/super-herois-kids2.jpeg",
+    className: "area-image-adenoide",
   },
   {
     id: "frenectomia",
     title: "Frenectomia — correção do frênulo lingual",
     text: "Correção cirúrgica da 'língua presa' quando indicada para favorecer a amamentação em bebês, a deglutição e o desenvolvimento livre da fala na infância.",
-    image: "/media/area-garganta.jpg",
+    image: "/media/super-herois-kids4.jpeg",
+    className: "area-image-adenoide",
   },
 ];
 

@@ -20,6 +20,7 @@ import {
   SmartVideo,
   surgeryWhatsapp,
 } from "@/components/site-chrome";
+import { TestimonialsSection } from "@/components/testimonials-section";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -698,6 +699,8 @@ export default function Home() {
             CUIDADO EM CADA ETAPA.
           </span>
         </section>
+
+        <TestimonialsSection />
 
         <FaqSection />
 

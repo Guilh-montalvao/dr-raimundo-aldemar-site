@@ -209,10 +209,31 @@ export function TestimonialsSection() {
         </div>
       </div>
 
-      {/* DESKTOP E MOBILE: MARQUEE 3D PERSPECTIVA */}
-      <div className="testimonials-3d-stage flex relative h-[430px] md:h-[490px] w-full flex-row items-center justify-center gap-3 md:gap-4 overflow-hidden [perspective:340px] md:[perspective:420px]">
+      {/* DESKTOP: 4 COLUNAS 3D | MOBILE: 2 COLUNAS 3D */}
+      <div className="testimonials-3d-stage flex relative h-[430px] md:h-[490px] w-full flex-row items-center justify-center gap-3 md:gap-4 overflow-hidden [perspective:360px] md:[perspective:420px]">
+        {/* Mobile: 2 colunas 3D responsivas com todos os 15 depoimentos */}
         <div
-          className="flex flex-row items-center gap-3 md:gap-4"
+          className="flex md:hidden flex-row items-center gap-3"
+          style={{
+            transform:
+              "translateX(-12px) translateY(0px) translateZ(-45px) rotateX(16deg) rotateY(-8deg) rotateZ(12deg)",
+          }}
+        >
+          <Marquee pauseOnHover vertical className="[--duration:46s]">
+            {reviews.slice(0, 8).map((review) => (
+              <ReviewCard key={review.name} review={review} />
+            ))}
+          </Marquee>
+          <Marquee reverse pauseOnHover vertical className="[--duration:48s]">
+            {reviews.slice(8, 15).map((review) => (
+              <ReviewCard key={review.name} review={review} />
+            ))}
+          </Marquee>
+        </div>
+
+        {/* Desktop: 4 colunas 3D */}
+        <div
+          className="hidden md:flex flex-row items-center gap-4"
           style={{
             transform:
               "translateX(-40px) translateY(0px) translateZ(-70px) rotateX(18deg) rotateY(-9deg) rotateZ(14deg)",

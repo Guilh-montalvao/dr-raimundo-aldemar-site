@@ -7,6 +7,8 @@ import { Marquee } from "@/components/ui/marquee";
 interface Review {
   name: string;
   initials: string;
+  avatar?: string;
+  photo?: string;
   tag: string;
   body: string;
 }
@@ -15,12 +17,15 @@ const reviews: Review[] = [
   {
     name: "Ana Paula Nogueira Rodrigues",
     initials: "AP",
+    avatar: "/media/depoimentos/ana-paula.png",
     tag: "Avaliação no Google · Infantil",
     body: "Para quem procura otorrino de excelência, indico o Dr. Raimundo. Levei meu filho e fiquei encantada com o atendimento. Ele é muito atencioso e paciente com as crianças, orienta todos os cuidados e ouve com atenção nossas preocupações. Gostei tanto que marquei consulta pra família toda.",
   },
   {
     name: "Ana Gomes",
     initials: "AG",
+    avatar: "/media/depoimentos/ana-gomes.png",
+    photo: "/media/depoimentos/ana-gomes-foto.png",
     tag: "Avaliação no Google · Cirurgia Infantil",
     body: "Dr. Raimundo, médico maravilhoso, educado, gentil, atende as crianças com muito carinho e adultos com muita atenção. Operou meu neto, a cirurgia foi um sucesso. Precisamos de mais médicos assim, com amor aos pacientes. Parabéns a toda equipe da clínica.",
   },
@@ -33,8 +38,16 @@ const reviews: Review[] = [
   {
     name: "Cidelice Refosco",
     initials: "CR",
+    avatar: "/media/depoimentos/cidelice-refosco.png",
     tag: "Avaliação no Google",
     body: "Depois de mais de 15 dias passando por vários profissionais, finalmente fui atendida pelo Dr. Raimundo Aldemar. Ele me ouviu com calma, teve um atendimento muito humanizado e conseguiu identificar que eu estava com VPPB. Explicou tudo com clareza e me passou muita segurança. Saí de lá sem tontura e sem dor!",
+  },
+  {
+    name: "Jaqueline Borges",
+    initials: "JB",
+    avatar: "/media/depoimentos/jaqueline-borges.png",
+    tag: "Avaliação no Google · Local Guide",
+    body: "Estou em acompanhamento com o Dr. Raimundo há cerca de 1 ano. Ele é um excelente profissional. Muito atencioso, cuida de gente com muito carinho.",
   },
   {
     name: "Cíntia Lopes",
@@ -45,18 +58,21 @@ const reviews: Review[] = [
   {
     name: "Jhúlia Tamirys",
     initials: "JT",
-    tag: "Avaliação no Google",
+    avatar: "/media/depoimentos/jhulia-tamirys.png",
+    tag: "Avaliação no Google · Local Guide",
     body: "Dr. Raimundo me atendeu muito bem. Super direto ao ponto. Nesse clima seco meu nariz não parava de sangrar e ele me ajudou a resolver. Obrigado!",
   },
   {
     name: "Telma Alves Santana",
     initials: "TS",
-    tag: "Avaliação no Google",
+    avatar: "/media/depoimentos/telma-alves.png",
+    tag: "Avaliação no Google · Local Guide",
     body: "Clínica que recomendo, minha experiência foi ótima. Fui marcar uma consulta e logo fiz a consulta com exame e resultado com o mesmo doutor. Dr. Raimundo excelente, tudo num local só: consulta, exames e cirurgias. Amei.",
   },
   {
     name: "Marmoraria Andrade",
     initials: "MA",
+    avatar: "/media/depoimentos/marmoraria-andrade.png",
     tag: "Avaliação no Google",
     body: "Estava procurando no Google um otorrinolaringologista, me interessei pelas avaliações dos pacientes e realmente fui muito bem atendido por toda a equipe. Gostei muito do atendimento do Dr. Raimundo, muito atencioso e excelente profissional, super recomendo.",
   },
@@ -81,15 +97,15 @@ const reviews: Review[] = [
   {
     name: "Érica Ferreira Araújo",
     initials: "EA",
-    tag: "Avaliação no Google",
+    tag: "Avaliação no Google · Local Guide",
     body: "Desde a primeira consulta com o Dr. Raimundo me senti muito segura, ele é calmo e muito paciente. A localização é ótima e as atendentes são muito ágeis, humanas e profissionais.",
   },
 ];
 
-const firstCol = reviews.slice(0, 3);
-const secondCol = reviews.slice(3, 6);
-const thirdCol = reviews.slice(6, 9);
-const fourthCol = reviews.slice(9, 12);
+const firstCol = [reviews[0], reviews[1], reviews[2]];
+const secondCol = [reviews[3], reviews[4], reviews[5]];
+const thirdCol = [reviews[6], reviews[7], reviews[8]];
+const fourthCol = [reviews[9], reviews[10], reviews[11], reviews[12]];
 
 function ReviewCard({
   review,
@@ -106,9 +122,20 @@ function ReviewCard({
       )}
     >
       <div className="flex flex-row items-center gap-2.5">
-        <span className="testimonial-avatar" aria-hidden="true">
-          {review.initials}
-        </span>
+        {review.avatar ? (
+          <img
+            src={review.avatar}
+            alt={review.name}
+            width={34}
+            height={34}
+            loading="lazy"
+            className="w-[34px] h-[34px] rounded-full object-cover shrink-0 border border-[#d5c2aa]"
+          />
+        ) : (
+          <span className="testimonial-avatar" aria-hidden="true">
+            {review.initials}
+          </span>
+        )}
         <div className="flex flex-col min-w-0">
           <figcaption className="testimonial-author truncate">
             {review.name}
@@ -124,6 +151,17 @@ function ReviewCard({
       </div>
 
       <blockquote className="testimonial-body">{review.body}</blockquote>
+
+      {review.photo && (
+        <div className="mt-3 overflow-hidden rounded-xl border border-[#dfd3c2]">
+          <img
+            src={review.photo}
+            alt={`Foto enviada por ${review.name} com Dr. Raimundo Aldemar`}
+            loading="lazy"
+            className="w-full h-36 object-cover object-center block"
+          />
+        </div>
+      )}
     </figure>
   );
 }
@@ -159,7 +197,7 @@ export function TestimonialsSection() {
       </div>
 
       {/* DESKTOP: MARQUEE 3D PERSPECTIVA */}
-      <div className="testimonials-3d-stage hidden md:flex relative h-[470px] w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:420px]">
+      <div className="testimonials-3d-stage hidden md:flex relative h-[490px] w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:420px]">
         <div
           className="flex flex-row items-center gap-4"
           style={{
@@ -167,7 +205,7 @@ export function TestimonialsSection() {
               "translateX(-40px) translateY(0px) translateZ(-70px) rotateX(18deg) rotateY(-9deg) rotateZ(14deg)",
           }}
         >
-          <Marquee pauseOnHover vertical className="[--duration:34s]">
+          <Marquee pauseOnHover vertical className="[--duration:36s]">
             {firstCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
@@ -182,7 +220,7 @@ export function TestimonialsSection() {
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:40s]">
+          <Marquee reverse pauseOnHover vertical className="[--duration:42s]">
             {fourthCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
@@ -197,13 +235,13 @@ export function TestimonialsSection() {
 
       {/* MOBILE: MARQUEE HORIZONTAL LIMPO E LEGÍVEL */}
       <div className="md:hidden relative flex w-full flex-col gap-3 overflow-hidden py-2">
-        <Marquee pauseOnHover className="[--duration:46s]">
-          {reviews.slice(0, 6).map((review) => (
+        <Marquee pauseOnHover className="[--duration:48s]">
+          {reviews.slice(0, 7).map((review) => (
             <ReviewCard key={review.name} review={review} compact />
           ))}
         </Marquee>
-        <Marquee reverse pauseOnHover className="[--duration:50s]">
-          {reviews.slice(6, 12).map((review) => (
+        <Marquee reverse pauseOnHover className="[--duration:52s]">
+          {reviews.slice(7, 13).map((review) => (
             <ReviewCard key={review.name} review={review} compact />
           ))}
         </Marquee>
@@ -213,4 +251,3 @@ export function TestimonialsSection() {
     </section>
   );
 }
-

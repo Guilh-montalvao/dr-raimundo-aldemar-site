@@ -107,6 +107,13 @@ const reviews: Review[] = [
     body: "Quero dar meus parabéns a toda equipe pelo atendimento e prestação de serviços, com o complemento do Dr. Raimundo, que ao meu ver tem uma humanidade e profissionalismo ímpar. Obrigado.",
   },
   {
+    name: "Luiz Almeida",
+    initials: "LA",
+    avatar: "/media/depoimentos/luiz-almeida.png",
+    tag: "Avaliação no Google · Desvio de Septo",
+    body: "Gostaria de expressar publicamente minha gratidão ao Dr. Raimundo Aldemar e equipe médica que realizaram a minha cirurgia de desvio de septo. Ressalto o imenso profissionalismo, a excelente educação e respeito durante as consultas pré e pós-operatórias. Quando eu já estava em casa, Dr. Raimundo me contatou por WhatsApp para saber se estava tudo bem comigo. Sua conduta é admirável.",
+  },
+  {
     name: "Érica Ferreira Araújo",
     initials: "EA",
     avatar: "/media/depoimentos/erica-araujo.png",
@@ -116,22 +123,15 @@ const reviews: Review[] = [
 ];
 
 const firstCol = [reviews[0], reviews[1], reviews[2], reviews[5]];
-const secondCol = [reviews[3], reviews[4], reviews[6]];
-const thirdCol = [reviews[7], reviews[8], reviews[9]];
-const fourthCol = [reviews[10], reviews[11], reviews[12], reviews[13]];
+const secondCol = [reviews[3], reviews[4], reviews[6], reviews[13]];
+const thirdCol = [reviews[7], reviews[8], reviews[9], reviews[10]];
+const fourthCol = [reviews[11], reviews[12], reviews[14]];
 
-function ReviewCard({
-  review,
-  compact = false,
-}: {
-  review: Review;
-  compact?: boolean;
-}) {
+function ReviewCard({ review }: { review: Review }) {
   return (
     <figure
       className={cn(
-        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-4 transition-colors",
-        compact ? "w-[270px] sm:w-[295px] shrink-0" : "w-64"
+        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-3.5 md:p-4 transition-colors w-52 sm:w-56 md:w-64"
       )}
     >
       <div className="flex flex-row items-center gap-2.5">
@@ -209,10 +209,10 @@ export function TestimonialsSection() {
         </div>
       </div>
 
-      {/* DESKTOP: MARQUEE 3D PERSPECTIVA */}
-      <div className="testimonials-3d-stage hidden md:flex relative h-[490px] w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:420px]">
+      {/* DESKTOP E MOBILE: MARQUEE 3D PERSPECTIVA */}
+      <div className="testimonials-3d-stage flex relative h-[430px] md:h-[490px] w-full flex-row items-center justify-center gap-3 md:gap-4 overflow-hidden [perspective:340px] md:[perspective:420px]">
         <div
-          className="flex flex-row items-center gap-4"
+          className="flex flex-row items-center gap-3 md:gap-4"
           style={{
             transform:
               "translateX(-40px) translateY(0px) translateZ(-70px) rotateX(18deg) rotateY(-9deg) rotateZ(14deg)",
@@ -244,22 +244,6 @@ export function TestimonialsSection() {
         <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-1/4" />
         <div className="testimonials-fade-left pointer-events-none absolute inset-y-0 left-0 w-1/6" />
         <div className="testimonials-fade-right pointer-events-none absolute inset-y-0 right-0 w-1/6" />
-      </div>
-
-      {/* MOBILE: MARQUEE HORIZONTAL LIMPO E LEGÍVEL */}
-      <div className="md:hidden relative flex w-full flex-col gap-3 overflow-hidden py-2">
-        <Marquee pauseOnHover className="[--duration:48s]">
-          {reviews.slice(0, 7).map((review) => (
-            <ReviewCard key={review.name} review={review} compact />
-          ))}
-        </Marquee>
-        <Marquee reverse pauseOnHover className="[--duration:52s]">
-          {reviews.slice(7, 14).map((review) => (
-            <ReviewCard key={review.name} review={review} compact />
-          ))}
-        </Marquee>
-        <div className="testimonials-fade-left pointer-events-none absolute inset-y-0 left-0 w-10" />
-        <div className="testimonials-fade-right pointer-events-none absolute inset-y-0 right-0 w-10" />
       </div>
     </section>
   );

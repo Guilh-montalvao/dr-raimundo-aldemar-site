@@ -121,6 +121,23 @@ export default function AtendimentoInfantilPage() {
           );
         });
 
+        gsap.utils.toArray<HTMLElement>("[data-mark-reveal]").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { backgroundSize: "0% 88%" },
+            {
+              backgroundSize: "100% 88%",
+              duration: 0.9,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+
         gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
           gsap.fromTo(
             el,
@@ -230,11 +247,13 @@ export default function AtendimentoInfantilPage() {
                 otorrinolaringológica detalhada.
               </p>
               <p data-reveal>
-                Investigar esses sinais não significa que toda criança precisa
-                de cirurgia. Muitos quadros respondem muito bem ao tratamento
-                clínico e ao controle da rinite; e, quando a cirurgia é
-                realmente indicada, a decisão é construída junto à família com
-                clareza e segurança.
+                Investigar esses sinais{" "}
+                <mark className="editorial-mark" data-mark-reveal>
+                  não significa que toda criança precisa de cirurgia
+                </mark>
+                . Muitos quadros respondem muito bem ao tratamento clínico e ao
+                controle da rinite; e, quando a cirurgia é realmente indicada, a
+                decisão é construída junto à família com clareza e segurança.
               </p>
               <div className="credentials" data-reveal>
                 <div>

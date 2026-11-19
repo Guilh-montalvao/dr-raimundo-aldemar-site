@@ -213,6 +213,23 @@ export default function Home() {
           );
         });
 
+        gsap.utils.toArray<HTMLElement>("[data-mark-reveal]").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { backgroundSize: "0% 88%" },
+            {
+              backgroundSize: "100% 88%",
+              duration: 0.9,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+
         gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
           gsap.fromTo(
             el,
@@ -441,11 +458,17 @@ export default function Home() {
               </span>
             </h2>
             <p data-reveal>
-              Esses sinais merecem avaliação otorrinolaringológica cuidadosa,
-              sem significar que toda criança precisa de cirurgia. Quando o
-              procedimento cirúrgico é indicado — como amigdalectomia, adenoide,
-              miringotomia com colocação de tubo de ventilação ou frenectomia —
-              a família recebe orientação próxima antes, durante e depois.
+              Esses sinais merecem avaliação otorrinolaringológica cuidadosa,{" "}
+              <mark
+                className="editorial-mark editorial-mark-dark"
+                data-mark-reveal
+              >
+                sem significar que toda criança precisa de cirurgia
+              </mark>
+              . Quando o procedimento cirúrgico é indicado — como
+              amigdalectomia, adenoide, miringotomia com colocação de tubo de
+              ventilação ou frenectomia — a família recebe orientação próxima
+              antes, durante e depois.
             </p>
             <div className="surgery-cta-group" data-reveal>
               <LinkButton href="/atendimento-infantil" light>
@@ -482,9 +505,12 @@ export default function Home() {
                 <span className="serif">cada criança é um super-herói.</span>
               </h2>
               <p data-reveal>
-                Para ajudar a tornar a experiência hospitalar mais leve e menos
-                assustadora, as crianças são acolhidas com capas e máscaras de
-                super-heróis, carinho e escuta em cada etapa.
+                Para ajudar a{" "}
+                <mark className="editorial-mark" data-mark-reveal>
+                  tornar a experiência hospitalar mais leve
+                </mark>{" "}
+                e menos assustadora, as crianças são acolhidas com capas e
+                máscaras de super-heróis, carinho e escuta em cada etapa.
               </p>
               <p data-reveal>
                 O acompanhamento começa na explicação detalhada em consultório e
@@ -552,10 +578,13 @@ export default function Home() {
                 <span className="serif">é preciso ouvir.</span>
               </h2>
               <p data-reveal>
-                Sou o Dr. Raimundo Aldemar, médico otorrinolaringologista com
-                título de especialista. Atendo crianças e adultos, com atenção
-                às queixas respiratórias, do sono, dos ouvidos e da garganta em
-                cada fase da vida.
+                Sou o Dr. Raimundo Aldemar,{" "}
+                <mark className="editorial-mark" data-mark-reveal>
+                  médico otorrinolaringologista com título de especialista
+                </mark>
+                . Atendo crianças e adultos, com atenção às queixas
+                respiratórias, do sono, dos ouvidos e da garganta em cada fase
+                da vida.
               </p>
               <p data-reveal>
                 Na consulta, meu compromisso é ouvir o que você sente, explicar

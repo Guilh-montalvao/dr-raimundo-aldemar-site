@@ -92,6 +92,23 @@ export default function ExamesEProcedimentosPage() {
           );
         });
 
+        gsap.utils.toArray<HTMLElement>("[data-mark-reveal]").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { backgroundSize: "0% 88%" },
+            {
+              backgroundSize: "100% 88%",
+              duration: 0.9,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+
         gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
           gsap.fromTo(
             el,
@@ -193,9 +210,12 @@ export default function ExamesEProcedimentosPage() {
                       1. Videoendoscopia nasal — com ótica flexível
                     </strong>
                     <small>
-                      Realizada em crianças e adultos. O uso da fibra óptica
-                      flexível pode proporcionar maior conforto e tranquilidade
-                      durante a avaliação das estruturas nasais e da adenoide.
+                      Realizada em crianças e adultos. O uso da{" "}
+                      <mark className="editorial-mark" data-mark-reveal>
+                        fibra óptica flexível
+                      </mark>{" "}
+                      pode proporcionar maior conforto e tranquilidade durante a
+                      avaliação das estruturas nasais e da adenoide.
                     </small>
                   </p>
                 </div>

@@ -127,6 +127,19 @@ const secondCol = [reviews[3], reviews[4], reviews[6], reviews[13]];
 const thirdCol = [reviews[7], reviews[8], reviews[9], reviews[10]];
 const fourthCol = [reviews[11], reviews[12], reviews[14]];
 
+function renderHighlightedBody(text: string) {
+  const parts = text.split(/(Dr\.?\s*Raimundo(?:\s+Aldemar)?)/gi);
+  return parts.map((part, idx) =>
+    /^Dr\.?\s*Raimundo(?:\s+Aldemar)?$/i.test(part) ? (
+      <mark key={idx} className="editorial-mark">
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
+}
+
 function ReviewCard({ review }: { review: Review }) {
   return (
     <figure
@@ -163,7 +176,9 @@ function ReviewCard({ review }: { review: Review }) {
         ))}
       </div>
 
-      <blockquote className="testimonial-body">{review.body}</blockquote>
+      <blockquote className="testimonial-body">
+        {renderHighlightedBody(review.body)}
+      </blockquote>
 
       {review.photo && (
         <div className="mt-3 overflow-hidden rounded-xl border border-[#dfd3c2]">

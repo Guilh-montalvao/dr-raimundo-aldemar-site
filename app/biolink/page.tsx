@@ -587,10 +587,10 @@ export default function BiolinkPage() {
           onClick={() => setSelectedClinicConvenios(null)}
         >
           <div
-            className="w-full max-w-[520px] bg-[#241b14] border border-[#c1a586]/40 rounded-2xl p-5 text-[#f8f5ef] shadow-2xl"
+            className="w-full max-w-[520px] max-h-[90svh] flex flex-col bg-[#241b14] border border-[#c1a586]/40 rounded-2xl p-4 sm:p-5 text-[#f8f5ef] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-3 mb-3 pb-3 border-b border-[#c1a586]/20">
+            <div className="flex items-start justify-between gap-3 mb-3 pb-3 border-b border-[#c1a586]/20 shrink-0">
               <div>
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-[#c1a586] block">
                   {selectedClinicConvenios.region}
@@ -606,7 +606,7 @@ export default function BiolinkPage() {
               <button
                 type="button"
                 onClick={() => setSelectedClinicConvenios(null)}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-[#f8f5ef] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-[#f8f5ef] cursor-pointer shrink-0"
                 aria-label="Fechar lista de convênios"
               >
                 <X size={17} />
@@ -614,7 +614,7 @@ export default function BiolinkPage() {
             </div>
 
             <div
-              className="grid grid-cols-1 sm:grid-cols-2 sm:grid-flow-col gap-2 max-h-[320px] overflow-y-auto pr-1"
+              className="grid grid-cols-1 sm:grid-cols-2 sm:grid-flow-col gap-2 min-h-0 flex-1 max-h-[54svh] overflow-y-auto pr-1"
               style={{
                 gridTemplateRows: `repeat(${Math.ceil(
                   selectedClinicConvenios.convenios.length / 2

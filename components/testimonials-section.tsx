@@ -125,9 +125,9 @@ const reviews: Review[] = [
   },
 ];
 
-const firstCol = [reviews[0], reviews[1], reviews[2], reviews[5]];
+const firstCol = [reviews[0], reviews[10], reviews[2], reviews[5]];
 const secondCol = [reviews[3], reviews[4], reviews[6], reviews[13]];
-const thirdCol = [reviews[7], reviews[8], reviews[9], reviews[10]];
+const thirdCol = [reviews[7], reviews[1], reviews[8], reviews[9]];
 const fourthCol = [reviews[11], reviews[12], reviews[14]];
 
 function renderHighlightedBody(text: string) {

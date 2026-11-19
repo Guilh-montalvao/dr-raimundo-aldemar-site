@@ -430,6 +430,31 @@ h2 .serif,h1 .serif{color:#80664b}
 .editorial-mark{background-color:transparent;background-image:linear-gradient(120deg,rgba(193,165,134,.36) 0%,rgba(222,201,173,.52) 100%);background-repeat:no-repeat;background-position:0 85%;background-size:100% 88%;color:var(--brown);font-weight:600;padding:1px 5px;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .editorial-mark-dark{background-image:linear-gradient(120deg,rgba(222,201,173,.22) 0%,rgba(193,165,134,.34) 100%);color:#fffefa;border-bottom:1px solid rgba(222,201,173,.42)}
 
+/* Mobile Responsiveness Polish (Modals, Drawer, Cards, Buttons & Footer) */
+html,body{overflow-x:clip}
+.quick-booking-dialog{max-height:calc(100svh - 28px);overflow-y:auto;overscroll-behavior:contain}
+.mobile-menu{overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:960px){
+  .mobile-menu nav{margin:20px 0 12px}
+  .mobile-menu nav a{padding:13px 0;font-size:15.5px;gap:14px}
+  .menu-instagram{padding:13px 0;margin:12px 0 16px;font-size:14px}
+  .site-footer{padding-bottom:84px}
+}
+@media(max-width:640px){
+  .button{gap:16px;padding:13px 18px;max-width:100%}
+  .quick-booking-backdrop{padding:14px}
+  .quick-booking-dialog{padding:20px 16px;border-radius:16px}
+  .quick-booking-header{margin-bottom:16px}
+  .quick-booking-units{gap:10px}
+  .quick-unit-link{padding:11px 12px;gap:11px}
+  .quick-unit-thumb{width:46px;height:46px}
+  .quick-unit-info strong{font-size:14.5px}
+  .quick-unit-info span{font-size:11.5px}
+  .convenios-logos-grid{gap:6px}
+  .convenio-chip{padding:5px 6px;gap:6px}
+  .convenio-chip-name{font-size:11px}
+}
+
 
 
 

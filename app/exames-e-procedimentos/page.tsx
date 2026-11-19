@@ -25,25 +25,30 @@ const officeProcedures = [
     id: "lavagem",
     title: "Lavagem de ouvido",
     text: "Procedimento realizado em consultório para higienização segura do conduto auditivo, devolvendo a sensação de ouvido livre com cuidado e conforto.",
-    image: "/media/area-ouvido.jpg",
+    video: "/videos/lavagem-de-ouvido.mp4",
+    image: "/media/procedimento-ouvido.jpg",
+    caption: "Lavagem de ouvido em consultório",
   },
   {
     id: "cerume",
     title: "Remoção de cerume (cera do ouvido)",
     text: "Retirada cuidadosa do excesso de cerume acumulado que provoca sensação de ouvido tampado, desconforto, zumbido ou redução temporária da audição.",
-    image: "/media/area-ouvido.jpg",
+    image: "/media/exame-otoscopio.jpg",
+    caption: "Avaliação otoscópica e remoção de cerume",
   },
   {
     id: "aspiracao",
     title: "Aspiração de ouvido",
     text: "Remoção precisa de infecção e secreção do ouvido em consultório, fundamental para o tratamento eficaz das otites e recuperação da saúde auditiva.",
-    image: "/media/area-ouvido.jpg",
+    image: "/media/procedimento-ouvido.jpg",
+    caption: "Aspiração de ouvido em consultório",
   },
   {
     id: "cauterizacao",
     title: "Cauterização septal",
     text: "Procedimento ambulatorial indicado para o controle seguro e duradouro de quadros de sangramento de nariz (epistaxe) recorrentes.",
     image: "/media/area-nariz.jpg",
+    caption: "Cauterização septal para sangramento nasal",
   },
 ];
 
@@ -236,25 +241,7 @@ export default function ExamesEProcedimentosPage() {
         </section>
 
         {/* PROCEDIMENTOS EM CONSULTÓRIO */}
-        <section
-          id="procedimentos"
-          className="specialties specialties-immersive section-pad"
-        >
-          <div className="specialty-backgrounds">
-            {officeProcedures.map((proc) => (
-              <div
-                key={proc.id}
-                className={`area-image ${
-                  activeProcedure === proc.id ? "is-active" : ""
-                }`}
-                role="img"
-                aria-hidden={activeProcedure !== proc.id}
-                aria-label={`Procedimento em consultório — ${proc.title}`}
-                style={{ backgroundImage: `url('${proc.image}')` }}
-              />
-            ))}
-          </div>
-          <div className="specialty-shade" aria-hidden="true" />
+        <section id="procedimentos" className="specialties section-pad">
           <div className="section-top" data-reveal>
             <span className="eyebrow">PROCEDIMENTOS EM CONSULTÓRIO</span>
             <span className="small-note">Cuidado seguro e resolutivo.</span>
@@ -272,12 +259,42 @@ export default function ExamesEProcedimentosPage() {
           </div>
           <div className="specialties-grid">
             <div className="area-context area-video-context" data-reveal>
-              <div className="section-video-showcase">
-                <SmartVideo
-                  src="/videos/lavagem-de-ouvido.mp4"
-                  ariaLabel="Vídeo de procedimento de lavagem de ouvido em consultório"
-                />
-              </div>
+              {(() => {
+                const current =
+                  officeProcedures.find((p) => p.id === activeProcedure) ||
+                  officeProcedures[0];
+                if ("video" in current && current.video) {
+                  return (
+                    <div className="w-full flex flex-col items-center">
+                      <div className="section-video-showcase">
+                        <SmartVideo
+                          key={current.id}
+                          src={current.video}
+                          ariaLabel={`Vídeo — ${current.title}`}
+                        />
+                      </div>
+                      <div className="photo-caption video-caption">
+                        <span>{current.caption}</span>
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <div className="w-full flex flex-col items-center">
+                    <div className="section-video-showcase">
+                      <img
+                        key={current.id}
+                        src={current.image}
+                        alt={current.caption}
+                        className="w-full h-full object-cover object-center block"
+                      />
+                    </div>
+                    <div className="photo-caption video-caption">
+                      <span>{current.caption}</span>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
             <Accordion
               type="single"
@@ -306,7 +323,16 @@ export default function ExamesEProcedimentosPage() {
                   </AccordionTrigger>
                   <AccordionContent className="area-content">
                     <p>{proc.text}</p>
-                    <a href="#contato" className="text-link">
+                    <a
+                      href="#contato"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.dispatchEvent(
+                          new CustomEvent("open-quick-booking")
+                        );
+                      }}
+                      className="text-link"
+                    >
                       Agendar procedimento <ArrowUpRight size={18} />
                     </a>
                   </AccordionContent>

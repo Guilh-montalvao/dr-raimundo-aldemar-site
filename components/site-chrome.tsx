@@ -37,8 +37,8 @@ export const whatsapp = (number: string, clinic: string) =>
 export const surgeryWhatsapp = (procedure?: string) =>
   `https://wa.me/556182994767?text=${encodeURIComponent(
     procedure
-      ? `Olá! Gostaria de consultar valores e informações sobre agendamento da cirurgia de ${procedure} com o Dr. Raimundo Aldemar, otorrinolaringologista.`
-      : `Olá! Gostaria de consultar valores e informações para agendar cirurgia (criança / adulto) com o Dr. Raimundo Aldemar, otorrinolaringologista.`
+      ? `Olá! Gostaria de consultar valores e informações sobre ${procedure} com o Dr. Raimundo Aldemar, otorrinolaringologista.`
+      : `Olá! Gostaria de consultar valores e informações sobre cirurgias (criança / adulto) com o Dr. Raimundo Aldemar, otorrinolaringologista.`
   )}`;
 
 const instagramUrl =
@@ -284,7 +284,9 @@ function scrollToHash(hash: string) {
   const id = hash.replace(/^#/, "");
   const el = document.getElementById(id);
   if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const targetY =
+      el.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
   }
 }
 
@@ -1363,6 +1365,11 @@ export function SiteFooter() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      scrollToHash(href.slice(1));
+      return;
+    }
     if (href === pathname) {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });

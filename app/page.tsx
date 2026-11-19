@@ -83,8 +83,21 @@ export default function Home() {
   const [heroMode, setHeroMode] = useState<"crianca" | "adulto">("crianca");
 
   useEffect(() => {
-    if (!window.location.hash) {
+    const initialHash = window.location.hash;
+    if (!initialHash) {
       window.scrollTo(0, 0);
+    } else {
+      introCompletedInSpa = true;
+      if (introRef.current) introRef.current.style.display = "none";
+      const scrollTarget = () => {
+        const el = document.getElementById(initialHash.replace(/^#/, ""));
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+        }
+      };
+      setTimeout(scrollTarget, 120);
+      setTimeout(scrollTarget, 450);
     }
     if (introCompletedInSpa) {
       if (introRef.current) introRef.current.style.display = "none";

@@ -1,8 +1,11 @@
 "use client";
 
-import { Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
+
+const GOOGLE_REVIEW_URL =
+  "https://www.google.com/search?q=Dr.+Raimundo+Aldemar+Otorrinolaringologista#lrd=0x935a3369d10c8b8f:0x6dc27a136970f659,3,,,";
 
 interface Review {
   name: string;
@@ -280,6 +283,22 @@ export function TestimonialsSection() {
         <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-1/4" />
         <div className="testimonials-fade-left pointer-events-none absolute inset-y-0 left-0 w-1/6" />
         <div className="testimonials-fade-right pointer-events-none absolute inset-y-0 right-0 w-1/6" />
+      </div>
+
+      <div className="testimonials-cta" data-reveal>
+        <p>Já foi atendido pelo Dr. Raimundo? Compartilhe sua experiência.</p>
+        <a
+          href={GOOGLE_REVIEW_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="button button-dark testimonials-review-btn"
+        >
+          <span className="inline-flex items-center gap-2">
+            <Star size={15} fill="#d49b27" color="#d49b27" />
+            Avaliar Dr. Raimundo no Google
+          </span>
+          <ArrowUpRight size={16} />
+        </a>
       </div>
     </section>
   );

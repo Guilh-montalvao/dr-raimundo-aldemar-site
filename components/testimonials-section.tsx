@@ -50,8 +50,16 @@ const reviews: Review[] = [
     body: "Estou em acompanhamento com o Dr. Raimundo há cerca de 1 ano. Ele é um excelente profissional. Muito atencioso, cuida de gente com muito carinho.",
   },
   {
+    name: "Indri Nogueira Varise",
+    initials: "IN",
+    avatar: "/media/depoimentos/indri-nogueira.png",
+    tag: "Avaliação no Google · Infantil",
+    body: "Dr. Raimundo Otorrinolaringologista é um excelente médico! Super atencioso com nossas crianças e paciente! Fez todos os exames que minha filha precisava e nem chorou! Obrigada Dr. Raimundo pelos seus cuidados!",
+  },
+  {
     name: "Cíntia Lopes",
     initials: "CL",
+    avatar: "/media/depoimentos/cintia-lopes.png",
     tag: "Avaliação no Google",
     body: "Excelente atendimento com o Dr. Raimundo Aldemar! Profissional extremamente atencioso, educado e competente. Explica tudo com muita clareza, tira todas as dúvidas com paciência e transmite muita segurança. Atendimento humanizado e de alta qualidade.",
   },
@@ -79,12 +87,14 @@ const reviews: Review[] = [
   {
     name: "Alaor Machado",
     initials: "AM",
+    avatar: "/media/depoimentos/alaor-machado.png",
     tag: "Avaliação no Google",
     body: "Dr. Raimundo Aldemar: um médico muito atencioso, simpático e competente. Minha experiência não poderia ter sido melhor. Parabéns a todos da Clínica.",
   },
   {
     name: "Eurides Xavier",
     initials: "EX",
+    avatar: "/media/depoimentos/eurides-xavier.png",
     tag: "Avaliação no Google",
     body: "Primeira vez que fui e fui muito bem atendida pelo Dr. Raimundo Aldemar. Marquei a consulta errada e ele mesmo assim me atendeu, não me fez ter viagem perdida, avaliou meus ouvidos e me atendeu muito bem.",
   },
@@ -102,10 +112,10 @@ const reviews: Review[] = [
   },
 ];
 
-const firstCol = [reviews[0], reviews[1], reviews[2]];
-const secondCol = [reviews[3], reviews[4], reviews[5]];
-const thirdCol = [reviews[6], reviews[7], reviews[8]];
-const fourthCol = [reviews[9], reviews[10], reviews[11], reviews[12]];
+const firstCol = [reviews[0], reviews[1], reviews[2], reviews[5]];
+const secondCol = [reviews[3], reviews[4], reviews[6]];
+const thirdCol = [reviews[7], reviews[8], reviews[9]];
+const fourthCol = [reviews[10], reviews[11], reviews[12], reviews[13]];
 
 function ReviewCard({
   review,
@@ -241,7 +251,7 @@ export function TestimonialsSection() {
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:52s]">
-          {reviews.slice(7, 13).map((review) => (
+          {reviews.slice(7, 14).map((review) => (
             <ReviewCard key={review.name} review={review} compact />
           ))}
         </Marquee>

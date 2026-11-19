@@ -32,6 +32,7 @@ const reviews: Review[] = [
   {
     name: "Tatiane da Silva Oliveira",
     initials: "TO",
+    avatar: "/media/depoimentos/tatiane-oliveira.png",
     tag: "Avaliação no Google · Infantil",
     body: "Sensacional o atendimento. O Dr. Raimundo foi muito profissional e bem descontraído. Minha filha ficou bem tranquila com o atendimento. Super indico.",
   },
@@ -101,12 +102,14 @@ const reviews: Review[] = [
   {
     name: "Itaecio Ferreira de Sousa",
     initials: "IF",
+    avatar: "/media/depoimentos/itaecio-sousa.png",
     tag: "Avaliação no Google",
     body: "Quero dar meus parabéns a toda equipe pelo atendimento e prestação de serviços, com o complemento do Dr. Raimundo, que ao meu ver tem uma humanidade e profissionalismo ímpar. Obrigado.",
   },
   {
     name: "Érica Ferreira Araújo",
     initials: "EA",
+    avatar: "/media/depoimentos/erica-araujo.png",
     tag: "Avaliação no Google · Local Guide",
     body: "Desde a primeira consulta com o Dr. Raimundo me senti muito segura, ele é calmo e muito paciente. A localização é ótima e as atendentes são muito ágeis, humanas e profissionais.",
   },

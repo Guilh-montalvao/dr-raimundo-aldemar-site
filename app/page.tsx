@@ -83,7 +83,9 @@ export default function Home() {
   const [heroMode, setHeroMode] = useState<"crianca" | "adulto">("crianca");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
     if (introCompletedInSpa) {
       if (introRef.current) introRef.current.style.display = "none";
     } else if (!introStartedRef.current) {

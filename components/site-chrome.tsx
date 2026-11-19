@@ -74,6 +74,11 @@ export const navLinks: NavItem[] = [
     href: "/exames-e-procedimentos",
   },
   {
+    label: "Depoimentos",
+    shortLabel: "Depoimentos",
+    href: "/#depoimentos",
+  },
+  {
     label: "Locais de atendimento",
     shortLabel: "Locais de atendimento",
     href: "#contato",
@@ -455,6 +460,16 @@ export function SiteHeader() {
     closeMobile = false
   ) => {
     if (closeMobile) setMenuOpen(false);
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      const hash = href.slice(1);
+      if (closeMobile) {
+        setTimeout(() => scrollToHash(hash), 220);
+      } else {
+        scrollToHash(hash);
+      }
+      return;
+    }
     if (href === pathname) {
       e.preventDefault();
       if (closeMobile) {

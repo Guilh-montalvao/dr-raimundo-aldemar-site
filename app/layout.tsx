@@ -9,17 +9,78 @@ import "@fontsource/inter/latin-600.css";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? (process.env.NEXT_PUBLIC_SITE_URL.startsWith("http")
-      ? process.env.NEXT_PUBLIC_SITE_URL
-      : `https://${process.env.NEXT_PUBLIC_SITE_URL}`)
-  : process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "https://drraimundoaldemar.com.br";
+  ? process.env.NEXT_PUBLIC_SITE_URL.startsWith("http")
+    ? process.env.NEXT_PUBLIC_SITE_URL
+    : `https://${process.env.NEXT_PUBLIC_SITE_URL}`
+  : "https://www.drraimundoaldemar.com.br";
+
+const physicianJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  name: "Dr. Raimundo Aldemar de Morais Lima",
+  alternateName: "Dr. Raimundo Aldemar — Otorrinolaringologista",
+  description:
+    "Médico Otorrinolaringologista em Brasília (CRM-DF 20094 · RQE 13936). Atendimento clínico e cirúrgico infantil e adulto na Asa Norte (Otorhynus), Gama (Otogama) e Taguatinga (CDO Otorrino).",
+  url: "https://www.drraimundoaldemar.com.br",
+  image: "https://www.drraimundoaldemar.com.br/media/og-image.jpg",
+  medicalSpecialty: "Otolaryngology",
+  identifier: "CRM-DF 20094 · RQE 13936",
+  sameAs: ["https://www.instagram.com/raimundo.otorrino/"],
+  areaServed: {
+    "@type": "City",
+    name: "Brasília",
+    containedInPlace: {
+      "@type": "State",
+      name: "Distrito Federal",
+    },
+  },
+  workLocation: [
+    {
+      "@type": "MedicalClinic",
+      name: "Unidade Otorhynus — Asa Norte",
+      telephone: "+55-61-98574-3764",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "SHLN Bloco K, Edifício Centro Clínico Norte I, Salas 203/204, Asa Norte",
+        addressLocality: "Brasília",
+        addressRegion: "DF",
+        addressCountry: "BR",
+      },
+    },
+    {
+      "@type": "MedicalClinic",
+      name: "Clínica Otogama — Gama",
+      telephone: "+55-61-98346-6377",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Quadra 01, Conjunto A, Lote 4, Gama Sul",
+        addressLocality: "Brasília",
+        addressRegion: "DF",
+        addressCountry: "BR",
+      },
+    },
+    {
+      "@type": "MedicalClinic",
+      name: "CDO Otorrino — Taguatinga",
+      telephone: "+55-61-98323-0103",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "Área Especial 8/9/10, Centro Médico Hospital Anchieta, Salas 111/112 B, Taguatinga Norte",
+        addressLocality: "Brasília",
+        addressRegion: "DF",
+        addressCountry: "BR",
+      },
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   title: "Dr. Raimundo Aldemar | Otorrinolaringologista em Brasília",
   description:
     "Respirar bem, livre da obstrução nasal • Criança • Adulto. Médico Otorrinolaringologista em Brasília (CRM-DF 20094 · RQE 13936). Atendimento na Asa Norte (Otorhynus), Gama (Otogama) e Taguatinga (CDO).",
@@ -68,6 +129,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <link rel="icon" type="image/png" href="/favicon.png?v=2" />
         <link rel="apple-touch-icon" href="/favicon.png?v=2" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianJsonLd) }}
+        />
       </head>
       <body>{children}</body>
     </html>

@@ -384,7 +384,19 @@ export default function Home() {
                 <ArrowUpRight size={14} className="hero-quick-arrow" />
               </button>
 
-              <a href="#cirurgia" className="hero-quick-card">
+              <a
+                href="#cirurgia"
+                className="hero-quick-card"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("cirurgia");
+                  if (el) {
+                    const y =
+                      el.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+                  }
+                }}
+              >
                 <span className="hero-quick-icon" aria-hidden="true">
                   <Stethoscope size={18} />
                 </span>
@@ -395,7 +407,19 @@ export default function Home() {
                 <ArrowUpRight size={14} className="hero-quick-arrow" />
               </a>
 
-              <a href="#contato" className="hero-quick-card">
+              <a
+                href="#contato"
+                className="hero-quick-card"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("contato");
+                  if (el) {
+                    const y =
+                      el.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+                  }
+                }}
+              >
                 <span className="hero-quick-icon" aria-hidden="true">
                   <MapPin size={18} />
                 </span>
@@ -773,7 +797,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="surgery surgery-immersive section-pad">
+        <section id="cirurgia" className="surgery surgery-immersive section-pad">
           <div
             className="surgery-photo photo-background"
             data-parallax

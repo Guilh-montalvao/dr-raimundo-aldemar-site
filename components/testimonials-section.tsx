@@ -130,11 +130,14 @@ const secondCol = [reviews[3], reviews[4], reviews[6], reviews[13]];
 const thirdCol = [reviews[7], reviews[1], reviews[8], reviews[9]];
 const fourthCol = [reviews[11], reviews[12], reviews[14]];
 
-function renderHighlightedBody(text: string) {
+function renderHighlightedBody(text: string, dark = false) {
   const parts = text.split(/(Dr\.?\s*Raimundo(?:\s+Aldemar)?)/gi);
   return parts.map((part, idx) =>
     /^Dr\.?\s*Raimundo(?:\s+Aldemar)?$/i.test(part) ? (
-      <mark key={idx} className="editorial-mark">
+      <mark
+        key={idx}
+        className={dark ? "editorial-mark editorial-mark-dark" : "editorial-mark"}
+      >
         {part}
       </mark>
     ) : (
@@ -143,11 +146,12 @@ function renderHighlightedBody(text: string) {
   );
 }
 
-function ReviewCard({ review }: { review: Review }) {
+function ReviewCard({ review, dark = false }: { review: Review; dark?: boolean }) {
   return (
     <figure
       className={cn(
-        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-3.5 md:p-4 transition-colors w-52 sm:w-56 md:w-64"
+        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-3.5 md:p-4 transition-colors w-52 sm:w-56 md:w-64",
+        dark && "testimonial-card-biolink"
       )}
     >
       <div className="flex flex-row items-center gap-2.5">
@@ -158,7 +162,10 @@ function ReviewCard({ review }: { review: Review }) {
             width={34}
             height={34}
             loading="lazy"
-            className="w-[34px] h-[34px] rounded-full object-cover shrink-0 border border-[#d5c2aa]"
+            className={cn(
+              "w-[34px] h-[34px] rounded-full object-cover shrink-0 border",
+              dark ? "border-[#c1a586]/50" : "border-[#d5c2aa]"
+            )}
           />
         ) : (
           <span className="testimonial-avatar" aria-hidden="true">
@@ -180,11 +187,16 @@ function ReviewCard({ review }: { review: Review }) {
       </div>
 
       <blockquote className="testimonial-body">
-        {renderHighlightedBody(review.body)}
+        {renderHighlightedBody(review.body, dark)}
       </blockquote>
 
       {review.photo && (
-        <div className="mt-3 overflow-hidden rounded-xl border border-[#dfd3c2]">
+        <div
+          className={cn(
+            "mt-3 overflow-hidden rounded-xl border",
+            dark ? "border-[#c1a586]/30" : "border-[#dfd3c2]"
+          )}
+        >
           <img
             src={review.photo}
             alt={`Foto enviada por ${review.name} com Dr. Raimundo Aldemar`}
@@ -197,7 +209,117 @@ function ReviewCard({ review }: { review: Review }) {
   );
 }
 
-export function TestimonialsSection() {
+export function TestimonialsSection({
+  variant = "light",
+}: {
+  variant?: "light" | "biolink";
+}) {
+  const isBiolink = variant === "biolink";
+
+  if (isBiolink) {
+    return (
+      <section
+        id="depoimentos"
+        className="testimonials-section-biolink mt-3 sm:mt-4"
+        aria-label="Avaliações reais no Google"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 mb-3.5 px-1">
+          <div>
+            <span className="eyebrow block mb-1">AVALIAÇÕES REAIS NO GOOGLE</span>
+            <h2 className="text-[19px] sm:text-[22px] leading-tight text-[#f8f5ef]">
+              O que dizem os pacientes{" "}
+              <span className="serif">e as famílias atendidas.</span>
+            </h2>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-0.5" aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <Star key={idx} size={13} fill="#d49b27" color="#d49b27" />
+              ))}
+            </div>
+            <span className="text-[11px] text-[#dec9ad] font-medium">
+              5,0 no Google
+            </span>
+          </div>
+        </div>
+
+        {/* 3D Marquee Dark Compacto (2 colunas Mobile | 3 colunas Desktop) */}
+        <div className="testimonials-3d-stage-biolink flex relative h-[350px] sm:h-[395px] w-full flex-row items-center justify-center gap-3 overflow-hidden rounded-2xl [perspective:360px] md:[perspective:420px]">
+          <div
+            className="flex md:hidden flex-row items-center gap-3"
+            style={{
+              transform:
+                "translateX(-12px) translateY(0px) translateZ(-45px) rotateX(16deg) rotateY(-8deg) rotateZ(12deg)",
+            }}
+          >
+            <Marquee pauseOnHover vertical className="[--duration:46s]">
+              {reviews.slice(0, 8).map((review) => (
+                <ReviewCard key={review.name} review={review} dark />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover vertical className="[--duration:48s]">
+              {reviews.slice(8, 15).map((review) => (
+                <ReviewCard key={review.name} review={review} dark />
+              ))}
+            </Marquee>
+          </div>
+
+          <div
+            className="hidden md:flex flex-row items-center gap-3.5"
+            style={{
+              transform:
+                "translateX(-28px) translateY(0px) translateZ(-65px) rotateX(18deg) rotateY(-9deg) rotateZ(13deg)",
+            }}
+          >
+            <Marquee pauseOnHover vertical className="[--duration:36s]">
+              {firstCol.map((review) => (
+                <ReviewCard key={review.name} review={review} dark />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover vertical className="[--duration:38s]">
+              {secondCol.map((review) => (
+                <ReviewCard key={review.name} review={review} dark />
+              ))}
+            </Marquee>
+            <Marquee pauseOnHover vertical className="[--duration:36s]">
+              {thirdCol.map((review) => (
+                <ReviewCard key={review.name} review={review} dark />
+              ))}
+            </Marquee>
+            <Marquee reverse pauseOnHover vertical className="[--duration:42s]">
+              {fourthCol.map((review) => (
+                <ReviewCard key={review.name} review={review} dark />
+              ))}
+            </Marquee>
+          </div>
+
+          <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-1/4" />
+          <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-1/4" />
+          <div className="testimonials-biolink-fade-left pointer-events-none absolute inset-y-0 left-0 w-1/6" />
+          <div className="testimonials-biolink-fade-right pointer-events-none absolute inset-y-0 right-0 w-1/6" />
+        </div>
+
+        <div className="mt-3.5 flex flex-col sm:flex-row items-center justify-between gap-2.5 px-1">
+          <p className="text-[12px] text-[#ccbeb0] text-center sm:text-left">
+            Já foi atendido pelo Dr. Raimundo? Compartilhe sua experiência.
+          </p>
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button-gold !min-h-[38px] !py-2 !px-4 !text-[12px] w-full sm:w-auto shrink-0"
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <Star size={13} fill="#fffefa" color="#fffefa" />
+              Avaliar no Google
+            </span>
+            <ArrowUpRight size={14} />
+          </a>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="depoimentos" className="testimonials-section section-pad">
       <div className="section-top" data-reveal>

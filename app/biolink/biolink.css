@@ -471,3 +471,57 @@ body:has(.biolink-theme) {
   background: rgba(46, 36, 28, 0.95);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
 }
+
+/* DARK 3D GOOGLE REVIEWS SECTION IN BIOLINK */
+.biolink-theme .testimonials-section-biolink {
+  background: rgba(28, 21, 16, 0.88);
+  border: 1px solid rgba(193, 165, 134, 0.28);
+  border-radius: 18px;
+  padding: 16px 14px;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+}
+@media (min-width: 640px) {
+  .biolink-theme .testimonials-section-biolink {
+    padding: 20px 20px;
+  }
+}
+.biolink-theme .testimonials-3d-stage-biolink {
+  background: #1c1510;
+  border: 1px solid rgba(193, 165, 134, 0.16);
+}
+.biolink-theme .testimonial-card-biolink {
+  background: rgba(38, 29, 22, 0.96);
+  border-color: rgba(193, 165, 134, 0.28);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.biolink-theme .testimonial-card-biolink:hover {
+  border-color: rgba(222, 201, 173, 0.6);
+  background: rgba(48, 37, 28, 0.98);
+}
+.biolink-theme .testimonial-card-biolink .testimonial-author {
+  color: #f8f5ef;
+}
+.biolink-theme .testimonial-card-biolink .testimonial-tag {
+  color: #c1a586;
+}
+.biolink-theme .testimonial-card-biolink .testimonial-body {
+  color: #e6dcd0;
+}
+.biolink-theme .testimonial-card-biolink .testimonial-avatar {
+  background: rgba(193, 165, 134, 0.18);
+  border-color: rgba(193, 165, 134, 0.4);
+  color: #dec9ad;
+}
+.biolink-theme .testimonials-biolink-fade-top {
+  background: linear-gradient(180deg, #1c1510 0%, transparent 100%);
+}
+.biolink-theme .testimonials-biolink-fade-bottom {
+  background: linear-gradient(0deg, #1c1510 0%, transparent 100%);
+}
+.biolink-theme .testimonials-biolink-fade-left {
+  background: linear-gradient(90deg, #1c1510 0%, transparent 100%);
+}
+.biolink-theme .testimonials-biolink-fade-right {
+  background: linear-gradient(270deg, #1c1510 0%, transparent 100%);
+}

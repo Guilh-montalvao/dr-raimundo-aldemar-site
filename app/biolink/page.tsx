@@ -19,6 +19,7 @@ import {
   cdoConvenios,
   surgeryWhatsapp,
 } from "@/components/site-chrome";
+import { TestimonialsSection } from "@/components/testimonials-section";
 
 const siteUrl = "https://drraimundoaldemar.com.br";
 const instagramUrl =
@@ -576,6 +577,9 @@ export default function BiolinkPage() {
             />
           </a>
         </div>
+
+        {/* 3. DEPOIMENTOS 3D DO GOOGLE (VERSÃO DARK COMPACTA) */}
+        <TestimonialsSection variant="biolink" />
       </main>
 
       {/* MODAL LEVE DE CONVÊNIOS (SÓ ABRE SE O PACIENTE CLICAR) */}

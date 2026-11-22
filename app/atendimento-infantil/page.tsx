@@ -86,7 +86,20 @@ export default function AtendimentoInfantilPage() {
   const [activeSurgery, setActiveSurgery] = useState("amigdalectomia");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const initialHash = window.location.hash;
+    if (!initialHash) {
+      window.scrollTo(0, 0);
+    } else {
+      const scrollTarget = () => {
+        const el = document.getElementById(initialHash.replace(/^#/, ""));
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+        }
+      };
+      setTimeout(scrollTarget, 120);
+      setTimeout(scrollTarget, 420);
+    }
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {

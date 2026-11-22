@@ -384,28 +384,27 @@ export default function Home() {
                 <ArrowUpRight size={14} className="hero-quick-arrow" />
               </button>
 
-              <a
-                href="#cirurgia"
+              <Link
+                href={
+                  heroMode === "crianca"
+                    ? "/atendimento-infantil#cirurgias-infantis"
+                    : "/cirurgia-adulto#procedimentos-adulto"
+                }
                 className="hero-quick-card"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("cirurgia");
-                  if (el) {
-                    const y =
-                      el.getBoundingClientRect().top + window.pageYOffset - 80;
-                    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
-                  }
-                }}
               >
                 <span className="hero-quick-icon" aria-hidden="true">
                   <Stethoscope size={18} />
                 </span>
                 <span className="hero-quick-text">
                   <strong>Cirurgias que realiza</strong>
-                  <small>Infantil e adulto</small>
+                  <small>
+                    {heroMode === "crianca"
+                      ? "Cirurgias na infância"
+                      : "Cirurgias em adultos"}
+                  </small>
                 </span>
                 <ArrowUpRight size={14} className="hero-quick-arrow" />
-              </a>
+              </Link>
 
               <a
                 href="#contato"

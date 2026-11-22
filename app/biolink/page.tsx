@@ -341,33 +341,30 @@ export default function BiolinkPage() {
           }}
         />
 
-        {/* Botão Compartilhar */}
+        {/* Botão Compartilhar (ícone discreto) */}
         <button
           type="button"
           onClick={handleShare}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 hover:bg-black/85 text-[#f8f5ef] border border-[#c1a586]/40 text-[11px] sm:text-xs backdrop-blur-md transition-all cursor-pointer shadow-md"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-black/55 hover:bg-black/80 text-[#f8f5ef] border border-[#c1a586]/35 text-[11px] backdrop-blur-md transition-all cursor-pointer shadow-md"
           title="Compartilhar ou copiar link"
           aria-label="Compartilhar link do Dr. Raimundo Aldemar"
         >
           {copied ? (
             <>
               <Check size={13} className="text-[#25D366]" />
-              <span className="text-[#25D366] font-medium">Copiado!</span>
+              <span className="text-[#25D366] font-medium">Copiado</span>
             </>
           ) : (
-            <>
-              <Share2 size={13} className="text-[#c1a586]" />
-              <span>Compartilhar</span>
-            </>
+            <Share2 size={14} className="text-[#dec9ad]" />
           )}
         </button>
       </div>
 
-      {/* 3. CONTEÚDO ENXUTO E RÁPIDO DO BIOLINK */}
-      <main className="w-full max-w-[1120px] mx-auto px-3.5 sm:px-6 pb-6 z-10 flex-1 flex flex-col gap-3.5 sm:gap-4">
-        {/* IDENTIDADE DO MÉDICO */}
-        <section className="w-full flex flex-col items-center text-center">
-          <div className="profile-avatar-wrap -mt-12 sm:-mt-14 mb-1.5 z-20">
+      {/* 3. CONTEÚDO MINIMALISTA DO BIOLINK */}
+      <main className="w-full max-w-[560px] mx-auto px-4 pb-8 z-10 flex-1 flex flex-col gap-3">
+        {/* IDENTIDADE CLEAN */}
+        <section className="w-full flex flex-col items-center text-center mb-1">
+          <div className="profile-avatar-wrap -mt-12 sm:-mt-14 mb-2 z-20">
             <a
               href={instagramUrl}
               target="_blank"
@@ -378,177 +375,119 @@ export default function BiolinkPage() {
               <img
                 src="/media/perfil-instagram-corrigido.png"
                 alt="Dr. Raimundo Aldemar — @raimundo.otorrino"
-                className="w-[195px] sm:w-[235px] h-auto object-contain block filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)]"
+                className="w-[185px] sm:w-[215px] h-auto object-contain block filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)]"
                 width="900"
                 height="300"
               />
             </a>
           </div>
 
-          <div className="profile-meta-item flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-[11px] sm:text-[12px] text-[#dec9ad] mb-1">
-            <span className="font-semibold text-[#f8f5ef] bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">
-              Médico Otorrinolaringologista · CRM-DF 20094 · RQE 13936
-            </span>
-          </div>
-
-          <p className="profile-meta-item text-[13px] sm:text-[14px] font-medium text-[#f8f5ef] max-w-[540px]">
-            Respirar bem,{" "}
-            <span className="serif text-[#dec9ad]">
-              livre da obstrução nasal
-            </span>{" "}
-            <span className="text-[#c1a586]">— Criança e Adulto</span>
+          <p className="profile-meta-item text-[11px] sm:text-[12px] tracking-[0.04em] text-[#dec9ad]">
+            Otorrinolaringologista · CRM-DF 20094 · RQE 13936
           </p>
         </section>
 
-        {/* AS 3 UNIDADES DE ATENDIMENTO (1. ASA NORTE · 2. GAMA · 3. TAGUATINGA) */}
+        {/* AS 3 UNIDADES DE ATENDIMENTO (CLEAN E DIRETO) */}
         <section id="unidades" className="flex flex-col gap-2.5">
-          <div
-            id="unidades-header"
-            className="flex items-center justify-between gap-2 pb-1 border-b border-[#c1a586]/20"
-          >
-            <span className="text-[10.5px] sm:text-[11.5px] font-bold tracking-[0.14em] uppercase text-[#c1a586]">
-              Escolha a Unidade para Agendar no WhatsApp
-            </span>
-            <span className="text-[10.5px] text-[#dec9ad]">
-              Particular e Convênios
-            </span>
-          </div>
+          {clinics.map((clinic) => (
+            <article
+              key={clinic.id}
+              className={`cinematic-clinic-card clinic-card-bg clinic-card-minimal ${
+                clinic.featured ? "featured" : ""
+              }`}
+            >
+              <div
+                className="clinic-card-bg-photo"
+                style={{ backgroundImage: `url('${clinic.image}')` }}
+              />
+              <div className="clinic-card-bg-shade" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 items-stretch">
-            {clinics.map((clinic) => (
-              <article
-                key={clinic.id}
-                className={`cinematic-clinic-card clinic-card-bg ${
-                  clinic.featured ? "featured" : ""
-                }`}
-              >
-                <div
-                  className="clinic-card-bg-photo"
-                  style={{ backgroundImage: `url('${clinic.image}')` }}
-                />
-                <div className="clinic-card-bg-shade" />
-
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-[#d5c1a8] bg-black/60 px-2 py-0.5 rounded-full border border-[#c1a586]/40">
+              <div className="flex items-center justify-between gap-2 mb-2.5">
+                <div>
+                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#dec9ad] block">
                     {clinic.region}
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/15 text-[#f8f5ef] border border-white/20 font-medium">
-                    {clinic.badge}
-                  </span>
-                </div>
-
-                <div className="my-auto py-1">
-                  <h2 className="text-[17px] sm:text-[18px] font-bold text-[#f8f5ef] leading-tight mb-1">
+                  <h2 className="text-[17px] font-semibold text-[#f8f5ef] leading-tight">
                     {clinic.name}
                   </h2>
-                  <p className="text-[11.5px] text-[#ece3d9] leading-snug">
-                    {clinic.address}
-                  </p>
-                  <p className="text-[10.5px] text-[#dec9ad] mt-0.5">
-                    {clinic.neighborhood}
-                  </p>
                 </div>
 
-                <div className="flex flex-col gap-1.5 pt-2.5 border-t border-[#c1a586]/30 mt-1.5">
+                <div className="flex items-center gap-2.5 text-[11px] text-[#dec9ad] shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedClinicConvenios(clinic)}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 hover:bg-black/75 border border-[#c1a586]/35 text-[#f8f5ef] transition-colors cursor-pointer"
+                  >
+                    <ShieldCheck size={12} className="text-[#c1a586]" />
+                    <span>Convênios</span>
+                  </button>
                   <a
-                    href={whatsappUrl(clinic.whatsapp, clinic.name)}
+                    href={clinic.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="button button-whatsapp w-full !justify-between !min-h-[40px] !text-[12.5px] !py-2 !px-3.5 shadow-sm"
+                    className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-black/50 hover:bg-black/75 border border-[#c1a586]/35 text-[#dec9ad] hover:text-white transition-colors"
+                    title={`Abrir mapa — ${clinic.name}`}
+                    aria-label={`Abrir mapa — ${clinic.name}`}
                   >
-                    <span className="flex items-center gap-1.5">
-                      <MessageCircle size={15} className="fill-white/20" />
-                      <span>Agendar no WhatsApp</span>
-                    </span>
-                    <ArrowUpRight size={15} />
+                    <MapPin size={13} />
                   </a>
-
-                  <div className="flex items-center justify-between text-[11px] text-[#dec9ad] px-0.5 pt-0.5 gap-2">
-                    <a
-                      href={clinic.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                    >
-                      <MapPin size={11} className="text-[#c1a586]" />
-                      <span className="underline underline-offset-4 decoration-[#c1a586]/60 hover:decoration-white">
-                        Mapa
-                      </span>
-                    </a>
-
-                    <button
-                      type="button"
-                      onClick={() => setSelectedClinicConvenios(clinic)}
-                      className="inline-flex items-center gap-1 text-[#f8f5ef] hover:text-[#dec9ad] transition-colors cursor-pointer"
-                    >
-                      <ShieldCheck size={12} className="text-[#c1a586]" />
-                      <span className="underline underline-offset-4 decoration-[#c1a586]/60">
-                        Convênios ({clinic.convenios.length})
-                      </span>
-                    </button>
-
-                    <a
-                      href={`tel:${clinic.phoneRaw}`}
-                      className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                    >
-                      <Phone size={11} className="text-[#c1a586]" />
-                      <span>{clinic.phone}</span>
-                    </a>
-                  </div>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+
+              <a
+                href={whatsappUrl(clinic.whatsapp, clinic.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button-whatsapp w-full !justify-between !min-h-[40px] !text-[12.5px] !py-2 !px-4 shadow-sm"
+              >
+                <span className="flex items-center gap-2">
+                  <MessageCircle size={15} className="fill-white/20" />
+                  <span>Agendar em {clinic.region}</span>
+                </span>
+                <ArrowUpRight size={15} />
+              </a>
+            </article>
+          ))}
         </section>
 
-        {/* CANAL DIRETO DE CIRURGIAS E CONSULTA DE VALORES */}
+        {/* CANAL DIRETO DE CIRURGIAS (1 LINHA LIMPA) */}
         <a
           href={surgeryWhatsapp()}
           target="_blank"
           rel="noopener noreferrer"
-          className="official-link-card official-card p-3.5 sm:p-4 flex items-center justify-between group transition-all border-[#c1a586]/50 bg-[#2a2018]/90"
+          className="official-link-card official-card px-4 py-3.5 flex items-center justify-between group transition-all border-[#c1a586]/50 bg-[#2a2018]/90"
         >
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#25D366]/15 border border-[#25D366]/45 flex items-center justify-center text-[#25D366] shrink-0">
-              <MessageCircle size={17} />
+            <div className="w-8 h-8 rounded-full bg-[#25D366]/15 border border-[#25D366]/45 flex items-center justify-center text-[#25D366] shrink-0">
+              <MessageCircle size={15} />
             </div>
-            <div>
-              <h3 className="text-[13.5px] sm:text-[14.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
-                Agendar Cirurgia · Consultar Valores (Criança e Adulto)
-              </h3>
-              <p className="text-[11px] sm:text-[11.5px] text-[#dec9ad]">
-                Canal direto no WhatsApp para orçamentos e orientações cirúrgicas · (61) 8299-4767
-              </p>
-            </div>
+            <h3 className="text-[13.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
+              Agendar Cirurgia · Valores
+            </h3>
           </div>
           <ArrowUpRight
-            size={16}
-            className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-1.5"
+            size={15}
+            className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0"
           />
         </a>
 
-        {/* LINKS RÁPIDOS DE 1 LINHA */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+        {/* SITE OFICIAL & INSTAGRAM (1 LINHA CADA) */}
+        <div className="grid grid-cols-2 gap-2.5">
           <a
             href="/"
-            className="official-link-card official-card p-3 sm:p-3.5 flex items-center justify-between group transition-all"
+            className="official-link-card official-card px-3.5 py-3 flex items-center justify-between group transition-all"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-white/10 border border-[#c1a586]/35 flex items-center justify-center text-[#c1a586] group-hover:bg-[#c1a586] group-hover:text-[#18120e] transition-all shrink-0">
-                <Globe size={16} />
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-7 h-7 rounded-full bg-white/10 border border-[#c1a586]/35 flex items-center justify-center text-[#c1a586] group-hover:bg-[#c1a586] group-hover:text-[#18120e] transition-all shrink-0">
+                <Globe size={14} />
               </div>
-              <div>
-                <h3 className="text-[13.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
-                  Site Oficial
-                </h3>
-                <p className="text-[11px] text-[#ece3d9]">
-                  Atendimento infantil, adulto, exames e trajetória médica.
-                </p>
-              </div>
+              <h3 className="text-[13px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
+                Site Oficial
+              </h3>
             </div>
             <ArrowUpRight
-              size={15}
-              className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-1.5"
+              size={14}
+              className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-1"
             />
           </a>
 
@@ -556,24 +495,19 @@ export default function BiolinkPage() {
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="official-link-card official-card p-3 sm:p-3.5 flex items-center justify-between group transition-all"
+            className="official-link-card official-card px-3.5 py-3 flex items-center justify-between group transition-all"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0">
-                <InstagramIcon size={16} />
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0">
+                <InstagramIcon size={14} />
               </div>
-              <div>
-                <h3 className="text-[13.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
-                  @raimundo.otorrino
-                </h3>
-                <p className="text-[11px] text-[#ece3d9]">
-                  Acompanhe conteúdos e orientações no Instagram.
-                </p>
-              </div>
+              <h3 className="text-[13px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
+                Instagram
+              </h3>
             </div>
             <ArrowUpRight
-              size={15}
-              className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-1.5"
+              size={14}
+              className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-1"
             />
           </a>
         </div>

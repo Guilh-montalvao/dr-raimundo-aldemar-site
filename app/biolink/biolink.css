@@ -245,6 +245,10 @@ body:has(.biolink-theme) {
   padding: 16px 18px;
   color: #f8f5ef;
 }
+.biolink-theme .clinic-card-bg.clinic-card-minimal {
+  min-height: 118px;
+  padding: 14px 16px;
+}
 
 .biolink-theme .clinic-card-bg:hover {
   transform: translateY(-4px);
@@ -370,6 +374,10 @@ body:has(.biolink-theme) {
   .biolink-theme .clinic-card-bg {
     min-height: 185px;
     padding: 14px 15px;
+  }
+  .biolink-theme .clinic-card-bg.clinic-card-minimal {
+    min-height: 112px;
+    padding: 13px 14px;
   }
   .biolink-theme .surgical-card-bg {
     padding: 16px 16px;

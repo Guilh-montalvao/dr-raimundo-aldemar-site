@@ -437,12 +437,20 @@ export function SmartVideo({
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [showFloatingSchedule, setShowFloatingSchedule] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setBookingOpen(true);
     window.addEventListener("open-quick-booking", handler);
     return () => window.removeEventListener("open-quick-booking", handler);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setShowFloatingSchedule(window.scrollY > 360);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleMobileHashClick = (
@@ -666,11 +674,11 @@ export function SiteHeader() {
         </Sheet>
       </header>
 
-      {/* BOTÃO FIXO DISCRETO DE AGENDAMENTO NO CELULAR */}
+      {/* BOTÃO FIXO DISCRETO DE AGENDAMENTO NO CELULAR (APÓS ROLAR A CAPA) */}
       <button
         type="button"
         onClick={() => setBookingOpen(true)}
-        className="mobile-floating-schedule"
+        className={`mobile-floating-schedule${showFloatingSchedule ? " is-visible" : ""}`}
         aria-label="Agendar consulta pelo WhatsApp"
       >
         <MessageCircle size={17} />

@@ -2,7 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowDown, Plus, Minus } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowDown,
+  Plus,
+  Minus,
+  CalendarCheck,
+  Stethoscope,
+  MapPin,
+  GraduationCap,
+} from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -352,6 +361,62 @@ export default function Home() {
                 </button>
               </span>
             </h1>
+
+            {/* ATALHOS EM EVIDÊNCIA NA CAPA (ACIMA DA DOBRA) */}
+            <nav
+              className="hero-quick-grid hero-reveal"
+              aria-label="Acesso rápido às principais informações"
+            >
+              <button
+                type="button"
+                className="hero-quick-card is-primary"
+                onClick={() =>
+                  window.dispatchEvent(new CustomEvent("open-quick-booking"))
+                }
+              >
+                <span className="hero-quick-icon" aria-hidden="true">
+                  <CalendarCheck size={18} />
+                </span>
+                <span className="hero-quick-text">
+                  <strong>Agendamento</strong>
+                  <small>Consultas e cirurgias</small>
+                </span>
+                <ArrowUpRight size={14} className="hero-quick-arrow" />
+              </button>
+
+              <a href="#cirurgia" className="hero-quick-card">
+                <span className="hero-quick-icon" aria-hidden="true">
+                  <Stethoscope size={18} />
+                </span>
+                <span className="hero-quick-text">
+                  <strong>Cirurgias que realiza</strong>
+                  <small>Infantil e adulto</small>
+                </span>
+                <ArrowUpRight size={14} className="hero-quick-arrow" />
+              </a>
+
+              <a href="#contato" className="hero-quick-card">
+                <span className="hero-quick-icon" aria-hidden="true">
+                  <MapPin size={18} />
+                </span>
+                <span className="hero-quick-text">
+                  <strong>Locais de atendimento</strong>
+                  <small>Asa Norte, Gama e Taguatinga</small>
+                </span>
+                <ArrowUpRight size={14} className="hero-quick-arrow" />
+              </a>
+
+              <Link href="/o-medico" className="hero-quick-card">
+                <span className="hero-quick-icon" aria-hidden="true">
+                  <GraduationCap size={18} />
+                </span>
+                <span className="hero-quick-text">
+                  <strong>Formação médica</strong>
+                  <small>CRM, RQE e trajetória</small>
+                </span>
+                <ArrowUpRight size={14} className="hero-quick-arrow" />
+              </Link>
+            </nav>
 
             {heroMode === "crianca" ? (
               <p className="hero-description hero-reveal">

@@ -430,6 +430,42 @@ h2 .serif,h1 .serif{color:#80664b}
 .editorial-mark{background-color:transparent;background-image:linear-gradient(120deg,rgba(193,165,134,.36) 0%,rgba(222,201,173,.52) 100%);background-repeat:no-repeat;background-position:0 85%;background-size:100% 88%;color:var(--brown);font-weight:600;padding:1px 5px;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .editorial-mark-dark{background-image:linear-gradient(120deg,rgba(222,201,173,.22) 0%,rgba(193,165,134,.34) 100%);color:#fffefa;border-bottom:1px solid rgba(222,201,173,.42)}
 
+/* Hero Quick-Access Icon Grid (Above the Fold on Mobile & Desktop) */
+.hero.hero-kids-primary{height:auto;min-height:calc(100svh - 76px);max-height:none;padding-bottom:68px}
+.hero-kids-primary .hero-content{padding:44px 0 36px clamp(28px,6vw,92px);max-width:680px}
+.hero-quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:540px;margin:20px 0 22px}
+.hero-quick-card{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:14px;background:rgba(24,18,14,.62);border:1px solid rgba(222,201,173,.34);backdrop-filter:blur(12px);color:#f8f5ef;text-align:left;transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease;min-width:0}
+.hero-quick-card:hover{transform:translateY(-2px);border-color:#dec9ad;background:rgba(36,27,20,.86);box-shadow:0 10px 24px rgba(0,0,0,.32)}
+.hero-quick-card.is-primary{background:linear-gradient(135deg,rgba(222,201,173,.24) 0%,rgba(193,165,134,.14) 100%);border-color:rgba(222,201,173,.62)}
+.hero-quick-card.is-primary:hover{background:linear-gradient(135deg,rgba(222,201,173,.34) 0%,rgba(193,165,134,.22) 100%);border-color:#f0dfc8}
+.hero-quick-icon{width:34px;height:34px;border-radius:10px;background:rgba(222,201,173,.16);border:1px solid rgba(222,201,173,.32);color:#dec9ad;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-quick-card.is-primary .hero-quick-icon{background:rgba(248,245,239,.92);border-color:#f8f5ef;color:#35291f}
+.hero-quick-text{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.22}
+.hero-quick-text strong{font-size:13px;font-weight:600;color:#fffefa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-quick-text small{font-size:11px;color:#d5c1a8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-quick-arrow{color:#d5c1a8;flex-shrink:0;opacity:.75;transition:transform .2s ease,opacity .2s ease}
+.hero-quick-card:hover .hero-quick-arrow{transform:translate(2px,-2px);opacity:1}
+
+@media(max-width:960px){
+  .mobile-floating-schedule{opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease,background .25s}
+  .mobile-floating-schedule.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+}
+@media(max-width:768px){
+  .hero.hero-kids-primary{min-height:0;padding-bottom:58px}
+  .hero-kids-primary .hero-photo-layer{height:365px}
+  .hero-kids-primary .hero-kids-shade{background:linear-gradient(180deg,rgba(36,29,23,.10) 0px,rgba(36,29,23,.36) 175px,rgba(36,29,23,.94) 305px,#241d17 365px)}
+  .hero-kids-primary .hero-content{padding:225px 18px 14px;max-width:none}
+  .hero-title-specialist{margin:10px 0 12px}
+  .hero-audience-switcher{margin-top:12px}
+  .hero-quick-grid{max-width:none;gap:8px;margin:14px 0 16px}
+  .hero-quick-card{padding:10px 10px;gap:9px;border-radius:12px}
+  .hero-quick-icon{width:30px;height:30px;border-radius:8px}
+  .hero-quick-text strong{font-size:12px;white-space:normal;line-height:1.2}
+  .hero-quick-text small{font-size:10px;margin-top:2px}
+  .hero-quick-arrow{display:none}
+  .hero-kids-primary .hero-description{font-size:14px;line-height:1.65;margin-bottom:18px}
+}
+
 /* Mobile Responsiveness Polish (Modals, Drawer, Cards, Buttons & Footer) */
 html,body{overflow-x:clip}
 .quick-booking-dialog{max-height:calc(100svh - 28px);overflow-y:auto;overscroll-behavior:contain}

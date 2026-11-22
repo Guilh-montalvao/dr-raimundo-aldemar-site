@@ -201,7 +201,7 @@ function ReviewCard({ review, dark = false }: { review: Review; dark?: boolean }
             src={review.photo}
             alt={`Foto enviada por ${review.name} com Dr. Raimundo Aldemar`}
             loading="lazy"
-            className="w-full h-36 object-cover object-center block"
+            className="w-full h-44 sm:h-48 object-cover object-bottom block"
           />
         </div>
       )}
@@ -309,8 +309,12 @@ export function TestimonialsSection({
             rel="noopener noreferrer"
             className="button button-gold !min-h-[38px] !py-2 !px-4 !text-[12px] w-full sm:w-auto shrink-0"
           >
-            <span className="inline-flex items-center gap-1.5">
-              <Star size={13} fill="#fffefa" color="#fffefa" />
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-0.5" aria-hidden="true">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <Star key={idx} size={11} fill="#fffefa" color="#fffefa" />
+                ))}
+              </span>
               Avaliar no Google
             </span>
             <ArrowUpRight size={14} />
@@ -415,8 +419,12 @@ export function TestimonialsSection({
           rel="noopener noreferrer"
           className="button button-dark testimonials-review-btn"
         >
-          <span className="inline-flex items-center gap-2">
-            <Star size={15} fill="#d49b27" color="#d49b27" />
+          <span className="inline-flex items-center gap-2.5">
+            <span className="inline-flex items-center gap-0.5" aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <Star key={idx} size={13} fill="#d49b27" color="#d49b27" />
+              ))}
+            </span>
             Avaliar Dr. Raimundo no Google
           </span>
           <ArrowUpRight size={16} />

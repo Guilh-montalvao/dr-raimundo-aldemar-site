@@ -220,31 +220,29 @@ export function TestimonialsSection({
     return (
       <section
         id="depoimentos"
-        className="testimonials-section-biolink mt-3 sm:mt-4"
+        className="testimonials-section-biolink w-full z-10"
         aria-label="Avaliações reais no Google"
       >
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 mb-3.5 px-1">
+        <div className="w-full max-w-[560px] mx-auto px-4 flex items-end justify-between gap-3 mb-4">
           <div>
-            <span className="eyebrow block mb-1">AVALIAÇÕES REAIS NO GOOGLE</span>
-            <h2 className="text-[19px] sm:text-[22px] leading-tight text-[#f8f5ef]">
+            <span className="eyebrow block mb-1">AVALIAÇÕES NO GOOGLE</span>
+            <h2 className="testimonials-biolink-title">
               O que dizem os pacientes{" "}
-              <span className="serif">e as famílias atendidas.</span>
+              <span className="serif">e as famílias.</span>
             </h2>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0 pb-0.5">
             <div className="flex items-center gap-0.5" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, idx) => (
-                <Star key={idx} size={13} fill="#d49b27" color="#d49b27" />
+                <Star key={idx} size={12} fill="#d49b27" color="#d49b27" />
               ))}
             </div>
-            <span className="text-[11px] text-[#dec9ad] font-medium">
-              5,0 no Google
-            </span>
+            <span className="text-[11px] text-[#dec9ad] font-medium">5,0</span>
           </div>
         </div>
 
-        {/* 3D Marquee Dark Compacto (2 colunas Mobile | 3 colunas Desktop) */}
-        <div className="testimonials-3d-stage-biolink flex relative h-[350px] sm:h-[395px] w-full flex-row items-center justify-center gap-3 overflow-hidden rounded-2xl [perspective:360px] md:[perspective:420px]">
+        {/* 3D Marquee Dark integrado ao cenário (Full-bleed, sem caixa externa) */}
+        <div className="testimonials-3d-stage-biolink flex relative h-[360px] sm:h-[410px] w-full flex-row items-center justify-center gap-3 overflow-hidden [perspective:360px] md:[perspective:420px]">
           <div
             className="flex md:hidden flex-row items-center gap-3"
             style={{
@@ -265,7 +263,7 @@ export function TestimonialsSection({
           </div>
 
           <div
-            className="hidden md:flex flex-row items-center gap-3.5"
+            className="hidden md:flex flex-row items-center gap-4"
             style={{
               transform:
                 "translateX(-28px) translateY(0px) translateZ(-65px) rotateX(18deg) rotateY(-9deg) rotateZ(13deg)",
@@ -299,15 +297,12 @@ export function TestimonialsSection({
           <div className="testimonials-biolink-fade-right pointer-events-none absolute inset-y-0 right-0 w-1/6" />
         </div>
 
-        <div className="mt-3.5 flex flex-col sm:flex-row items-center justify-between gap-2.5 px-1">
-          <p className="text-[12px] text-[#ccbeb0] text-center sm:text-left">
-            Já foi atendido pelo Dr. Raimundo? Compartilhe sua experiência.
-          </p>
+        <div className="w-full max-w-[560px] mx-auto px-4 mt-4 flex flex-col items-center gap-2.5 text-center">
           <a
             href={GOOGLE_REVIEW_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="button button-gold !min-h-[38px] !py-2 !px-4 !text-[12px] w-full sm:w-auto shrink-0"
+            className="button button-gold !min-h-[40px] !py-2 !px-5 !text-[12.5px] w-full sm:w-auto"
           >
             <span className="inline-flex items-center gap-2">
               <span className="inline-flex items-center gap-0.5" aria-hidden="true">

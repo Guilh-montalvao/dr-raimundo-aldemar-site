@@ -403,16 +403,16 @@ export default function BiolinkPage() {
               <div className="clinic-card-bg-shade" />
 
               <div className="flex items-center justify-between gap-2 mb-2.5">
-                <div>
-                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#dec9ad] block">
+                <div className="min-w-0">
+                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#dec9ad] block leading-none mb-1">
                     {clinic.region}
                   </span>
-                  <h2 className="text-[17px] font-semibold text-[#f8f5ef] leading-tight">
+                  <h2 className="clinic-card-title truncate">
                     {clinic.name}
                   </h2>
                 </div>
 
-                <div className="flex items-center gap-2.5 text-[11px] text-[#dec9ad] shrink-0">
+                <div className="flex items-center gap-2 text-[11px] text-[#dec9ad] shrink-0">
                   <button
                     type="button"
                     onClick={() => setSelectedClinicConvenios(clinic)}
@@ -438,11 +438,11 @@ export default function BiolinkPage() {
                 href={whatsappUrl(clinic.whatsapp, clinic.name)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="button button-whatsapp w-full !justify-between !min-h-[40px] !text-[12.5px] !py-2 !px-4 shadow-sm"
+                className="button button-whatsapp w-full !justify-between !min-h-[38px] !text-[12.5px] !py-1.5 !px-4 shadow-sm"
               >
                 <span className="flex items-center gap-2">
                   <MessageCircle size={15} className="fill-white/20" />
-                  <span>Agendar em {clinic.region}</span>
+                  <span>Agendar no WhatsApp</span>
                 </span>
                 <ArrowUpRight size={15} />
               </a>
@@ -455,15 +455,15 @@ export default function BiolinkPage() {
           href={surgeryWhatsapp()}
           target="_blank"
           rel="noopener noreferrer"
-          className="official-link-card official-card px-4 py-3.5 flex items-center justify-between group transition-all border-[#c1a586]/50 bg-[#2a2018]/90"
+          className="official-link-card official-card px-4 py-3 flex items-center justify-between group transition-all border-[#c1a586]/50 bg-[#2a2018]/90"
         >
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <div className="w-8 h-8 rounded-full bg-[#25D366]/15 border border-[#25D366]/45 flex items-center justify-center text-[#25D366] shrink-0">
               <MessageCircle size={15} />
             </div>
-            <h3 className="text-[13.5px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
+            <span className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
               Agendar Cirurgia · Valores
-            </h3>
+            </span>
           </div>
           <ArrowUpRight
             size={15}
@@ -475,15 +475,15 @@ export default function BiolinkPage() {
         <div className="grid grid-cols-2 gap-2.5">
           <a
             href="/"
-            className="official-link-card official-card px-3.5 py-3 flex items-center justify-between group transition-all"
+            className="official-link-card official-card px-3.5 py-2.5 flex items-center justify-between group transition-all"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-7 h-7 rounded-full bg-white/10 border border-[#c1a586]/35 flex items-center justify-center text-[#c1a586] group-hover:bg-[#c1a586] group-hover:text-[#18120e] transition-all shrink-0">
                 <Globe size={14} />
               </div>
-              <h3 className="text-[13px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
+              <span className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
                 Site Oficial
-              </h3>
+              </span>
             </div>
             <ArrowUpRight
               size={14}
@@ -495,15 +495,15 @@ export default function BiolinkPage() {
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="official-link-card official-card px-3.5 py-3 flex items-center justify-between group transition-all"
+            className="official-link-card official-card px-3.5 py-2.5 flex items-center justify-between group transition-all"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0">
                 <InstagramIcon size={14} />
               </div>
-              <h3 className="text-[13px] font-semibold text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
+              <span className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
                 Instagram
-              </h3>
+              </span>
             </div>
             <ArrowUpRight
               size={14}
@@ -511,10 +511,10 @@ export default function BiolinkPage() {
             />
           </a>
         </div>
-
-        {/* 3. DEPOIMENTOS 3D DO GOOGLE (VERSÃO DARK COMPACTA) */}
-        <TestimonialsSection variant="biolink" />
       </main>
+
+      {/* 3. DEPOIMENTOS 3D DO GOOGLE INTEGRADOS AO CENÁRIO (SEM CARD EXTERNO) */}
+      <TestimonialsSection variant="biolink" />
 
       {/* MODAL LEVE DE CONVÊNIOS (SÓ ABRE SE O PACIENTE CLICAR) */}
       {selectedClinicConvenios && (

@@ -246,8 +246,25 @@ body:has(.biolink-theme) {
   color: #f8f5ef;
 }
 .biolink-theme .clinic-card-bg.clinic-card-minimal {
-  min-height: 118px;
-  padding: 14px 16px;
+  height: 114px;
+  min-height: 114px;
+  padding: 13px 15px;
+}
+.biolink-theme .clinic-card-title {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px !important;
+  font-weight: 600;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em;
+  color: #f8f5ef;
+  margin: 0;
+}
+.biolink-theme .biolink-action-title {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13.5px !important;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 .biolink-theme .clinic-card-bg:hover {
@@ -376,6 +393,7 @@ body:has(.biolink-theme) {
     padding: 14px 15px;
   }
   .biolink-theme .clinic-card-bg.clinic-card-minimal {
+    height: 112px;
     min-height: 112px;
     padding: 13px 14px;
   }
@@ -480,32 +498,33 @@ body:has(.biolink-theme) {
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
 }
 
-/* DARK 3D GOOGLE REVIEWS SECTION IN BIOLINK */
+/* DARK 3D GOOGLE REVIEWS INTEGRATED INTO BIOLINK SCENARIO (NO OUTER CARD) */
 .biolink-theme .testimonials-section-biolink {
-  background: rgba(28, 21, 16, 0.88);
-  border: 1px solid rgba(193, 165, 134, 0.28);
-  border-radius: 18px;
-  padding: 16px 14px;
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(12px);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 12px 0 32px;
+  box-shadow: none;
 }
-@media (min-width: 640px) {
-  .biolink-theme .testimonials-section-biolink {
-    padding: 20px 20px;
-  }
+.biolink-theme .testimonials-biolink-title {
+  font-size: 20px !important;
+  line-height: 1.18 !important;
+  letter-spacing: -0.03em;
+  color: #f8f5ef;
+  margin: 0;
 }
 .biolink-theme .testimonials-3d-stage-biolink {
-  background: #1c1510;
-  border: 1px solid rgba(193, 165, 134, 0.16);
+  background: transparent;
+  border: 0;
 }
 .biolink-theme .testimonial-card-biolink {
-  background: rgba(38, 29, 22, 0.96);
+  background: rgba(34, 26, 20, 0.92);
   border-color: rgba(193, 165, 134, 0.28);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 .biolink-theme .testimonial-card-biolink:hover {
   border-color: rgba(222, 201, 173, 0.6);
-  background: rgba(48, 37, 28, 0.98);
+  background: rgba(46, 35, 27, 0.96);
 }
 .biolink-theme .testimonial-card-biolink .testimonial-author {
   color: #f8f5ef;
@@ -522,14 +541,14 @@ body:has(.biolink-theme) {
   color: #dec9ad;
 }
 .biolink-theme .testimonials-biolink-fade-top {
-  background: linear-gradient(180deg, #1c1510 0%, transparent 100%);
+  background: linear-gradient(180deg, #201813 0%, transparent 100%);
 }
 .biolink-theme .testimonials-biolink-fade-bottom {
-  background: linear-gradient(0deg, #1c1510 0%, transparent 100%);
+  background: linear-gradient(0deg, #201813 0%, transparent 100%);
 }
 .biolink-theme .testimonials-biolink-fade-left {
-  background: linear-gradient(90deg, #1c1510 0%, transparent 100%);
+  background: linear-gradient(90deg, #201813 0%, transparent 100%);
 }
 .biolink-theme .testimonials-biolink-fade-right {
-  background: linear-gradient(270deg, #1c1510 0%, transparent 100%);
+  background: linear-gradient(270deg, #201813 0%, transparent 100%);
 }

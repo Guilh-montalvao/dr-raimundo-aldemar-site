@@ -17,7 +17,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 const physicianJsonLd = {
   "@context": "https://schema.org",
   "@type": "Physician",
-  name: "Dr. Raimundo Aldemar de Morais Lima",
+  name: "Dr. Raimundo Aldemar Silva Filho",
   alternateName: "Dr. Raimundo Aldemar — Otorrinolaringologista",
   description:
     "Médico Otorrinolaringologista em Brasília (CRM-DF 20094 · RQE 13936). Atendimento clínico e cirúrgico infantil e adulto na Asa Norte (Otorhynus), Gama (Otogama) e Taguatinga (CDO Otorrino).",

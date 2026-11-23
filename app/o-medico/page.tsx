@@ -143,7 +143,7 @@ export default function OMedicoPage() {
                 <span className="serif">cuidado em cada fase da vida.</span>
               </h2>
               <p data-reveal>
-                Sou o Dr. Raimundo Aldemar de Morais Lima, médico
+                Sou o Dr. Raimundo Aldemar Silva Filho, médico
                 otorrinolaringologista em Brasília. Minha prática é guiada pelo
                 compromisso de oferecer um atendimento acolhedor e técnico tanto
                 para crianças quanto para adultos.

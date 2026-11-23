@@ -927,7 +927,7 @@ export function FaqSection({
           <p className="faq-authorship">
             <strong>Autoria médica identificada:</strong>
             <br />
-            Dr. Raimundo Aldemar de Morais Lima
+            Dr. Raimundo Aldemar Silva Filho
             <br />
             Médico Otorrinolaringologista · CRM-DF 20094 · RQE 13936
           </p>
@@ -1411,7 +1411,7 @@ export function SiteFooter() {
           <p className="footer-technical-resp">
             <strong>Responsável Técnico:</strong>
             <br />
-            Dr. Raimundo Aldemar de Morais Lima
+            Dr. Raimundo Aldemar Silva Filho
             <br />
             Médico Otorrinolaringologista · CRM-DF 20094 · RQE 13936
           </p>

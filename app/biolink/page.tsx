@@ -607,7 +607,7 @@ export default function BiolinkPage() {
       {/* 4. RODAPÉ COMPACTO */}
       <footer className="cinematic-footer w-full border-t border-[rgba(193,165,134,0.18)] bg-[#18120e] py-3.5 px-4 sm:px-6 text-center flex flex-col items-center z-10">
         <p className="text-[11.5px] text-[#ece3d9] font-medium">
-          Dr. Raimundo Aldemar de Morais Lima · Médico Otorrinolaringologista
+          Dr. Raimundo Aldemar Silva Filho · Médico Otorrinolaringologista
         </p>
         <p className="text-[10.5px] text-[#dec9ad]">
           CRM-DF 20094 · RQE 13936 · Brasília — DF

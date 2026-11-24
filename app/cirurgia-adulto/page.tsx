@@ -195,8 +195,8 @@ export default function CirurgiaAdultoPage() {
               <div
                 key={surg.id}
                 className={`area-image ${
-                  activeSurgery === surg.id ? "is-active" : ""
-                }`}
+                  surg.id === "ronco" ? "area-image-cirurgia" : ""
+                } ${activeSurgery === surg.id ? "is-active" : ""}`}
                 role="img"
                 aria-hidden={activeSurgery !== surg.id}
                 aria-label={`Cirurgia em adulto — ${surg.title}`}

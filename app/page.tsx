@@ -644,6 +644,33 @@ export default function Home() {
                 <span>Pequenos Super-Heróis</span>
                 <span>Fotografias reais com autorização dos responsáveis</span>
               </div>
+
+              <div className="superhero-videos-grid">
+                <div className="superhero-video-card">
+                  <div className="superhero-video-frame">
+                    <SmartVideo
+                      src="/videos/levando-crianca-cirurgia.mp4"
+                      ariaLabel="Dr. Raimundo levando pequeno super-herói no colo para a cirurgia"
+                    />
+                  </div>
+                  <div className="photo-caption">
+                    <span>Indo para a cirurgia</span>
+                    <span>Acolhimento no colo</span>
+                  </div>
+                </div>
+                <div className="superhero-video-card">
+                  <div className="superhero-video-frame">
+                    <SmartVideo
+                      src="/videos/depois-cirurgia-presentes.mp4"
+                      ariaLabel="Pequeno paciente recebendo presentes e carinho após a cirurgia"
+                    />
+                  </div>
+                  <div className="photo-caption">
+                    <span>Depois da cirurgia</span>
+                    <span>Presentes e carinho</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -286,14 +287,19 @@ export function UnifiedConveniosModal({
 
   useEffect(() => {
     if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || typeof document === "undefined") return null;
 
   const q = normalizeSearch(query.trim());
   const filtered = unifiedConvenios.filter((item) => {
@@ -310,7 +316,7 @@ export function UnifiedConveniosModal({
     { id: "taguatinga", label: "Taguatinga", count: cdoConvenios.length },
   ];
 
-  return (
+  return createPortal(
     <div
       className="unified-convenios-backdrop"
       role="dialog"
@@ -327,8 +333,8 @@ export function UnifiedConveniosModal({
             <span className="eyebrow">CONVÊNIOS ATENDIDOS</span>
             <h3 id="unified-convenios-title">Consulte seu plano de saúde</h3>
             <p>
-              Busque pelo nome do convênio ou filtre pela unidade. Toque na
-              unidade para agendar pelo WhatsApp.
+              Busque pelo nome ou filtre pela unidade. Toque na unidade para
+              agendar pelo WhatsApp.
             </p>
           </div>
           <button
@@ -348,7 +354,7 @@ export function UnifiedConveniosModal({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Digite seu convênio (ex.: Amil, Saúde Caixa, Unimed...)"
+            placeholder="Buscar convênio (ex.: Amil, Caixa...)"
             aria-label="Buscar convênio pelo nome"
           />
           {query && (
@@ -444,7 +450,8 @@ export function UnifiedConveniosModal({
           </span>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -702,6 +709,20 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!bookingOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setBookingOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [bookingOpen]);
+
   const handleMobileHashClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     hash: string
@@ -934,15 +955,17 @@ export function SiteHeader() {
         <span>Agendar consulta</span>
       </button>
 
-      {/* MODAL / SHEET DE AGENDAMENTO RÁPIDO EM 1 CLIQUE */}
-      {bookingOpen && (
-        <div
-          className="quick-booking-backdrop"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="quick-booking-title"
-          onClick={() => setBookingOpen(false)}
-        >
+      {/* MODAL / SHEET DE AGENDAMENTO RÁPIDO EM 1 CLIQUE (PORTAL ACIMA DE TUDO) */}
+      {bookingOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="quick-booking-backdrop"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="quick-booking-title"
+            onClick={() => setBookingOpen(false)}
+          >
           <div
             className="quick-booking-dialog"
             onClick={(e) => e.stopPropagation()}
@@ -1120,8 +1143,9 @@ export function SiteHeader() {
               </button>
             </div>
           </div>
-        </div>
-      )}
+        </div>,
+          document.body
+        )}
     </>
   );
 }

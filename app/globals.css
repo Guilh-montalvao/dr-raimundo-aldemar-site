@@ -524,52 +524,69 @@ html,body{overflow-x:clip}
 .location-convenios-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;margin:2px 0 18px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(193,165,134,.32);color:#dec9ad;font-size:13px;font-weight:500;transition:background .2s ease,border-color .2s ease,color .2s ease}
 .location-convenios-btn:hover{background:rgba(222,201,173,.14);border-color:#dec9ad;color:#fffefa}
 
-.unified-convenios-backdrop{position:fixed;inset:0;z-index:130;background:rgba(18,13,10,.76);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:16px;animation:quickFadeIn .18s ease-out}
-.unified-convenios-dialog{width:100%;max-width:600px;max-height:90svh;display:flex;flex-direction:column;background:#241b14;color:#f8f5ef;border:1px solid rgba(222,201,173,.38);border-radius:20px;padding:24px;box-shadow:0 28px 68px rgba(0,0,0,.55)}
-.unified-convenios-header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px;flex-shrink:0}
+.unified-convenios-backdrop{position:fixed;inset:0;z-index:9999;background:rgba(14,10,8,.8);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));animation:quickFadeIn .18s ease-out}
+.unified-convenios-dialog{width:100%;max-width:600px;max-height:calc(100dvh - 28px);display:flex;flex-direction:column;background:#241b14;color:#f8f5ef;border:1px solid rgba(222,201,173,.4);border-radius:20px;padding:22px 20px;box-shadow:0 28px 68px rgba(0,0,0,.6)}
+.unified-convenios-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;flex-shrink:0}
 .unified-convenios-header .eyebrow{color:#c1a586;display:block;font-size:10.5px;margin-bottom:4px}
-.unified-convenios-header h3{font-size:clamp(1.2rem,2.2vw,1.45rem)!important;color:#f8f5ef;margin:0 0 4px!important;line-height:1.2}
-.unified-convenios-header p{font-size:13px;color:#d5c6b6;line-height:1.5;margin:0}
+.unified-convenios-header h3{font-size:clamp(1.18rem,2.2vw,1.45rem)!important;color:#f8f5ef;margin:0 0 4px!important;line-height:1.2}
+.unified-convenios-header p{font-size:12.5px;color:#d5c6b6;line-height:1.45;margin:0}
 
 .unified-convenios-search{position:relative;display:flex;align-items:center;margin-bottom:12px;flex-shrink:0}
-.unified-convenios-search-icon{position:absolute;left:14px;color:#c1a586;pointer-events:none}
-.unified-convenios-search input{width:100%;height:44px;padding:0 38px 0 40px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(222,201,173,.32);color:#fffefa;font-size:14px;outline:none;transition:border-color .2s ease,background .2s ease}
-.unified-convenios-search input::placeholder{color:#a89785}
+.unified-convenios-search-icon{position:absolute;left:13px;color:#c1a586;pointer-events:none}
+.unified-convenios-search input{width:100%;height:44px;padding:0 38px 0 38px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(222,201,173,.34);color:#fffefa;font-size:16px;outline:none;transition:border-color .2s ease,background .2s ease}
+.unified-convenios-search input::placeholder{color:#a89785;font-size:14px}
 .unified-convenios-search input:focus{border-color:#dec9ad;background:rgba(255,255,255,.11)}
-.unified-convenios-clear{position:absolute;right:10px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#f8f5ef;display:grid;place-items:center}
+.unified-convenios-clear{position:absolute;right:10px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#f8f5ef;display:grid;place-items:center}
 .unified-convenios-clear:hover{background:rgba(255,255,255,.22)}
 
-.unified-convenios-tabs{display:flex;align-items:center;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px;flex-shrink:0;scrollbar-width:none}
-.unified-convenios-tabs::-webkit-scrollbar{display:none}
-.unified-convenios-tab{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid rgba(222,201,173,.22);color:#d5c6b6;font-size:12.5px;font-weight:500;white-space:nowrap;transition:all .2s ease}
+.unified-convenios-tabs{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap;flex-shrink:0}
+.unified-convenios-tab{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 13px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid rgba(222,201,173,.22);color:#d5c6b6;font-size:12.5px;font-weight:500;white-space:nowrap;transition:all .2s ease}
 .unified-convenios-tab small{font-size:11px;opacity:.75}
 .unified-convenios-tab:hover{background:rgba(255,255,255,.12);color:#fffefa}
 .unified-convenios-tab.is-active{background:#f8f5ef;border-color:#f8f5ef;color:#201813;font-weight:600}
 .unified-convenios-tab.is-active small{opacity:.8}
 
-.unified-convenios-list{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:4px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c1a586 rgba(255,255,255,.06)}
-.unified-convenio-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.045);border:1px solid rgba(193,165,134,.2);transition:border-color .2s ease,background .2s ease}
+.unified-convenios-list{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:8px;padding-right:4px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c1a586 rgba(255,255,255,.06)}
+.unified-convenio-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.045);border:1px solid rgba(193,165,134,.2);transition:border-color .2s ease,background .2s ease}
 .unified-convenio-row:hover{border-color:rgba(222,201,173,.42);background:rgba(255,255,255,.075)}
 .unified-convenio-main{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
 .unified-convenio-logo{width:30px;height:30px;border-radius:7px;background:#fff;padding:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
 .unified-convenio-logo img{width:100%;height:100%;object-fit:contain;display:block}
 .unified-convenio-name{font-size:13.5px;font-weight:500;color:#f8f5ef;line-height:1.25;overflow:hidden;text-overflow:ellipsis}
 .unified-convenio-units{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:5px;flex-shrink:0}
-.unified-unit-badge{display:inline-flex;align-items:center;gap:3px;padding:4px 9px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(222,201,173,.28);color:#ece3d9;font-size:11px;font-weight:500;white-space:nowrap;transition:all .2s ease}
+.unified-unit-badge{display:inline-flex;align-items:center;gap:3px;padding:5px 10px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(222,201,173,.28);color:#ece3d9;font-size:11px;font-weight:500;white-space:nowrap;transition:all .2s ease}
 .unified-unit-badge.is-asa-norte{background:rgba(222,201,173,.18);border-color:rgba(222,201,173,.52);color:#fffefa}
 .unified-unit-badge:hover{background:#25D366;border-color:#25D366;color:#fff}
 
 .unified-convenios-empty{padding:28px 16px;text-align:center;color:#d5c6b6}
 .unified-convenios-empty p{font-size:14.5px;color:#f8f5ef;margin:0 0 6px}
 .unified-convenios-empty span{font-size:12.5px;line-height:1.5;display:block}
-.unified-convenios-footer{margin-top:12px;padding-top:12px;border-top:1px solid rgba(193,165,134,.2);font-size:11.5px;color:#c1a586;text-align:center;flex-shrink:0}
+.unified-convenios-footer{margin-top:10px;padding-top:10px;border-top:1px solid rgba(193,165,134,.2);font-size:11.5px;color:#c1a586;text-align:center;flex-shrink:0}
 
+/* Global Cross-Device Polish (Modals z-index, iOS Safe Areas, Small Phones & Tablets) */
+.quick-booking-backdrop{z-index:9999;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom))}
+.quick-booking-dialog{max-height:calc(100dvh - 28px)}
+@media(max-width:960px){
+  .mobile-floating-schedule{bottom:calc(16px + env(safe-area-inset-bottom));right:14px}
+  .site-footer{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+}
 @media(max-width:640px){
-  .unified-convenios-backdrop{padding:10px}
-  .unified-convenios-dialog{padding:18px 14px;border-radius:16px}
+  .brand{width:clamp(148px,46vw,175px)}
+  .unified-convenios-backdrop{padding:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom))}
+  .unified-convenios-dialog{padding:16px 14px;border-radius:16px;max-height:calc(100dvh - 20px)}
+  .unified-convenios-header{margin-bottom:12px}
+  .unified-convenios-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .unified-convenios-tab{width:100%;padding:8px 10px;font-size:12px}
   .unified-convenio-row{flex-direction:column;align-items:flex-start;gap:8px;padding:10px}
-  .unified-convenio-units{justify-content:flex-start;padding-left:40px}
+  .unified-convenio-units{justify-content:flex-start;padding-left:0;width:100%}
+  .unified-unit-badge{padding:5px 9px;font-size:11px}
   .contact-convenios-trigger{width:100%;justify-content:space-between}
+}
+@media(max-width:380px){
+  .hero-audience-bar .audience-pill{font-size:13px;padding:8px 8px;gap:5px}
+  .hero-quick-card{padding:9px 8px;gap:7px}
+  .hero-quick-icon{width:28px;height:28px}
+  .hero-quick-text strong{font-size:11.5px}
 }
 
 

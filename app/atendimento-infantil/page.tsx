@@ -321,7 +321,7 @@ export default function AtendimentoInfantilPage() {
               </div>
               <div className="photo-caption">
                 <span>Avaliação respiratória na infância</span>
-                <span>Dr. Raimundo Aldemar · RQE 13936</span>
+                <span>Dr. Raimundo Aldemar · CRM-DF 20094 · RQE 13936</span>
               </div>
             </div>
           </div>

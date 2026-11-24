@@ -332,7 +332,7 @@ export default function Home() {
 
           <div className="hero-content">
             <p className="eyebrow hero-reveal">
-              OTORRINOLARINGOLOGISTA EM BRASÍLIA · RQE 13936
+              OTORRINOLARINGOLOGISTA · CRM-DF 20094 · RQE 13936
             </p>
             <h1 className="hero-reveal hero-title-specialist">
               Respirar bem,
@@ -534,7 +534,7 @@ export default function Home() {
         <div className="intro-strip" data-reveal>
           <span>Nariz, ouvidos e garganta.</span>
           <span>Crianças e adultos.</span>
-          <span>Otorrinolaringologista · RQE 13936.</span>
+          <span>Otorrinolaringologista · CRM-DF 20094 · RQE 13936.</span>
         </div>
 
         {/* SEÇÃO INFANTIL DE ALTO DESTAQUE NA HOME (CONSULTÓRIO + FOTOS E VÍDEOS REAIS) */}

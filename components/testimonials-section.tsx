@@ -149,7 +149,7 @@ function ReviewCard({ review, dark = false }: { review: Review; dark?: boolean }
   return (
     <figure
       className={cn(
-        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-3.5 md:p-4 transition-colors w-52 sm:w-56 md:w-64",
+        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-3 sm:p-4 transition-colors w-full",
         dark && "testimonial-card-biolink"
       )}
     >
@@ -240,60 +240,46 @@ export function TestimonialsSection({
           </div>
         </div>
 
-        {/* 3D Marquee Dark integrado ao cenário (Full-bleed, sem caixa externa) */}
-        <div className="testimonials-3d-stage-biolink flex relative h-[360px] sm:h-[410px] w-full flex-row items-center justify-center gap-3 overflow-hidden [perspective:360px] md:[perspective:420px]">
-          <div
-            className="flex md:hidden flex-row items-center gap-3"
-            style={{
-              transform:
-                "translateX(-12px) translateY(0px) translateZ(-45px) rotateX(16deg) rotateY(-8deg) rotateZ(12deg)",
-            }}
-          >
-            <Marquee pauseOnHover vertical className="[--duration:46s]">
+        {/* Marquee Vertical Reto Dark integrado ao cenário (2 colunas Mobile | 4 colunas Desktop) */}
+        <div className="testimonials-3d-stage-biolink relative h-[400px] sm:h-[440px] w-full max-w-[1100px] mx-auto px-3 sm:px-4 overflow-hidden">
+          <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
+            <Marquee pauseOnHover vertical className="[--duration:46s] p-0">
               {reviews.slice(0, 8).map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover vertical className="[--duration:48s]">
+            <Marquee reverse pauseOnHover vertical className="[--duration:48s] p-0">
               {reviews.slice(8, 15).map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
           </div>
 
-          <div
-            className="hidden md:flex flex-row items-center gap-4"
-            style={{
-              transform:
-                "translateX(-28px) translateY(0px) translateZ(-65px) rotateX(18deg) rotateY(-9deg) rotateZ(13deg)",
-            }}
-          >
-            <Marquee pauseOnHover vertical className="[--duration:36s]">
+          <div className="hidden md:grid md:grid-cols-4 w-full h-full gap-4">
+            <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
               {firstCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover vertical className="[--duration:38s]">
+            <Marquee reverse pauseOnHover vertical className="[--duration:38s] p-0">
               {secondCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee pauseOnHover vertical className="[--duration:36s]">
+            <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
               {thirdCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover vertical className="[--duration:42s]">
+            <Marquee reverse pauseOnHover vertical className="[--duration:42s] p-0">
               {fourthCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
           </div>
 
-          <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-1/4" />
-          <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-1/4" />
-          <div className="testimonials-biolink-fade-left pointer-events-none absolute inset-y-0 left-0 w-1/6" />
-          <div className="testimonials-biolink-fade-right pointer-events-none absolute inset-y-0 right-0 w-1/6" />
+          <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-20" />
+          <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-20" />
         </div>
 
         <div className="w-full max-w-[560px] mx-auto px-4 mt-4 flex flex-col items-center gap-2.5 text-center">
@@ -347,62 +333,48 @@ export function TestimonialsSection({
         </div>
       </div>
 
-      {/* DESKTOP: 4 COLUNAS 3D | MOBILE: 2 COLUNAS 3D */}
-      <div className="testimonials-3d-stage flex relative h-[430px] md:h-[490px] w-full flex-row items-center justify-center gap-3 md:gap-4 overflow-hidden [perspective:360px] md:[perspective:420px]">
-        {/* Mobile: 2 colunas 3D responsivas com todos os 15 depoimentos */}
-        <div
-          className="flex md:hidden flex-row items-center gap-3"
-          style={{
-            transform:
-              "translateX(-12px) translateY(0px) translateZ(-45px) rotateX(16deg) rotateY(-8deg) rotateZ(12deg)",
-          }}
-        >
-          <Marquee pauseOnHover vertical className="[--duration:46s]">
+      {/* DESKTOP: 4 COLUNAS VERTICAIS RETAS | MOBILE: 2 COLUNAS VERTICAIS RETAS */}
+      <div className="testimonials-3d-stage relative h-[460px] md:h-[520px] w-full overflow-hidden">
+        {/* Mobile: 2 colunas verticais retas com todos os 15 depoimentos */}
+        <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
+          <Marquee pauseOnHover vertical className="[--duration:46s] p-0">
             {reviews.slice(0, 8).map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:48s]">
+          <Marquee reverse pauseOnHover vertical className="[--duration:48s] p-0">
             {reviews.slice(8, 15).map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
         </div>
 
-        {/* Desktop: 4 colunas 3D */}
-        <div
-          className="hidden md:flex flex-row items-center gap-4"
-          style={{
-            transform:
-              "translateX(-40px) translateY(0px) translateZ(-70px) rotateX(18deg) rotateY(-9deg) rotateZ(14deg)",
-          }}
-        >
-          <Marquee pauseOnHover vertical className="[--duration:36s]">
+        {/* Desktop: 4 colunas verticais retas */}
+        <div className="hidden md:grid md:grid-cols-4 w-full h-full gap-4">
+          <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
             {firstCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:38s]">
+          <Marquee reverse pauseOnHover vertical className="[--duration:38s] p-0">
             {secondCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee pauseOnHover vertical className="[--duration:36s]">
+          <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
             {thirdCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:42s]">
+          <Marquee reverse pauseOnHover vertical className="[--duration:42s] p-0">
             {fourthCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
         </div>
 
-        <div className="testimonials-fade-top pointer-events-none absolute inset-x-0 top-0 h-1/4" />
-        <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-1/4" />
-        <div className="testimonials-fade-left pointer-events-none absolute inset-y-0 left-0 w-1/6" />
-        <div className="testimonials-fade-right pointer-events-none absolute inset-y-0 right-0 w-1/6" />
+        <div className="testimonials-fade-top pointer-events-none absolute inset-x-0 top-0 h-24" />
+        <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-24" />
       </div>
 
       <div className="testimonials-cta" data-reveal>

@@ -510,8 +510,14 @@ export default function BiolinkPage() {
             className="official-link-card official-card px-3.5 py-2.5 flex items-center justify-between group transition-all"
           >
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0">
-                <InstagramIcon size={14} />
+              <div
+                className="w-7 h-7 rounded-[8px] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0"
+                style={{
+                  background:
+                    "radial-gradient(circle at 30% 107%, #FFD600 0%, #FF7A00 28%, #FF0069 58%, #D300C5 80%, #7638FA 100%)",
+                }}
+              >
+                <InstagramIcon size={16} />
               </div>
               <span className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
                 Instagram

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Play, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
 
@@ -246,12 +246,11 @@ export function TestimonialsSection({
 
         {/* Marquee Vertical Reto Dark integrado ao cenário (pausa ao tocar/segurar ou passar o mouse) */}
         <div
-          className="testimonials-3d-stage-biolink relative h-[400px] sm:h-[440px] w-full max-w-[1100px] mx-auto px-3 sm:px-4 overflow-hidden select-none"
+          className="testimonials-3d-stage-biolink relative h-[470px] sm:h-[510px] w-full max-w-[1100px] mx-auto px-3 sm:px-4 overflow-hidden select-none"
           onTouchStart={() => setTouchHolding(true)}
           onTouchEnd={() => setTouchHolding(false)}
           onTouchCancel={() => setTouchHolding(false)}
           onClick={() => setTapPaused((prev) => !prev)}
-          title={tapPaused ? "Toque para continuar" : "Toque para pausar e ler"}
         >
           <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
             <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:46s] p-0">
@@ -289,22 +288,8 @@ export function TestimonialsSection({
             </Marquee>
           </div>
 
-          <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-20" />
-          <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-20" />
-
-          {tapPaused && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setTapPaused(false);
-              }}
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#241b14]/95 border border-[#dec9ad]/50 text-[#f8f5ef] text-[11.5px] font-medium shadow-lg backdrop-blur-md"
-            >
-              <Play size={11} fill="#dec9ad" color="#dec9ad" />
-              Pausado · Toque para continuar
-            </button>
-          )}
+          <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-16" />
+          <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-16" />
         </div>
 
         <div className="w-full max-w-[560px] mx-auto px-4 mt-4 flex flex-col items-center gap-2.5 text-center">
@@ -360,12 +345,11 @@ export function TestimonialsSection({
 
       {/* DESKTOP: 4 COLUNAS VERTICAIS RETAS | MOBILE: 2 COLUNAS VERTICAIS RETAS (pausa ao tocar/segurar ou passar o mouse) */}
       <div
-        className="testimonials-3d-stage relative h-[460px] md:h-[520px] w-full overflow-hidden select-none"
+        className="testimonials-3d-stage relative h-[520px] md:h-[580px] w-full overflow-hidden select-none"
         onTouchStart={() => setTouchHolding(true)}
         onTouchEnd={() => setTouchHolding(false)}
         onTouchCancel={() => setTouchHolding(false)}
         onClick={() => setTapPaused((prev) => !prev)}
-        title={tapPaused ? "Toque para continuar" : "Toque para pausar e ler"}
       >
         {/* Mobile: 2 colunas verticais retas com todos os 15 depoimentos */}
         <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
@@ -405,22 +389,8 @@ export function TestimonialsSection({
           </Marquee>
         </div>
 
-        <div className="testimonials-fade-top pointer-events-none absolute inset-x-0 top-0 h-24" />
-        <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-24" />
-
-        {tapPaused && (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setTapPaused(false);
-            }}
-            className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#35291f]/95 border border-[#c1a586]/50 text-[#f8f5ef] text-[12px] font-medium shadow-lg backdrop-blur-md"
-          >
-            <Play size={11} fill="#dec9ad" color="#dec9ad" />
-            Pausado · Toque para continuar
-          </button>
-        )}
+        <div className="testimonials-fade-top pointer-events-none absolute inset-x-0 top-0 h-20" />
+        <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-20" />
       </div>
 
       <div className="testimonials-cta" data-reveal>

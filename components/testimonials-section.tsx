@@ -4,8 +4,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
 
-const GOOGLE_REVIEW_URL =
-  "https://www.google.com/search?q=Dr.+Raimundo+Aldemar+Otorrinolaringologista#lrd=0x935a3369d10c8b8f:0x6dc27a136970f659,3,,,";
+const GOOGLE_REVIEW_URL = "https://g.page/r/CVn2cGkTesJtEBM/review";
 
 interface Review {
   name: string;

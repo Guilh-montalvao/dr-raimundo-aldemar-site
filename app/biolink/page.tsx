@@ -450,25 +450,37 @@ export default function BiolinkPage() {
           ))}
         </section>
 
-        {/* CANAL DIRETO DE CIRURGIAS (1 LINHA LIMPA) */}
+        {/* CANAL DIRETO DE CIRURGIAS (MESMO EFEITO EDITORIAL COM FOTO AMBIENT + THUMBNAIL) */}
         <a
           href={surgeryWhatsapp()}
           target="_blank"
           rel="noopener noreferrer"
-          className="official-link-card official-card px-4 py-3 flex items-center justify-between group transition-all border-[#c1a586]/50 bg-[#2a2018]/90"
+          className="official-link-card biolink-surgery-card group"
         >
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-full bg-[#25D366]/15 border border-[#25D366]/45 flex items-center justify-center text-[#25D366] shrink-0">
-              <MessageCircle size={15} />
-            </div>
-            <span className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors truncate">
-              Agendar Cirurgia · Valores
-            </span>
-          </div>
-          <ArrowUpRight
-            size={15}
-            className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0"
+          <div
+            className="biolink-surgery-bg"
+            style={{ backgroundImage: "url('/media/cirurgia.jpg')" }}
+            aria-hidden="true"
           />
+          <div className="biolink-surgery-shade" aria-hidden="true" />
+          <img
+            src="/media/cirurgia.jpg"
+            alt="Agendar Cirurgia · Consultar Valores"
+            className="biolink-surgery-thumb"
+            width={48}
+            height={48}
+            loading="lazy"
+          />
+          <div className="biolink-surgery-info">
+            <strong className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors">
+              Agendar Cirurgia · Valores
+            </strong>
+            <span>Criança e Adulto · WhatsApp</span>
+          </div>
+          <span className="biolink-surgery-action" aria-hidden="true">
+            <MessageCircle size={15} />
+            <ArrowUpRight size={14} />
+          </span>
         </a>
 
         {/* SITE OFICIAL & INSTAGRAM (1 LINHA CADA) */}

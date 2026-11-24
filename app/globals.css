@@ -494,6 +494,11 @@ html,body{overflow-x:clip}
 }
 @media(max-width:640px){
   .button{gap:16px;padding:13px 18px;max-width:100%}
+  .children-section{padding-bottom:74px}
+  .children-section .surgery-cta-group{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+  .children-section .surgery-cta-group .button,.children-section .surgery-cta-group .text-link{width:100%;max-width:none;justify-content:space-between}
+  .children-footnote{bottom:22px;left:24px;right:24px}
+  .children-footnote>span:last-child{max-width:none;white-space:nowrap;font-size:10px;letter-spacing:.14em}
   .quick-booking-backdrop{padding:14px}
   .quick-booking-dialog{padding:20px 16px;border-radius:16px}
   .quick-booking-header{margin-bottom:16px}

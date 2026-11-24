@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight, Star } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Play, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
 
@@ -214,6 +215,9 @@ export function TestimonialsSection({
   variant?: "light" | "biolink";
 }) {
   const isBiolink = variant === "biolink";
+  const [tapPaused, setTapPaused] = useState(false);
+  const [touchHolding, setTouchHolding] = useState(false);
+  const isPaused = tapPaused || touchHolding;
 
   if (isBiolink) {
     return (
@@ -240,15 +244,22 @@ export function TestimonialsSection({
           </div>
         </div>
 
-        {/* Marquee Vertical Reto Dark integrado ao cenário (2 colunas Mobile | 4 colunas Desktop) */}
-        <div className="testimonials-3d-stage-biolink relative h-[400px] sm:h-[440px] w-full max-w-[1100px] mx-auto px-3 sm:px-4 overflow-hidden">
+        {/* Marquee Vertical Reto Dark integrado ao cenário (pausa ao tocar/segurar ou passar o mouse) */}
+        <div
+          className="testimonials-3d-stage-biolink relative h-[400px] sm:h-[440px] w-full max-w-[1100px] mx-auto px-3 sm:px-4 overflow-hidden select-none"
+          onTouchStart={() => setTouchHolding(true)}
+          onTouchEnd={() => setTouchHolding(false)}
+          onTouchCancel={() => setTouchHolding(false)}
+          onClick={() => setTapPaused((prev) => !prev)}
+          title={tapPaused ? "Toque para continuar" : "Toque para pausar e ler"}
+        >
           <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
-            <Marquee pauseOnHover vertical className="[--duration:46s] p-0">
+            <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:46s] p-0">
               {reviews.slice(0, 8).map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover vertical className="[--duration:48s] p-0">
+            <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:48s] p-0">
               {reviews.slice(8, 15).map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
@@ -256,22 +267,22 @@ export function TestimonialsSection({
           </div>
 
           <div className="hidden md:grid md:grid-cols-4 w-full h-full gap-4">
-            <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
+            <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
               {firstCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover vertical className="[--duration:38s] p-0">
+            <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:38s] p-0">
               {secondCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
+            <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
               {thirdCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
             </Marquee>
-            <Marquee reverse pauseOnHover vertical className="[--duration:42s] p-0">
+            <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:42s] p-0">
               {fourthCol.map((review) => (
                 <ReviewCard key={review.name} review={review} dark />
               ))}
@@ -280,6 +291,20 @@ export function TestimonialsSection({
 
           <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-20" />
           <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-20" />
+
+          {tapPaused && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setTapPaused(false);
+              }}
+              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#241b14]/95 border border-[#dec9ad]/50 text-[#f8f5ef] text-[11.5px] font-medium shadow-lg backdrop-blur-md"
+            >
+              <Play size={11} fill="#dec9ad" color="#dec9ad" />
+              Pausado · Toque para continuar
+            </button>
+          )}
         </div>
 
         <div className="w-full max-w-[560px] mx-auto px-4 mt-4 flex flex-col items-center gap-2.5 text-center">
@@ -333,16 +358,23 @@ export function TestimonialsSection({
         </div>
       </div>
 
-      {/* DESKTOP: 4 COLUNAS VERTICAIS RETAS | MOBILE: 2 COLUNAS VERTICAIS RETAS */}
-      <div className="testimonials-3d-stage relative h-[460px] md:h-[520px] w-full overflow-hidden">
+      {/* DESKTOP: 4 COLUNAS VERTICAIS RETAS | MOBILE: 2 COLUNAS VERTICAIS RETAS (pausa ao tocar/segurar ou passar o mouse) */}
+      <div
+        className="testimonials-3d-stage relative h-[460px] md:h-[520px] w-full overflow-hidden select-none"
+        onTouchStart={() => setTouchHolding(true)}
+        onTouchEnd={() => setTouchHolding(false)}
+        onTouchCancel={() => setTouchHolding(false)}
+        onClick={() => setTapPaused((prev) => !prev)}
+        title={tapPaused ? "Toque para continuar" : "Toque para pausar e ler"}
+      >
         {/* Mobile: 2 colunas verticais retas com todos os 15 depoimentos */}
         <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
-          <Marquee pauseOnHover vertical className="[--duration:46s] p-0">
+          <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:46s] p-0">
             {reviews.slice(0, 8).map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:48s] p-0">
+          <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:48s] p-0">
             {reviews.slice(8, 15).map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
@@ -351,22 +383,22 @@ export function TestimonialsSection({
 
         {/* Desktop: 4 colunas verticais retas */}
         <div className="hidden md:grid md:grid-cols-4 w-full h-full gap-4">
-          <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
+          <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
             {firstCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:38s] p-0">
+          <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:38s] p-0">
             {secondCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee pauseOnHover vertical className="[--duration:36s] p-0">
+          <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
             {thirdCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
           </Marquee>
-          <Marquee reverse pauseOnHover vertical className="[--duration:42s] p-0">
+          <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:42s] p-0">
             {fourthCol.map((review) => (
               <ReviewCard key={review.name} review={review} />
             ))}
@@ -375,6 +407,20 @@ export function TestimonialsSection({
 
         <div className="testimonials-fade-top pointer-events-none absolute inset-x-0 top-0 h-24" />
         <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-24" />
+
+        {tapPaused && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setTapPaused(false);
+            }}
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#35291f]/95 border border-[#c1a586]/50 text-[#f8f5ef] text-[12px] font-medium shadow-lg backdrop-blur-md"
+          >
+            <Play size={11} fill="#dec9ad" color="#dec9ad" />
+            Pausado · Toque para continuar
+          </button>
+        )}
       </div>
 
       <div className="testimonials-cta" data-reveal>

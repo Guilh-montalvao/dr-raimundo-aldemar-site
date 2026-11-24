@@ -633,78 +633,46 @@ export default function Home() {
             </div>
 
             <div className="about-visual" data-reveal>
-              <div className="superhero-mosaic">
-                {superheroPhotos.map((photo) => (
-                  <div key={photo.src} className="superhero-mosaic-item">
-                    <img src={photo.src} alt={photo.alt} loading="lazy" />
+              <div className="superhero-videos-grid">
+                <div className="superhero-video-card">
+                  <div className="superhero-video-frame">
+                    <SmartVideo
+                      src="/videos/levando-crianca-cirurgia.mp4"
+                      ariaLabel="Dr. Raimundo levando pequeno super-herói no colo para a cirurgia"
+                    />
                   </div>
-                ))}
-              </div>
-              <div className="photo-caption">
-                <span>Pequenos Super-Heróis</span>
-                <span>Fotografias reais com autorização dos responsáveis</span>
+                  <div className="photo-caption">
+                    <span>Indo para a cirurgia</span>
+                    <span>Acolhimento no colo</span>
+                  </div>
+                </div>
+                <div className="superhero-video-card">
+                  <div className="superhero-video-frame">
+                    <SmartVideo
+                      src="/videos/depois-cirurgia-presentes.mp4"
+                      ariaLabel="Pequeno paciente recebendo presentes e carinho após a cirurgia"
+                    />
+                  </div>
+                  <div className="photo-caption">
+                    <span>Depois da cirurgia</span>
+                    <span>Presentes e carinho</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="superhero-videos-row" data-reveal>
-            <div className="superhero-videos-intro">
-              <span className="eyebrow">EM VÍDEO</span>
-              <h3>
-                Do colo até a recuperação,{" "}
-                <span className="serif">carinho em cada etapa.</span>
-              </h3>
-              <p>
-                Registros reais de como o acolhimento lúdico ajuda a tornar o
-                momento da cirurgia mais leve para a criança e tranquilo para a
-                família.
-              </p>
-              <div className="credentials">
-                <div>
-                  <p>
-                    <strong>Indo para a cirurgia</strong>
-                    <small>
-                      A criança entra tranquila, vestida de super-herói e
-                      acolhida no colo pelo Dr. Raimundo.
-                    </small>
-                  </p>
+          <div className="superhero-strip-wrap" data-reveal>
+            <div className="superhero-mosaic superhero-mosaic-strip">
+              {superheroPhotos.map((photo) => (
+                <div key={photo.src} className="superhero-mosaic-item">
+                  <img src={photo.src} alt={photo.alt} loading="lazy" />
                 </div>
-                <div>
-                  <p>
-                    <strong>Depois da cirurgia</strong>
-                    <small>
-                      Retorno leve com atenção próxima à família, carinho e
-                      presentes que transformam a memória do dia.
-                    </small>
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="superhero-videos-grid">
-              <div className="superhero-video-card">
-                <div className="superhero-video-frame">
-                  <SmartVideo
-                    src="/videos/levando-crianca-cirurgia.mp4"
-                    ariaLabel="Dr. Raimundo levando pequeno super-herói no colo para a cirurgia"
-                  />
-                </div>
-                <div className="photo-caption">
-                  <span>Indo para a cirurgia</span>
-                  <span>Acolhimento no colo</span>
-                </div>
-              </div>
-              <div className="superhero-video-card">
-                <div className="superhero-video-frame">
-                  <SmartVideo
-                    src="/videos/depois-cirurgia-presentes.mp4"
-                    ariaLabel="Pequeno paciente recebendo presentes e carinho após a cirurgia"
-                  />
-                </div>
-                <div className="photo-caption">
-                  <span>Depois da cirurgia</span>
-                  <span>Presentes e carinho</span>
-                </div>
-              </div>
+            <div className="photo-caption">
+              <span>Pequenos Super-Heróis</span>
+              <span>Fotografias reais com autorização dos responsáveis</span>
             </div>
           </div>
         </section>

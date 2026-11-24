@@ -169,23 +169,20 @@ h2 .serif,h1 .serif{color:#80664b}
 
 /* Superhero 6-Photo Mosaic in Atendimento Infantil */
 .superhero-mosaic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.superhero-mosaic-item{aspect-ratio:3/4;overflow:hidden;border-radius:6px;background:#ded7c9;position:relative}
+.superhero-mosaic.superhero-mosaic-strip{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.superhero-strip-wrap{margin-top:46px;padding-top:36px;border-top:1px solid var(--border)}
+.superhero-mosaic-item{aspect-ratio:3/4;overflow:hidden;border-radius:8px;background:#ded7c9;position:relative}
 .superhero-mosaic-item img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s cubic-bezier(.2,0,.2,1)}
 .superhero-mosaic-item:hover img{transform:scale(1.05)}
-.superhero-videos-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,96px);align-items:center;margin-top:60px;padding-top:44px;border-top:1px solid var(--border)}
-.superhero-videos-intro .eyebrow{display:block;color:var(--gold);margin-bottom:14px}
-.superhero-videos-intro h3{font-size:clamp(1.75rem,2.5vw,2.35rem);line-height:1.16;margin-bottom:16px}
-.superhero-videos-intro h3 .serif{color:#80664b}
-.superhero-videos-intro>p{font-size:15.5px;color:#74685d;line-height:1.8;max-width:480px}
-.superhero-videos-intro .credentials{margin:24px 0 0;max-width:480px}
 .superhero-videos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;width:100%}
 .superhero-video-card{display:flex;flex-direction:column}
 .superhero-video-frame{width:100%;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#18120e;box-shadow:0 18px 40px rgba(53,41,31,.18)}
 @media(max-width:960px){
-  .superhero-videos-row{grid-template-columns:1fr;gap:28px;margin-top:44px;padding-top:34px}
-  .superhero-videos-intro>p,.superhero-videos-intro .credentials{max-width:none}
+  .superhero-mosaic.superhero-mosaic-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .superhero-strip-wrap{margin-top:36px;padding-top:28px}
 }
 @media(max-width:640px){
+  .superhero-mosaic.superhero-mosaic-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .superhero-videos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .superhero-video-card .photo-caption{flex-direction:column;gap:2px;margin-top:8px}
 }

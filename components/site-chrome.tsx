@@ -13,6 +13,8 @@ import {
   MessageCircle,
   Plus,
   Minus,
+  Search,
+  ShieldCheck,
 } from "lucide-react";
 import {
   Sheet,
@@ -198,6 +200,253 @@ const otogamaAndCdoList = sortAlphabetically([
 export const otogamaConvenios = otogamaAndCdoList;
 
 export const cdoConvenios = otogamaAndCdoList;
+
+export type ConvenioUnitId = "todos" | "asa-norte" | "gama" | "taguatinga";
+
+interface UnifiedConvenio {
+  name: string;
+  logo: string;
+  units: ("asa-norte" | "gama" | "taguatinga")[];
+}
+
+const CONVENIO_UNITS = [
+  {
+    id: "asa-norte" as const,
+    label: "Asa Norte",
+    clinicName: "Unidade Otorhynus (Asa Norte)",
+    whatsapp: "61985743764",
+  },
+  {
+    id: "gama" as const,
+    label: "Gama",
+    clinicName: "Clínica Otogama (Gama)",
+    whatsapp: "61983466377",
+  },
+  {
+    id: "taguatinga" as const,
+    label: "Taguatinga",
+    clinicName: "CDO Otorrino (Taguatinga)",
+    whatsapp: "61983230103",
+  },
+];
+
+const otorhynusSet = new Set(otorhynusConvenios.map((c) => c.name));
+const otogamaSet = new Set(otogamaConvenios.map((c) => c.name));
+const cdoSet = new Set(cdoConvenios.map((c) => c.name));
+
+const unifiedMap = new Map<string, { name: string; logo: string }>();
+for (const c of [...otorhynusConvenios, ...otogamaConvenios, ...cdoConvenios]) {
+  if (!unifiedMap.has(c.name)) unifiedMap.set(c.name, c);
+}
+
+export const unifiedConvenios: UnifiedConvenio[] = Array.from(
+  unifiedMap.values()
+)
+  .sort((a, b) =>
+    a.name.localeCompare(b.name, "pt-BR", { sensitivity: "base" })
+  )
+  .map((c) => ({
+    ...c,
+    units: [
+      ...(otorhynusSet.has(c.name) ? (["asa-norte"] as const) : []),
+      ...(otogamaSet.has(c.name) ? (["gama"] as const) : []),
+      ...(cdoSet.has(c.name) ? (["taguatinga"] as const) : []),
+    ],
+  }));
+
+const normalizeSearch = (str: string) =>
+  str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+const whatsappConvenio = (number: string, clinic: string, planName: string) =>
+  `https://wa.me/55${number}?text=${encodeURIComponent(
+    `Olá! Gostaria de agendar uma consulta pelo convênio ${planName} com o Dr. Raimundo Aldemar, otorrinolaringologista, na ${clinic}.`
+  )}`;
+
+export function UnifiedConveniosModal({
+  open,
+  initialUnit = "todos",
+  onClose,
+}: {
+  open: boolean;
+  initialUnit?: ConvenioUnitId;
+  onClose: () => void;
+}) {
+  const [unitFilter, setUnitFilter] = useState<ConvenioUnitId>(initialUnit);
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    if (open) {
+      setUnitFilter(initialUnit);
+      setQuery("");
+    }
+  }, [open, initialUnit]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const q = normalizeSearch(query.trim());
+  const filtered = unifiedConvenios.filter((item) => {
+    const matchesUnit =
+      unitFilter === "todos" || item.units.includes(unitFilter);
+    const matchesQuery = !q || normalizeSearch(item.name).includes(q);
+    return matchesUnit && matchesQuery;
+  });
+
+  const tabs: { id: ConvenioUnitId; label: string; count: number }[] = [
+    { id: "todos", label: "Todos", count: unifiedConvenios.length },
+    { id: "asa-norte", label: "Asa Norte", count: otorhynusConvenios.length },
+    { id: "gama", label: "Gama", count: otogamaConvenios.length },
+    { id: "taguatinga", label: "Taguatinga", count: cdoConvenios.length },
+  ];
+
+  return (
+    <div
+      className="unified-convenios-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="unified-convenios-title"
+      onClick={onClose}
+    >
+      <div
+        className="unified-convenios-dialog"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="unified-convenios-header">
+          <div>
+            <span className="eyebrow">CONVÊNIOS ATENDIDOS</span>
+            <h3 id="unified-convenios-title">Consulte seu plano de saúde</h3>
+            <p>
+              Busque pelo nome do convênio ou filtre pela unidade. Toque na
+              unidade para agendar pelo WhatsApp.
+            </p>
+          </div>
+          <button
+            type="button"
+            className="quick-booking-close"
+            onClick={onClose}
+            aria-label="Fechar busca de convênios"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Busca instantânea */}
+        <div className="unified-convenios-search">
+          <Search size={16} className="unified-convenios-search-icon" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Digite seu convênio (ex.: Amil, Saúde Caixa, Unimed...)"
+            aria-label="Buscar convênio pelo nome"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="unified-convenios-clear"
+              aria-label="Limpar busca"
+            >
+              <X size={14} />
+            </button>
+          )}
+        </div>
+
+        {/* Abas das unidades */}
+        <div className="unified-convenios-tabs" role="tablist">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={unitFilter === tab.id}
+              onClick={() => setUnitFilter(tab.id)}
+              className={`unified-convenios-tab${
+                unitFilter === tab.id ? " is-active" : ""
+              }`}
+            >
+              <span>{tab.label}</span>
+              <small>{tab.count}</small>
+            </button>
+          ))}
+        </div>
+
+        {/* Lista filtrada */}
+        <div className="unified-convenios-list">
+          {filtered.length === 0 ? (
+            <div className="unified-convenios-empty">
+              <p>
+                Não encontrou <strong>&ldquo;{query}&rdquo;</strong> na lista?
+              </p>
+              <span>
+                Também realizamos atendimento particular ou você pode confirmar
+                cobertura atualizada direto no WhatsApp.
+              </span>
+            </div>
+          ) : (
+            filtered.map((conv) => (
+              <div key={conv.name} className="unified-convenio-row">
+                <div className="unified-convenio-main">
+                  <span className="unified-convenio-logo">
+                    <img
+                      src={conv.logo}
+                      alt={conv.name}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </span>
+                  <span className="unified-convenio-name">{conv.name}</span>
+                </div>
+                <div className="unified-convenio-units">
+                  {CONVENIO_UNITS.filter((u) => conv.units.includes(u.id)).map(
+                    (unit) => (
+                      <a
+                        key={unit.id}
+                        href={whatsappConvenio(
+                          unit.whatsapp,
+                          unit.clinicName,
+                          conv.name
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`unified-unit-badge${
+                          unit.id === "asa-norte" ? " is-asa-norte" : ""
+                        }`}
+                        title={`Agendar pelo ${conv.name} em ${unit.label}`}
+                      >
+                        <span>{unit.label}</span>
+                        <ArrowUpRight size={11} />
+                      </a>
+                    )
+                  )}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        <div className="unified-convenios-footer">
+          <span>
+            Exibindo {filtered.length} de {unifiedConvenios.length} convênios ·
+            Atendimento também particular
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export interface FaqItem {
   id: string;
@@ -979,7 +1228,13 @@ export function FaqSection({
 }
 
 export function ContactSection() {
-  const [openConvenio, setOpenConvenio] = useState<string>("");
+  const [conveniosOpen, setConveniosOpen] = useState(false);
+  const [conveniosUnit, setConveniosUnit] = useState<ConvenioUnitId>("todos");
+
+  const openConvenios = (unit: ConvenioUnitId = "todos") => {
+    setConveniosUnit(unit);
+    setConveniosOpen(true);
+  };
 
   return (
     <section id="contato" className="contact-section">
@@ -998,13 +1253,24 @@ export function ContactSection() {
             <br />
             <span className="serif">para sua consulta.</span>
           </h2>
-          <p>
-            Atendimento na Asa Norte (Otorhynus), no Gama (Otogama) e em
-            Taguatinga (CDO Otorrino).
-            <br className="desktop-break" />
-            Escolha a unidade e entre em contato pelo WhatsApp para consultar
-            horários, convênios e agendar.
-          </p>
+          <div>
+            <p>
+              Atendimento na Asa Norte (Otorhynus), no Gama (Otogama) e em
+              Taguatinga (CDO Otorrino).
+              <br className="desktop-break" />
+              Escolha a unidade e entre em contato pelo WhatsApp para consultar
+              horários, convênios e agendar.
+            </p>
+            <button
+              type="button"
+              onClick={() => openConvenios("todos")}
+              className="contact-convenios-trigger"
+            >
+              <ShieldCheck size={16} />
+              <span>Consultar convênios e buscar meu plano</span>
+              <ArrowUpRight size={15} />
+            </button>
+          </div>
         </div>
 
         <div className="locations">
@@ -1044,53 +1310,17 @@ export function ContactSection() {
                 (61) 3340-8859
               </a>
 
-              <Accordion
-                type="single"
-                collapsible
-                value={openConvenio === "otorhynus" ? "otorhynus" : ""}
-                onValueChange={(v) =>
-                  setOpenConvenio(v === "otorhynus" ? "otorhynus" : "")
-                }
-                className="convenios-accordion"
+              <button
+                type="button"
+                onClick={() => openConvenios("asa-norte")}
+                className="location-convenios-btn"
               >
-                <AccordionItem value="otorhynus" className="convenios-item">
-                  <AccordionTrigger className="convenios-trigger">
-                    <span>
-                      Convênios atendidos ({otorhynusConvenios.length} planos)
-                    </span>
-                    {openConvenio === "otorhynus" ? (
-                      <Minus size={15} />
-                    ) : (
-                      <Plus size={15} />
-                    )}
-                  </AccordionTrigger>
-                  <AccordionContent className="convenios-content">
-                    <div
-                      className="convenios-logos-grid"
-                      style={{
-                        gridTemplateRows: `repeat(${Math.ceil(
-                          otorhynusConvenios.length / 2
-                        )}, minmax(0, auto))`,
-                      }}
-                    >
-                      {otorhynusConvenios.map((conv) => (
-                        <div key={conv.name} className="convenio-chip">
-                          <span className="convenio-logo-box">
-                            <img
-                              src={conv.logo}
-                              alt={`Logo ${conv.name}`}
-                              width={20}
-                              height={20}
-                              loading="lazy"
-                            />
-                          </span>
-                          <span className="convenio-chip-name">{conv.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck size={15} />
+                  Convênios atendidos ({otorhynusConvenios.length} planos)
+                </span>
+                <ArrowUpRight size={15} />
+              </button>
             </div>
             <div className="location-actions">
               <LinkButton
@@ -1147,53 +1377,17 @@ export function ContactSection() {
                 (61) 3254-0111
               </a>
 
-              <Accordion
-                type="single"
-                collapsible
-                value={openConvenio === "otogama" ? "otogama" : ""}
-                onValueChange={(v) =>
-                  setOpenConvenio(v === "otogama" ? "otogama" : "")
-                }
-                className="convenios-accordion"
+              <button
+                type="button"
+                onClick={() => openConvenios("gama")}
+                className="location-convenios-btn"
               >
-                <AccordionItem value="otogama" className="convenios-item">
-                  <AccordionTrigger className="convenios-trigger">
-                    <span>
-                      Convênios atendidos ({otogamaConvenios.length} planos)
-                    </span>
-                    {openConvenio === "otogama" ? (
-                      <Minus size={15} />
-                    ) : (
-                      <Plus size={15} />
-                    )}
-                  </AccordionTrigger>
-                  <AccordionContent className="convenios-content">
-                    <div
-                      className="convenios-logos-grid"
-                      style={{
-                        gridTemplateRows: `repeat(${Math.ceil(
-                          otogamaConvenios.length / 2
-                        )}, minmax(0, auto))`,
-                      }}
-                    >
-                      {otogamaConvenios.map((conv) => (
-                        <div key={conv.name} className="convenio-chip">
-                          <span className="convenio-logo-box">
-                            <img
-                              src={conv.logo}
-                              alt={`Logo ${conv.name}`}
-                              width={20}
-                              height={20}
-                              loading="lazy"
-                            />
-                          </span>
-                          <span className="convenio-chip-name">{conv.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck size={15} />
+                  Convênios atendidos ({otogamaConvenios.length} planos)
+                </span>
+                <ArrowUpRight size={15} />
+              </button>
             </div>
             <div className="location-actions">
               <LinkButton
@@ -1250,51 +1444,17 @@ export function ContactSection() {
                 (61) 3352-6994
               </a>
 
-              <Accordion
-                type="single"
-                collapsible
-                value={openConvenio === "cdo" ? "cdo" : ""}
-                onValueChange={(v) => setOpenConvenio(v === "cdo" ? "cdo" : "")}
-                className="convenios-accordion"
+              <button
+                type="button"
+                onClick={() => openConvenios("taguatinga")}
+                className="location-convenios-btn"
               >
-                <AccordionItem value="cdo" className="convenios-item">
-                  <AccordionTrigger className="convenios-trigger">
-                    <span>
-                      Convênios atendidos ({cdoConvenios.length} planos)
-                    </span>
-                    {openConvenio === "cdo" ? (
-                      <Minus size={15} />
-                    ) : (
-                      <Plus size={15} />
-                    )}
-                  </AccordionTrigger>
-                  <AccordionContent className="convenios-content">
-                    <div
-                      className="convenios-logos-grid"
-                      style={{
-                        gridTemplateRows: `repeat(${Math.ceil(
-                          cdoConvenios.length / 2
-                        )}, minmax(0, auto))`,
-                      }}
-                    >
-                      {cdoConvenios.map((conv) => (
-                        <div key={conv.name} className="convenio-chip">
-                          <span className="convenio-logo-box">
-                            <img
-                              src={conv.logo}
-                              alt={`Logo ${conv.name}`}
-                              width={20}
-                              height={20}
-                              loading="lazy"
-                            />
-                          </span>
-                          <span className="convenio-chip-name">{conv.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck size={15} />
+                  Convênios atendidos ({cdoConvenios.length} planos)
+                </span>
+                <ArrowUpRight size={15} />
+              </button>
             </div>
             <div className="location-actions">
               <LinkButton
@@ -1315,6 +1475,12 @@ export function ContactSection() {
             </div>
           </article>
         </div>
+
+        <UnifiedConveniosModal
+          open={conveniosOpen}
+          initialUnit={conveniosUnit}
+          onClose={() => setConveniosOpen(false)}
+        />
 
         <div className="surgery-direct-banner" data-reveal>
           <div className="surgery-direct-text">

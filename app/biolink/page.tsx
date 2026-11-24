@@ -18,6 +18,9 @@ import {
   otogamaConvenios,
   cdoConvenios,
   surgeryWhatsapp,
+  InstagramIcon,
+  UnifiedConveniosModal,
+  unifiedConvenios,
 } from "@/components/site-chrome";
 import { TestimonialsSection } from "@/components/testimonials-section";
 
@@ -94,41 +97,13 @@ const clinics: Clinic[] = [
   },
 ];
 
-function InstagramIcon({
-  size = 18,
-  className = "",
-}: {
-  size?: number;
-  className?: string;
-}) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
 export default function BiolinkPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const introStartedRef = useRef(false);
   const introTlRef = useRef<gsap.core.Timeline | null>(null);
   const [copied, setCopied] = useState(false);
-  const [selectedClinicConvenios, setSelectedClinicConvenios] =
-    useState<Clinic | null>(null);
+  const [conveniosModalOpen, setConveniosModalOpen] = useState(false);
 
   useEffect(() => {
     if (!introStartedRef.current) {
@@ -413,23 +388,15 @@ export default function BiolinkPage() {
                 </div>
 
                 <div className="flex items-center gap-2 text-[11px] text-[#dec9ad] shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedClinicConvenios(clinic)}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 hover:bg-black/75 border border-[#c1a586]/35 text-[#f8f5ef] transition-colors cursor-pointer"
-                  >
-                    <ShieldCheck size={12} className="text-[#c1a586]" />
-                    <span>Convênios</span>
-                  </button>
                   <a
                     href={clinic.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-black/50 hover:bg-black/75 border border-[#c1a586]/35 text-[#dec9ad] hover:text-white transition-colors"
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 border border-[#c1a586]/35 text-[#dec9ad] hover:text-white transition-colors"
                     title={`Abrir mapa — ${clinic.name}`}
                     aria-label={`Abrir mapa — ${clinic.name}`}
                   >
-                    <MapPin size={13} />
+                    <MapPin size={14} />
                   </a>
                 </div>
               </div>
@@ -449,6 +416,31 @@ export default function BiolinkPage() {
             </article>
           ))}
         </section>
+
+        {/* BOTÃO UNIFICADO DE CONVÊNIOS (BUSCA RÁPIDA + FILTRO DAS 3 UNIDADES) */}
+        <button
+          type="button"
+          onClick={() => setConveniosModalOpen(true)}
+          className="official-link-card official-card px-4 py-3 flex items-center justify-between group transition-all w-full text-left cursor-pointer border-[#c1a586]/45"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-8 h-8 rounded-full bg-[#c1a586]/15 border border-[#c1a586]/45 flex items-center justify-center text-[#dec9ad] shrink-0">
+              <ShieldCheck size={16} />
+            </div>
+            <div className="min-w-0">
+              <span className="biolink-action-title text-[#f8f5ef] group-hover:text-[#dec9ad] transition-colors block truncate">
+                Consultar Convênios Atendidos
+              </span>
+              <span className="text-[11px] text-[#dec9ad] block truncate">
+                {unifiedConvenios.length} planos · Busque seu plano nas 3 unidades
+              </span>
+            </div>
+          </div>
+          <ArrowUpRight
+            size={15}
+            className="text-[#c1a586] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-2"
+          />
+        </button>
 
         {/* CANAL DIRETO DE CIRURGIAS (MESMO EFEITO EDITORIAL COM FOTO AMBIENT + THUMBNAIL) */}
         <a
@@ -534,93 +526,11 @@ export default function BiolinkPage() {
       {/* 3. DEPOIMENTOS 3D DO GOOGLE INTEGRADOS AO CENÁRIO (SEM CARD EXTERNO) */}
       <TestimonialsSection variant="biolink" />
 
-      {/* MODAL LEVE DE CONVÊNIOS (SÓ ABRE SE O PACIENTE CLICAR) */}
-      {selectedClinicConvenios && (
-        <div
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setSelectedClinicConvenios(null)}
-        >
-          <div
-            className="w-full max-w-[520px] max-h-[90svh] flex flex-col bg-[#241b14] border border-[#c1a586]/40 rounded-2xl p-4 sm:p-5 text-[#f8f5ef] shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-3 mb-3 pb-3 border-b border-[#c1a586]/20 shrink-0">
-              <div>
-                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-[#c1a586] block">
-                  {selectedClinicConvenios.region}
-                </span>
-                <h3 className="text-[17px] font-bold text-[#f8f5ef]">
-                  Convênios — {selectedClinicConvenios.name}
-                </h3>
-                <p className="text-[12px] text-[#dec9ad]">
-                  {selectedClinicConvenios.convenios.length} planos atendidos
-                  nesta unidade
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setSelectedClinicConvenios(null)}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-[#f8f5ef] cursor-pointer shrink-0"
-                aria-label="Fechar lista de convênios"
-              >
-                <X size={17} />
-              </button>
-            </div>
-
-            <div
-              className="grid grid-cols-1 sm:grid-cols-2 sm:grid-flow-col gap-2 min-h-0 flex-1 max-h-[54svh] overflow-y-auto pr-1"
-              style={{
-                gridTemplateRows: `repeat(${Math.ceil(
-                  selectedClinicConvenios.convenios.length / 2
-                )}, minmax(0, auto))`,
-              }}
-            >
-              {selectedClinicConvenios.convenios.map((conv) => (
-                <div
-                  key={conv.name}
-                  className="flex items-center gap-2 p-1.5 rounded-lg bg-white/5 border border-[#c1a586]/20"
-                >
-                  <span className="w-6 h-6 rounded bg-white p-0.5 flex items-center justify-center shrink-0 overflow-hidden">
-                    <img
-                      src={conv.logo}
-                      alt={conv.name}
-                      width={20}
-                      height={20}
-                      loading="lazy"
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span className="text-[11.5px] text-[#ece3d9] truncate">
-                    {conv.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-4 pt-3 border-t border-[#c1a586]/20">
-              <a
-                href={whatsappUrl(
-                  selectedClinicConvenios.whatsapp,
-                  selectedClinicConvenios.name
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button button-whatsapp w-full !justify-between !min-h-[40px] !text-[12.5px] !py-2 !px-4"
-              >
-                <span className="flex items-center gap-1.5">
-                  <MessageCircle size={15} />
-                  <span>
-                    Agendar em {selectedClinicConvenios.name} no WhatsApp
-                  </span>
-                </span>
-                <ArrowUpRight size={15} />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* MODAL UNIFICADO DE CONVÊNIOS (BUSCA + ABAS DAS 3 UNIDADES) */}
+      <UnifiedConveniosModal
+        open={conveniosModalOpen}
+        onClose={() => setConveniosModalOpen(false)}
+      />
 
       {/* 4. RODAPÉ COMPACTO */}
       <footer className="cinematic-footer w-full border-t border-[rgba(193,165,134,0.18)] bg-[#18120e] py-3.5 px-4 sm:px-6 text-center flex flex-col items-center z-10">

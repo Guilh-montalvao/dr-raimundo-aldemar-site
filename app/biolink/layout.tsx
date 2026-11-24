@@ -19,23 +19,25 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 export const metadata: Metadata = {
   title: "Dr. Raimundo Aldemar | Agendamento & Links Oficiais",
-  description: "Agende sua consulta de Otorrinolaringologia com o Dr. Raimundo Aldemar. Atendimento na Otorhynus (Asa Norte) e Otogama (Gama).",
+  description:
+    "Agende sua consulta ou cirurgia com o Dr. Raimundo Aldemar, Otorrinolaringologista em Brasília (CRM-DF 20094 · RQE 13936). Asa Norte (Otorhynus), Gama (Otogama) e Taguatinga (CDO Otorrino).",
   alternates: {
-    canonical: "/biolink",
+    canonical: "/links",
   },
   openGraph: {
     title: "Dr. Raimundo Aldemar | Agendamento & Links Oficiais",
-    description: "Otorrinolaringologia para adultos e crianças em Brasília. CRM-DF 20094 · RQE 13936. Agende pelo WhatsApp.",
-    url: "/biolink",
-    siteName: "Dr. Raimundo Aldemar — Biolink",
+    description:
+      "Otorrinolaringologista para crianças e adultos em Brasília · Asa Norte, Gama e Taguatinga · Agende pelo WhatsApp.",
+    url: "/links",
+    siteName: "Dr. Raimundo Aldemar — Links Oficiais",
     locale: "pt_BR",
-    type: "profile",
+    type: "website",
     images: [
       {
-        url: "/media/og-image.jpg",
+        url: "/media/og-links.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr. Raimundo Aldemar — Médico Otorrinolaringologista",
+        alt: "Dr. Raimundo Aldemar — Agendamento de Consultas e Cirurgias em Brasília",
         type: "image/jpeg",
       },
     ],
@@ -43,8 +45,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Dr. Raimundo Aldemar | Agendamento & Links Oficiais",
-    description: "Otorrinolaringologia para adultos e crianças em Brasília. CRM-DF 20094 · RQE 13936.",
-    images: ["/media/og-image.jpg"],
+    description:
+      "Otorrinolaringologista para crianças e adultos em Brasília (CRM-DF 20094 · RQE 13936). Agende pelo WhatsApp.",
+    images: ["/media/og-links.jpg"],
   },
 };
 

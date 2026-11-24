@@ -22,7 +22,7 @@ const physicianJsonLd = {
   description:
     "Médico Otorrinolaringologista em Brasília (CRM-DF 20094 · RQE 13936). Atendimento clínico e cirúrgico infantil e adulto na Asa Norte (Otorhynus), Gama (Otogama) e Taguatinga (CDO Otorrino).",
   url: "https://www.drraimundoaldemar.com.br",
-  image: "https://www.drraimundoaldemar.com.br/media/og-image.jpg",
+  image: "https://www.drraimundoaldemar.com.br/media/og-site.jpg",
   medicalSpecialty: "Otolaryngology",
   identifier: "CRM-DF 20094 · RQE 13936",
   sameAs: ["https://www.instagram.com/raimundo.otorrino/"],
@@ -94,18 +94,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/media/og-image.jpg",
+        url: "/media/og-site.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr. Raimundo Aldemar — Médico Otorrinolaringologista",
+        alt: "Dr. Raimundo Aldemar — Médico Otorrinolaringologista em Brasília",
         type: "image/jpeg",
-      },
-      {
-        url: "/media/retrato.webp",
-        width: 1672,
-        height: 941,
-        alt: "Dr. Raimundo Aldemar — Médico Otorrinolaringologista",
-        type: "image/webp",
       },
     ],
   },
@@ -114,7 +107,7 @@ export const metadata: Metadata = {
     title: "Dr. Raimundo Aldemar | Otorrinolaringologista em Brasília",
     description:
       "Respirar bem, livre da obstrução nasal • Criança • Adulto. Médico Otorrinolaringologista em Brasília (CRM-DF 20094 · RQE 13936).",
-    images: ["/media/og-image.jpg"],
+    images: ["/media/og-site.jpg"],
   },
   icons: {
     icon: [{ url: "/favicon.png?v=2", type: "image/png" }],

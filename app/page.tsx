@@ -664,6 +664,18 @@ export default function Home() {
               <div className="superhero-video-card">
                 <div className="superhero-video-frame">
                   <SmartVideo
+                    src="/videos/super-heroi.mp4"
+                    ariaLabel="Antes da cirurgia eles viram super-heróis com o Dr. Raimundo"
+                  />
+                </div>
+                <div className="photo-caption">
+                  <span>Antes da cirurgia</span>
+                  <span>Pequenos super-heróis</span>
+                </div>
+              </div>
+              <div className="superhero-video-card">
+                <div className="superhero-video-frame">
+                  <SmartVideo
                     src="/videos/levando-crianca-cirurgia.mp4"
                     ariaLabel="Dr. Raimundo levando pequeno super-herói no colo para a cirurgia"
                   />

@@ -161,7 +161,7 @@ body:has(.biolink-theme) {
   pointer-events: none;
 }
 
-/* CINEMATIC PHOTOGRAPHIC BACKGROUND SYSTEM */
+/* PURE CSS LUXURY AMBIENT BACKGROUND (ZERO BACKGROUND IMAGES) */
 .biolink-theme .cinematic-bg-container {
   position: fixed;
   inset: 0;
@@ -170,62 +170,25 @@ body:has(.biolink-theme) {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background-color: #241c16;
+  background: linear-gradient(180deg, #1d1510 0%, #231912 42%, #19120e 100%);
 }
 
-.biolink-theme .cinematic-bg-layer {
+.biolink-theme .biolink-ambient-glow {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  background:
+    radial-gradient(ellipse 90% 42% at 50% 12%, rgba(222, 201, 173, 0.16) 0%, rgba(154, 128, 100, 0.05) 45%, transparent 74%),
+    radial-gradient(ellipse 75% 38% at 15% 58%, rgba(193, 165, 134, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 42% at 85% 84%, rgba(154, 128, 100, 0.12) 0%, transparent 72%);
 }
 
-.biolink-theme .cinematic-bg-layer.active {
-  opacity: 0.85;
-  transform: scale(1);
-}
-
-@media (min-width: 1024px) {
-  .biolink-theme .cinematic-bg-layer.layer-consultorio {
-    background-position: 75% 26%;
-    background-size: auto 115%;
-  }
-  .biolink-theme .cinematic-bg-layer.layer-cirurgia {
-    background-position: 70% 35%;
-  }
-}
-
-@media (max-width: 1023px) {
-  .biolink-theme .cinematic-bg-layer {
-    background-position: 65% 10%;
-    background-size: auto 65%;
-  }
-  .biolink-theme .cinematic-bg-layer.active {
-    opacity: 0.65;
-  }
-}
-
-.biolink-theme .cinematic-shade {
+.biolink-theme .biolink-micro-grid {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background: 
-    linear-gradient(90deg, rgba(36, 28, 22, 0.94) 0%, rgba(40, 32, 25, 0.82) 40%, rgba(32, 25, 20, 0.35) 85%),
-    linear-gradient(180deg, rgba(32, 25, 20, 0.65) 0%, rgba(26, 20, 16, 0.94) 75%, #201813 100%);
-}
-
-@media (max-width: 1023px) {
-  .biolink-theme .cinematic-shade {
-    background: 
-      linear-gradient(0deg, #201813 0%, #201813 32%, rgba(36, 28, 22, 0.88) 58%, rgba(40, 32, 25, 0.45) 82%, rgba(32, 25, 20, 0.2) 100%);
-  }
+  background-image: radial-gradient(rgba(222, 201, 173, 0.065) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 45%, #000 35%, transparent 100%);
 }
 
 /* OPTIMIZED COMPACT CLINIC CARDS */

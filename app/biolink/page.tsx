@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import {
   MapPin,
-  Phone,
   MessageCircle,
   Globe,
   Share2,
@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   ShieldCheck,
   X,
+  Copy,
 } from "lucide-react";
 import {
   otorhynusConvenios,
@@ -104,6 +105,7 @@ export default function BiolinkPage() {
   const introTlRef = useRef<gsap.core.Timeline | null>(null);
   const [copied, setCopied] = useState(false);
   const [conveniosModalOpen, setConveniosModalOpen] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   useEffect(() => {
     if (!introStartedRef.current) {
@@ -231,24 +233,49 @@ export default function BiolinkPage() {
     }
   }, []);
 
+  const officialLinksUrl = "https://www.drraimundoaldemar.com.br/links";
+  const shareText =
+    "Dr. Raimundo Aldemar — Otorrinolaringologista em Brasília (Criança e Adulto). Agende sua consulta ou cirurgia:";
+
+  const copyLinksUrl = async () => {
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        await navigator.clipboard.writeText(officialLinksUrl);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = officialLinksUrl;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2400);
+    } catch {
+      // ignore clipboard errors
+    }
+  };
+
   const handleShare = async () => {
     const shareData = {
       title: "Dr. Raimundo Aldemar — Otorrinolaringologista em Brasília",
-      text: "Respirar bem, livre da obstrução nasal • Criança • Adulto. Agende sua consulta com o Dr. Raimundo Aldemar (Asa Norte, Gama e Taguatinga).",
-      url: typeof window !== "undefined" ? window.location.href : siteUrl,
+      text: shareText,
+      url: officialLinksUrl,
     };
 
-    if (typeof navigator !== "undefined" && navigator.share) {
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
       try {
         await navigator.share(shareData);
-      } catch {
-        // user cancelled
+        return;
+      } catch (err) {
+        if ((err as { name?: string })?.name === "AbortError") {
+          return;
+        }
       }
-    } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-      await navigator.clipboard.writeText(shareData.url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2400);
     }
+    setShareModalOpen(true);
   };
 
   return (
@@ -292,13 +319,10 @@ export default function BiolinkPage() {
         </span>
       </div>
 
-      {/* 1. CINEMATIC BACKGROUND (Mesma imagem do background da intro) */}
+      {/* 1. FUNDO EDITORIAL LUXO EM CSS PURO (SEM IMAGEM DE FUNDO) */}
       <div className="cinematic-bg-container" aria-hidden="true">
-        <div
-          className="cinematic-bg-layer active"
-          style={{ backgroundImage: "url('/media/intro-bg.png')" }}
-        />
-        <div className="cinematic-shade" />
+        <div className="biolink-ambient-glow" />
+        <div className="biolink-micro-grid" />
       </div>
 
       {/* 2. CAPA COM DR. RAIMUNDO E A CRIANÇA */}
@@ -531,6 +555,83 @@ export default function BiolinkPage() {
         open={conveniosModalOpen}
         onClose={() => setConveniosModalOpen(false)}
       />
+
+      {/* MINI MODAL DE COMPARTILHAMENTO (FALLBACK QUANDO NAVEGADOR NÃO SUPORTA WEB SHARE NATIVO) */}
+      {shareModalOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="unified-convenios-backdrop"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="biolink-share-title"
+            onClick={() => setShareModalOpen(false)}
+          >
+            <div
+              className="w-full max-w-[400px] bg-[#241b14] border border-[#dec9ad]/40 rounded-2xl p-5 text-[#f8f5ef] shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div>
+                  <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-[#c1a586] block mb-1">
+                    COMPARTILHAR
+                  </span>
+                  <h3
+                    id="biolink-share-title"
+                    className="text-[17px] font-semibold text-[#f8f5ef] m-0"
+                  >
+                    Enviar links do Dr. Raimundo
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShareModalOpen(false)}
+                  className="quick-booking-close"
+                  aria-label="Fechar janela de compartilhamento"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-2.5">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(
+                    `${shareText} ${officialLinksUrl}`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setShareModalOpen(false)}
+                  className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-[#25D366] hover:bg-[#1fb556] text-white font-semibold text-[13.5px] transition-colors"
+                >
+                  <span className="inline-flex items-center gap-2.5">
+                    <MessageCircle size={17} />
+                    Compartilhar pelo WhatsApp
+                  </span>
+                  <ArrowUpRight size={16} />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={copyLinksUrl}
+                  className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-[#dec9ad]/30 text-[#f8f5ef] font-medium text-[13.5px] transition-colors cursor-pointer"
+                >
+                  <span className="inline-flex items-center gap-2.5">
+                    {copied ? (
+                      <Check size={17} className="text-[#25D366]" />
+                    ) : (
+                      <Copy size={16} className="text-[#dec9ad]" />
+                    )}
+                    {copied ? "Link copiado!" : "Copiar link"}
+                  </span>
+                  <span className="text-[11px] text-[#dec9ad] truncate max-w-[165px]">
+                    drraimundoaldemar.com.br/links
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
 
       {/* 4. RODAPÉ COMPACTO */}
       <footer className="cinematic-footer w-full border-t border-[rgba(193,165,134,0.18)] bg-[#18120e] py-3.5 px-4 sm:px-6 text-center flex flex-col items-center z-10">

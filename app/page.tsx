@@ -659,20 +659,28 @@ export default function Home() {
                 momento da cirurgia mais leve para a criança e tranquilo para a
                 família.
               </p>
-            </div>
-            <div className="superhero-videos-grid">
-              <div className="superhero-video-card">
-                <div className="superhero-video-frame">
-                  <SmartVideo
-                    src="/videos/super-heroi.mp4"
-                    ariaLabel="Antes da cirurgia eles viram super-heróis com o Dr. Raimundo"
-                  />
+              <div className="credentials">
+                <div>
+                  <p>
+                    <strong>Indo para a cirurgia</strong>
+                    <small>
+                      A criança entra tranquila, vestida de super-herói e
+                      acolhida no colo pelo Dr. Raimundo.
+                    </small>
+                  </p>
                 </div>
-                <div className="photo-caption">
-                  <span>Antes da cirurgia</span>
-                  <span>Pequenos super-heróis</span>
+                <div>
+                  <p>
+                    <strong>Depois da cirurgia</strong>
+                    <small>
+                      Retorno leve com atenção próxima à família, carinho e
+                      presentes que transformam a memória do dia.
+                    </small>
+                  </p>
                 </div>
               </div>
+            </div>
+            <div className="superhero-videos-grid">
               <div className="superhero-video-card">
                 <div className="superhero-video-frame">
                   <SmartVideo

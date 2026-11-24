@@ -228,10 +228,13 @@ h2 .serif,h1 .serif{color:#80664b}
 .hero-kids-primary .eyebrow{color:#d5c1a8}
 .hero-kids-primary h1{color:var(--cream)}
 .hero-kids-primary h1>span:first-of-type{color:#dec9ad}
-.hero-audience-switcher{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:18px;font-family:'Manrope',sans-serif;font-style:normal}
-.audience-pill{display:inline-flex;align-items:center;padding:8px 18px;border-radius:100px;font-size:clamp(.95rem,1.25vw,1.12rem);font-weight:500;letter-spacing:.02em;border:1px solid rgba(213,193,168,.35);background:rgba(255,255,255,.06);color:#d5c1a8;transition:all .25s ease}
-.audience-pill:hover{background:rgba(255,255,255,.14);color:#fffefa}
-.audience-pill.is-active{background:rgba(222,201,173,.22);border-color:#dec9ad;color:#fffefa;box-shadow:0 4px 16px rgba(0,0,0,.24)}
+.hero-audience-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:14px 0 18px}
+.hero-audience-label{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#dec9ad}
+.hero-audience-bar{display:inline-flex;align-items:center;gap:6px;padding:5px;border-radius:100px;background:rgba(18,13,10,.76);border:1.5px solid rgba(222,201,173,.48);backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,.32)}
+.audience-pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 20px;border-radius:100px;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;letter-spacing:.01em;border:1px solid transparent;background:transparent;color:#f2e8dc;transition:all .22s ease;white-space:nowrap}
+.audience-pill:hover{background:rgba(255,255,255,.12);color:#fffefa;border-color:rgba(222,201,173,.35)}
+.audience-pill.is-active{background:#f8f5ef;border-color:#f8f5ef;color:#201813;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.audience-pill.is-active:hover{background:#fffefa;color:#201813}
 .hero-kids-primary .hero-description{color:#ece3d9;max-width:500px;margin-bottom:26px}
 .hero-cta-row{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
 .hero-kids-preview-badge{display:inline-flex;align-items:center;gap:12px;padding:7px 16px 7px 9px;border-radius:100px;background:rgba(24,18,14,.68);border:1px solid rgba(213,193,168,.32);backdrop-filter:blur(10px);transition:transform .25s,border-color .25s,background .25s}
@@ -264,9 +267,12 @@ h2 .serif,h1 .serif{color:#80664b}
   .hero-video-float{position:relative;right:auto;bottom:auto;margin:18px auto 14px;width:min(275px,calc(100% - 44px))}
 }
 @media(max-width:640px){
-  .hero-title-specialist{font-size:clamp(1.95rem,7.8vw,2.45rem);line-height:1.12;margin:14px 0 14px}
+  .hero-title-specialist{font-size:clamp(1.95rem,7.8vw,2.45rem);line-height:1.12;margin:12px 0 10px}
   .hero-title-specialist .hero-audience-line{font-size:1.02rem;margin-top:10px}
-  .audience-pill{padding:7px 15px;font-size:.92rem}
+  .hero-audience-wrap{width:100%;margin:10px 0 14px;gap:6px}
+  .hero-audience-label{font-size:11px}
+  .hero-audience-bar{display:grid;grid-template-columns:1fr 1fr;width:100%;padding:4px;gap:4px}
+  .audience-pill{min-height:44px;padding:8px 12px;font-size:14px;gap:6px}
 }
 
 /* Editorial FAQ Section (Sem Cards Quadrados) */

@@ -11,6 +11,8 @@ import {
   Stethoscope,
   MapPin,
   GraduationCap,
+  Baby,
+  User,
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -336,31 +338,42 @@ export default function Home() {
               Respirar bem,
               <br />
               <span>livre da obstrução nasal</span>
-              <span
-                className="hero-audience-switcher"
+            </h1>
+
+            {/* SELETOR ACESSÍVEL DE ALTO CONTRASTE (PARA CRIANÇA / PARA ADULTO) */}
+            <div className="hero-audience-wrap hero-reveal">
+              <span className="hero-audience-label">
+                Para quem é o atendimento?
+              </span>
+              <div
+                className="hero-audience-bar"
                 role="group"
-                aria-label="Alternar destaque entre Criança e Adulto"
+                aria-label="Escolher atendimento para Criança ou para Adulto"
               >
                 <button
                   type="button"
+                  aria-pressed={heroMode === "crianca"}
                   onClick={() => setHeroMode("crianca")}
                   className={`audience-pill ${
                     heroMode === "crianca" ? "is-active" : ""
                   }`}
                 >
-                  Criança
+                  <Baby size={18} aria-hidden="true" />
+                  <span>Para Criança</span>
                 </button>
                 <button
                   type="button"
+                  aria-pressed={heroMode === "adulto"}
                   onClick={() => setHeroMode("adulto")}
                   className={`audience-pill ${
                     heroMode === "adulto" ? "is-active" : ""
                   }`}
                 >
-                  Adulto
+                  <User size={18} aria-hidden="true" />
+                  <span>Para Adulto</span>
                 </button>
-              </span>
-            </h1>
+              </div>
+            </div>
 
             {/* ATALHOS EM EVIDÊNCIA NA CAPA (ACIMA DA DOBRA) */}
             <nav

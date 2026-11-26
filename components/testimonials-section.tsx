@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowUpRight, Star } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Marquee } from "@/components/ui/marquee";
 
 const GOOGLE_REVIEW_URL = "https://g.page/r/CVn2cGkTesJtEBM/review";
+const AUTOPLAY_MS = 5500;
 
 interface Review {
   name: string;
@@ -18,19 +18,19 @@ interface Review {
 
 const reviews: Review[] = [
   {
-    name: "Ana Paula Nogueira Rodrigues",
-    initials: "AP",
-    avatar: "/media/depoimentos/ana-paula.png",
-    tag: "Avaliação no Google · Infantil",
-    body: "Para quem procura otorrino de excelência, indico o Dr. Raimundo. Levei meu filho e fiquei encantada com o atendimento. Ele é muito atencioso e paciente com as crianças, orienta todos os cuidados e ouve com atenção nossas preocupações. Gostei tanto que marquei consulta pra família toda.",
-  },
-  {
     name: "Ana Gomes",
     initials: "AG",
     avatar: "/media/depoimentos/ana-gomes.png",
     photo: "/media/depoimentos/ana-gomes-foto.png",
     tag: "Avaliação no Google · Cirurgia Infantil",
     body: "Dr. Raimundo, médico maravilhoso, educado, gentil, atende as crianças com muito carinho e adultos com muita atenção. Operou meu neto, a cirurgia foi um sucesso. Precisamos de mais médicos assim, com amor aos pacientes. Parabéns a toda equipe da clínica.",
+  },
+  {
+    name: "Ana Paula Nogueira Rodrigues",
+    initials: "AP",
+    avatar: "/media/depoimentos/ana-paula.png",
+    tag: "Avaliação no Google · Infantil",
+    body: "Para quem procura otorrino de excelência, indico o Dr. Raimundo. Levei meu filho e fiquei encantada com o atendimento. Ele é muito atencioso e paciente com as crianças, orienta todos os cuidados e ouve com atenção nossas preocupações. Gostei tanto que marquei consulta pra família toda.",
   },
   {
     name: "Tatiane da Silva Oliveira",
@@ -125,11 +125,6 @@ const reviews: Review[] = [
   },
 ];
 
-const firstCol = [reviews[0], reviews[10], reviews[2], reviews[5]];
-const secondCol = [reviews[3], reviews[4], reviews[6], reviews[13]];
-const thirdCol = [reviews[7], reviews[1], reviews[8], reviews[9]];
-const fourthCol = [reviews[11], reviews[12], reviews[14]];
-
 function renderHighlightedBody(text: string, dark = false) {
   const parts = text.split(/(Dr\.?\s*Raimundo(?:\s+Aldemar)?)/gi);
   return parts.map((part, idx) =>
@@ -146,66 +141,255 @@ function renderHighlightedBody(text: string, dark = false) {
   );
 }
 
-function ReviewCard({ review, dark = false }: { review: Review; dark?: boolean }) {
+function ReviewSlideCard({
+  review,
+  dark = false,
+}: {
+  review: Review;
+  dark?: boolean;
+}) {
   return (
     <figure
       className={cn(
-        "testimonial-card relative cursor-pointer overflow-hidden rounded-2xl border p-3 sm:p-4 transition-colors w-full",
-        dark && "testimonial-card-biolink"
+        "testimonial-card testimonial-slide-card relative overflow-hidden rounded-2xl border transition-colors w-full",
+        dark ? "testimonial-card-biolink p-5 sm:p-6" : "p-6 sm:p-8"
       )}
     >
-      <div className="flex flex-row items-center gap-2.5">
-        {review.avatar ? (
-          <img
-            src={review.avatar}
-            alt={review.name}
-            width={34}
-            height={34}
-            loading="lazy"
-            className={cn(
-              "w-[34px] h-[34px] rounded-full object-cover shrink-0 border",
-              dark ? "border-[#c1a586]/50" : "border-[#d5c2aa]"
-            )}
-          />
-        ) : (
-          <span className="testimonial-avatar" aria-hidden="true">
-            {review.initials}
-          </span>
+      <div
+        className={cn(
+          "flex flex-col gap-5",
+          review.photo && !dark && "md:flex-row md:items-center md:gap-7"
         )}
-        <div className="flex flex-col min-w-0">
-          <figcaption className="testimonial-author truncate">
-            {review.name}
-          </figcaption>
-          <p className="testimonial-tag truncate">{review.tag}</p>
+      >
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-3 min-w-0">
+              {review.avatar ? (
+                <img
+                  src={review.avatar}
+                  alt={review.name}
+                  width={42}
+                  height={42}
+                  loading="lazy"
+                  className={cn(
+                    "w-[42px] h-[42px] rounded-full object-cover shrink-0 border",
+                    dark ? "border-[#c1a586]/50" : "border-[#d5c2aa]"
+                  )}
+                />
+              ) : (
+                <span className="testimonial-avatar !w-[42px] !h-[42px]" aria-hidden="true">
+                  {review.initials}
+                </span>
+              )}
+              <div className="flex flex-col min-w-0">
+                <figcaption className="testimonial-author !text-[15px] truncate">
+                  {review.name}
+                </figcaption>
+                <p className="testimonial-tag !text-[12px] truncate">
+                  {review.tag}
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="testimonial-stars !m-0 shrink-0"
+              aria-label="Avaliação 5 de 5 estrelas"
+            >
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <Star key={idx} size={13} fill="#d49b27" color="#d49b27" />
+              ))}
+            </div>
+          </div>
+
+          <blockquote
+            className={cn(
+              "testimonial-body",
+              dark
+                ? "!text-[14px] sm:!text-[15px] !leading-[1.7]"
+                : "!text-[15.5px] sm:!text-[17px] !leading-[1.75]"
+            )}
+          >
+            &ldquo;{renderHighlightedBody(review.body, dark)}&rdquo;
+          </blockquote>
         </div>
+
+        {review.photo && (
+          <div
+            className={cn(
+              "overflow-hidden rounded-xl border shrink-0",
+              dark
+                ? "border-[#c1a586]/30 w-full h-48"
+                : "border-[#dfd3c2] w-full h-52 md:w-[215px] md:h-[215px]"
+            )}
+          >
+            <img
+              src={review.photo}
+              alt={`Foto enviada por ${review.name} com Dr. Raimundo Aldemar`}
+              loading="eager"
+              className="w-full h-full object-cover object-bottom block"
+            />
+          </div>
+        )}
       </div>
-
-      <div className="testimonial-stars" aria-label="Avaliação 5 de 5 estrelas">
-        {Array.from({ length: 5 }).map((_, idx) => (
-          <Star key={idx} size={12} fill="#d49b27" color="#d49b27" />
-        ))}
-      </div>
-
-      <blockquote className="testimonial-body">
-        {renderHighlightedBody(review.body, dark)}
-      </blockquote>
-
-      {review.photo && (
-        <div
-          className={cn(
-            "mt-3 overflow-hidden rounded-xl border",
-            dark ? "border-[#c1a586]/30" : "border-[#dfd3c2]"
-          )}
-        >
-          <img
-            src={review.photo}
-            alt={`Foto enviada por ${review.name} com Dr. Raimundo Aldemar`}
-            loading="lazy"
-            className="w-full h-44 sm:h-48 object-cover object-bottom block"
-          />
-        </div>
-      )}
     </figure>
+  );
+}
+
+function HorizontalReviewCarousel({ dark = false }: { dark?: boolean }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState<number | undefined>(
+    undefined
+  );
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
+  const total = reviews.length;
+
+  useEffect(() => {
+    const el = slideRefs.current[activeIdx];
+    if (!el) return;
+    const updateHeight = () => {
+      const h = el.offsetHeight;
+      if (h > 0) setViewportHeight(h);
+    };
+    updateHeight();
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(updateHeight);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [activeIdx]);
+
+  const goNext = useCallback(() => {
+    setActiveIdx((prev) => (prev + 1) % total);
+  }, [total]);
+
+  const goPrev = useCallback(() => {
+    setActiveIdx((prev) => (prev - 1 + total) % total);
+  }, [total]);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+
+    const timer = window.setInterval(goNext, AUTOPLAY_MS);
+    return () => window.clearInterval(timer);
+  }, [isPaused, goNext]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null) {
+      if (touchDeltaX.current < -45) goNext();
+      else if (touchDeltaX.current > 45) goPrev();
+    }
+    touchStartX.current = null;
+    touchDeltaX.current = 0;
+    setIsPaused(false);
+  };
+
+  return (
+    <div
+      className={cn(
+        "testimonial-carousel-shell w-full mx-auto",
+        dark ? "max-w-[560px] px-4" : "max-w-[820px]"
+      )}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={() => setIsPaused(false)}
+      aria-roledescription="carousel"
+      aria-label="Depoimentos de pacientes um por um"
+    >
+      <div
+        className="testimonial-carousel-viewport overflow-hidden rounded-2xl transition-[height] duration-300 ease-out"
+        style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
+      >
+        <div
+          className="testimonial-carousel-track flex items-start transition-transform duration-500 ease-out"
+          style={{ transform: `translate3d(-${activeIdx * 100}%, 0, 0)` }}
+        >
+          {reviews.map((review, idx) => (
+            <div
+              key={review.name}
+              ref={(el) => {
+                slideRefs.current[idx] = el;
+              }}
+              className="w-full shrink-0 px-0.5"
+              aria-hidden={idx !== activeIdx}
+            >
+              <ReviewSlideCard review={review} dark={dark} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Controles limpos: setas anterior/próximo + contador + indicadores */}
+      <div
+        className={cn(
+          "testimonial-carousel-controls flex items-center justify-between gap-3 mt-4",
+          dark && "is-dark"
+        )}
+      >
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={goPrev}
+            className="testimonial-nav-btn"
+            aria-label="Depoimento anterior"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            className="testimonial-nav-btn"
+            aria-label="Próximo depoimento"
+          >
+            <ChevronRight size={18} />
+          </button>
+          <span className="testimonial-counter">
+            {String(activeIdx + 1).padStart(2, "0")} /{" "}
+            {String(total).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div
+          className="testimonial-dots flex items-center gap-1.5"
+          role="tablist"
+          aria-label="Escolher depoimento"
+        >
+          {reviews.map((review, idx) => (
+            <button
+              key={review.name}
+              type="button"
+              role="tab"
+              aria-selected={idx === activeIdx}
+              aria-label={`Ver depoimento ${idx + 1}: ${review.name}`}
+              onClick={() => setActiveIdx(idx)}
+              className={cn(
+                "testimonial-dot",
+                idx === activeIdx && "is-active"
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -215,9 +399,6 @@ export function TestimonialsSection({
   variant?: "light" | "biolink";
 }) {
   const isBiolink = variant === "biolink";
-  const [tapPaused, setTapPaused] = useState(false);
-  const [touchHolding, setTouchHolding] = useState(false);
-  const isPaused = tapPaused || touchHolding;
 
   if (isBiolink) {
     return (
@@ -244,55 +425,9 @@ export function TestimonialsSection({
           </div>
         </div>
 
-        {/* Marquee Vertical Reto Dark integrado ao cenário (pausa ao tocar/segurar ou passar o mouse) */}
-        <div
-          className="testimonials-3d-stage-biolink relative h-[470px] sm:h-[510px] w-full max-w-[1100px] mx-auto px-3 sm:px-4 overflow-hidden select-none"
-          onTouchStart={() => setTouchHolding(true)}
-          onTouchEnd={() => setTouchHolding(false)}
-          onTouchCancel={() => setTouchHolding(false)}
-          onClick={() => setTapPaused((prev) => !prev)}
-        >
-          <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
-            <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:46s] p-0">
-              {reviews.slice(0, 8).map((review) => (
-                <ReviewCard key={review.name} review={review} dark />
-              ))}
-            </Marquee>
-            <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:48s] p-0">
-              {reviews.slice(8, 15).map((review) => (
-                <ReviewCard key={review.name} review={review} dark />
-              ))}
-            </Marquee>
-          </div>
+        <HorizontalReviewCarousel dark />
 
-          <div className="hidden md:grid md:grid-cols-4 w-full h-full gap-4">
-            <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
-              {firstCol.map((review) => (
-                <ReviewCard key={review.name} review={review} dark />
-              ))}
-            </Marquee>
-            <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:38s] p-0">
-              {secondCol.map((review) => (
-                <ReviewCard key={review.name} review={review} dark />
-              ))}
-            </Marquee>
-            <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
-              {thirdCol.map((review) => (
-                <ReviewCard key={review.name} review={review} dark />
-              ))}
-            </Marquee>
-            <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:42s] p-0">
-              {fourthCol.map((review) => (
-                <ReviewCard key={review.name} review={review} dark />
-              ))}
-            </Marquee>
-          </div>
-
-          <div className="testimonials-biolink-fade-top pointer-events-none absolute inset-x-0 top-0 h-16" />
-          <div className="testimonials-biolink-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-16" />
-        </div>
-
-        <div className="w-full max-w-[560px] mx-auto px-4 mt-4 flex flex-col items-center gap-2.5 text-center">
+        <div className="w-full max-w-[560px] mx-auto px-4 mt-5 flex flex-col items-center gap-2.5 text-center">
           <a
             href={GOOGLE_REVIEW_URL}
             target="_blank"
@@ -343,55 +478,7 @@ export function TestimonialsSection({
         </div>
       </div>
 
-      {/* DESKTOP: 4 COLUNAS VERTICAIS RETAS | MOBILE: 2 COLUNAS VERTICAIS RETAS (pausa ao tocar/segurar ou passar o mouse) */}
-      <div
-        className="testimonials-3d-stage relative h-[520px] md:h-[580px] w-full overflow-hidden select-none"
-        onTouchStart={() => setTouchHolding(true)}
-        onTouchEnd={() => setTouchHolding(false)}
-        onTouchCancel={() => setTouchHolding(false)}
-        onClick={() => setTapPaused((prev) => !prev)}
-      >
-        {/* Mobile: 2 colunas verticais retas com todos os 15 depoimentos */}
-        <div className="grid grid-cols-2 md:hidden w-full h-full gap-2.5 sm:gap-3">
-          <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:46s] p-0">
-            {reviews.slice(0, 8).map((review) => (
-              <ReviewCard key={review.name} review={review} />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:48s] p-0">
-            {reviews.slice(8, 15).map((review) => (
-              <ReviewCard key={review.name} review={review} />
-            ))}
-          </Marquee>
-        </div>
-
-        {/* Desktop: 4 colunas verticais retas */}
-        <div className="hidden md:grid md:grid-cols-4 w-full h-full gap-4">
-          <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
-            {firstCol.map((review) => (
-              <ReviewCard key={review.name} review={review} />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:38s] p-0">
-            {secondCol.map((review) => (
-              <ReviewCard key={review.name} review={review} />
-            ))}
-          </Marquee>
-          <Marquee pauseOnHover paused={isPaused} vertical className="[--duration:36s] p-0">
-            {thirdCol.map((review) => (
-              <ReviewCard key={review.name} review={review} />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover paused={isPaused} vertical className="[--duration:42s] p-0">
-            {fourthCol.map((review) => (
-              <ReviewCard key={review.name} review={review} />
-            ))}
-          </Marquee>
-        </div>
-
-        <div className="testimonials-fade-top pointer-events-none absolute inset-x-0 top-0 h-20" />
-        <div className="testimonials-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-20" />
-      </div>
+      <HorizontalReviewCarousel />
 
       <div className="testimonials-cta" data-reveal>
         <p>Já foi atendido pelo Dr. Raimundo? Compartilhe sua experiência.</p>

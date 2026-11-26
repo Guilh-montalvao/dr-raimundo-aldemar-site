@@ -441,6 +441,23 @@ h2 .serif,h1 .serif{color:#80664b}
 .testimonials-cta{margin-top:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}
 .testimonials-cta p{font-size:15px;color:#62574b;margin:0}
 .testimonials-review-btn{gap:14px}
+.testimonial-slide-card{min-height:220px;display:flex;flex-direction:column;justify-content:center}
+.testimonial-nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid #d5c5b0;background:#fffefa;color:#35291f;display:inline-flex;align-items:center;justify-content:center;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.testimonial-nav-btn:hover{background:#35291f;border-color:#35291f;color:#fffefa;transform:translateY(-1px)}
+.testimonial-counter{font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.08em;color:#80664b;margin-left:6px}
+.testimonial-dot{width:7px;height:7px;border-radius:999px;border:0;padding:0;background:#d8cab7;transition:width .25s ease,background .25s ease}
+.testimonial-dot:hover{background:#b49a7c}
+.testimonial-dot.is-active{width:24px;background:#35291f}
+.testimonial-carousel-controls.is-dark .testimonial-nav-btn{background:rgba(42,32,25,.85);border-color:rgba(222,201,173,.32);color:#dec9ad;width:36px;height:36px}
+.testimonial-carousel-controls.is-dark .testimonial-nav-btn:hover{background:#dec9ad;border-color:#dec9ad;color:#1d1510}
+.testimonial-carousel-controls.is-dark .testimonial-counter{color:#dec9ad;font-size:12px}
+.testimonial-carousel-controls.is-dark .testimonial-dot{background:rgba(222,201,173,.28)}
+.testimonial-carousel-controls.is-dark .testimonial-dot.is-active{width:22px;background:#dec9ad}
+@media(max-width:640px){
+  .testimonial-dots{gap:4px}
+  .testimonial-dot{width:5px;height:5px}
+  .testimonial-dot.is-active{width:16px}
+}
 @media(max-width:900px){
   .testimonials-heading{flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:32px}
   .testimonials-summary{max-width:none}

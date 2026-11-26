@@ -4,15 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  ArrowDown,
   Plus,
   Minus,
-  CalendarCheck,
-  Stethoscope,
   MapPin,
   GraduationCap,
-  Baby,
-  User,
+  ShieldCheck,
+  Star,
+  Sparkles,
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -83,6 +81,52 @@ const superheroPhotos = [
   },
 ];
 
+const heroKidsSlides = [
+  {
+    src: "/media/infantil.jpg",
+    alt: "Dr. Raimundo Aldemar acolhendo pequeno paciente vestido de super-herói",
+    pos: "56% 18%",
+  },
+  ...superheroPhotos.map((photo) => ({
+    src: photo.src,
+    alt: photo.alt,
+    pos: "50% 16%",
+  })),
+];
+
+const heroAdultSlides = [
+  {
+    src: "/media/background-hero-section.jpg",
+    alt: "Dr. Raimundo Aldemar em cirurgia otorrinolaringológica",
+    pos: "76% 14%",
+  },
+  {
+    src: "/media/exame-nasal.jpg",
+    alt: "Dr. Raimundo Aldemar realizando exame nasal em consultório",
+    pos: "68% 22%",
+  },
+  {
+    src: "/media/cirurgia.jpg",
+    alt: "Dr. Raimundo Aldemar com fotóforo cirúrgico",
+    pos: "70% 18%",
+  },
+  {
+    src: "/media/dr-raimundo-consultorio.jpg",
+    alt: "Dr. Raimundo Aldemar em seu consultório em Brasília",
+    pos: "58% 18%",
+  },
+  {
+    src: "/media/consulta.jpg",
+    alt: "Atendimento clínico otorrinolaringológico para adultos",
+    pos: "54% 22%",
+  },
+  {
+    src: "/media/exame-otoscopio.jpg",
+    alt: "Avaliação otorrinolaringológica com otoscópio em consultório",
+    pos: "58% 22%",
+  },
+];
+
 let introCompletedInSpa = false;
 
 export default function Home() {
@@ -91,7 +135,33 @@ export default function Home() {
   const introStartedRef = useRef(false);
   const introTlRef = useRef<gsap.core.Timeline | null>(null);
   const [activeArea, setActiveArea] = useState("nariz");
-  const [heroMode, setHeroMode] = useState<"crianca" | "adulto">("crianca");
+  const [heroFocus, setHeroFocus] = useState<"none" | "crianca" | "adulto">(
+    "none"
+  );
+  const [heroKidsIdx, setHeroKidsIdx] = useState(0);
+  const [heroAdultIdx, setHeroAdultIdx] = useState(0);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+    const kidsTimer = window.setInterval(() => {
+      setHeroKidsIdx((prev) => (prev + 1) % heroKidsSlides.length);
+    }, 2500);
+    let adultTimer: number | undefined;
+    const adultDelay = window.setTimeout(() => {
+      setHeroAdultIdx((prev) => (prev + 1) % heroAdultSlides.length);
+      adultTimer = window.setInterval(() => {
+        setHeroAdultIdx((prev) => (prev + 1) % heroAdultSlides.length);
+      }, 2500);
+    }, 1250);
+    return () => {
+      window.clearInterval(kidsTimer);
+      window.clearTimeout(adultDelay);
+      if (adultTimer !== undefined) window.clearInterval(adultTimer);
+    };
+  }, []);
 
   useEffect(() => {
     const initialHash = window.location.hash;
@@ -305,33 +375,51 @@ export default function Home() {
       <SiteHeader />
 
       <main id="principal">
-        {/* HERO SECTION — PROTAGONISMO INFANTIL + SELETOR CRIANÇA / ADULTO */}
+        {/* HERO SECTION UNIFICADO & CLARO — CRIANÇAS E ADULTOS */}
         <section
           id="inicio"
-          className={`hero hero-kids-primary ${
-            heroMode === "adulto" ? "hero-mode-adulto" : "hero-mode-crianca"
+          className={`hero hero-unified${
+            heroFocus !== "none" ? ` is-focus-${heroFocus}` : ""
           }`}
         >
-          {/* Camada 1: Foto Infantil (Padrão Principal) */}
-          <div
-            className={`hero-photo-layer hero-photo-crianca ${
-              heroMode === "crianca" ? "is-active" : ""
-            }`}
-            role="img"
-            aria-label="Dr. Raimundo Aldemar acolhendo pequeno paciente vestido de super-herói"
-          />
-          {/* Camada 2: Foto Adulto / Cirúrgica */}
-          <div
-            className={`hero-photo-layer hero-photo-adulto ${
-              heroMode === "adulto" ? "is-active" : ""
-            }`}
-            role="img"
-            aria-label="Dr. Raimundo Aldemar, médico otorrinolaringologista"
-          />
-          <div className="hero-kids-shade" />
+          {/* Fundo Fotográfico Duplo Unificado (Super-Heróis passando a cada 2,5s + Adulto) */}
+          <div className="hero-unified-media" aria-hidden="true">
+            <div className="hero-unified-panel hero-panel-crianca">
+              {heroKidsSlides.map((slide, index) => (
+                <img
+                  key={slide.src}
+                  src={slide.src}
+                  alt={slide.alt}
+                  loading={index <= 1 ? "eager" : "lazy"}
+                  decoding="async"
+                  style={{ objectPosition: slide.pos }}
+                  className={`hero-slide-img${
+                    index === heroKidsIdx ? " is-active" : ""
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="hero-unified-panel hero-panel-adulto">
+              {heroAdultSlides.map((slide, index) => (
+                <img
+                  key={slide.src}
+                  src={slide.src}
+                  alt={slide.alt}
+                  loading={index <= 1 ? "eager" : "lazy"}
+                  decoding="async"
+                  style={{ objectPosition: slide.pos }}
+                  className={`hero-slide-img${
+                    index === heroAdultIdx ? " is-active" : ""
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="hero-unified-shade" aria-hidden="true" />
 
-          <div className="hero-content">
+          <div className="hero-content hero-unified-content">
             <p className="eyebrow hero-reveal">
+              <span className="short-line" />
               OTORRINOLARINGOLOGISTA · CRM-DF 20094 · RQE 13936
             </p>
             <h1 className="hero-reveal hero-title-specialist">
@@ -340,202 +428,157 @@ export default function Home() {
               <span>livre da obstrução nasal</span>
             </h1>
 
-            {/* SELETOR ACESSÍVEL DE ALTO CONTRASTE (PARA CRIANÇA / PARA ADULTO) */}
-            <div className="hero-audience-wrap hero-reveal">
-              <span className="hero-audience-label">
-                Para quem é o atendimento?
-              </span>
-              <div
-                className="hero-audience-bar"
-                role="group"
-                aria-label="Escolher atendimento para Criança ou para Adulto"
-              >
-                <button
-                  type="button"
-                  aria-pressed={heroMode === "crianca"}
-                  onClick={() => setHeroMode("crianca")}
-                  className={`audience-pill ${
-                    heroMode === "crianca" ? "is-active" : ""
-                  }`}
-                >
-                  <Baby size={18} aria-hidden="true" />
-                  <span>Para Criança</span>
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={heroMode === "adulto"}
-                  onClick={() => setHeroMode("adulto")}
-                  className={`audience-pill ${
-                    heroMode === "adulto" ? "is-active" : ""
-                  }`}
-                >
-                  <User size={18} aria-hidden="true" />
-                  <span>Para Adulto</span>
-                </button>
-              </div>
-            </div>
+            <p className="hero-description hero-reveal">
+              Atendimento clínico e cirúrgico para{" "}
+              <strong>crianças e adultos</strong> em Brasília — unindo
+              acolhimento lúdico infantil e precisão em consultório.
+            </p>
 
-            {/* ATALHOS EM EVIDÊNCIA NA CAPA (ACIMA DA DOBRA) */}
+            {/* DUAS PORTAS DE ENTRADA CLARAS PARA GUIAR O PACIENTE */}
             <nav
-              className="hero-quick-grid hero-reveal"
-              aria-label="Acesso rápido às principais informações"
+              className="hero-guide-doors hero-reveal"
+              aria-label="Escolha o atendimento para criança ou para adulto"
             >
-              <button
-                type="button"
-                className="hero-quick-card is-primary"
-                onClick={() =>
-                  window.dispatchEvent(new CustomEvent("open-quick-booking"))
-                }
-              >
-                <span className="hero-quick-icon" aria-hidden="true">
-                  <CalendarCheck size={18} />
-                </span>
-                <span className="hero-quick-text">
-                  <strong>Agendamento</strong>
-                  <small>Consultas e cirurgias</small>
-                </span>
-                <ArrowUpRight size={14} className="hero-quick-arrow" />
-              </button>
-
               <Link
-                href={
-                  heroMode === "crianca"
-                    ? "/atendimento-infantil#cirurgias-infantis"
-                    : "/cirurgia-adulto#procedimentos-adulto"
-                }
-                className="hero-quick-card"
+                href="/atendimento-infantil"
+                className="hero-door-card"
+                onMouseEnter={() => setHeroFocus("crianca")}
+                onMouseLeave={() => setHeroFocus("none")}
+                onFocus={() => setHeroFocus("crianca")}
+                onBlur={() => setHeroFocus("none")}
               >
-                <span className="hero-quick-icon" aria-hidden="true">
-                  <Stethoscope size={18} />
-                </span>
-                <span className="hero-quick-text">
-                  <strong>Cirurgias que realiza</strong>
-                  <small>
-                    {heroMode === "crianca"
-                      ? "Cirurgias na infância"
-                      : "Cirurgias em adultos"}
-                  </small>
-                </span>
-                <ArrowUpRight size={14} className="hero-quick-arrow" />
-              </Link>
-
-              <a
-                href="#contato"
-                className="hero-quick-card"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("contato");
-                  if (el) {
-                    const y =
-                      el.getBoundingClientRect().top + window.pageYOffset - 80;
-                    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
-                  }
-                }}
-              >
-                <span className="hero-quick-icon" aria-hidden="true">
-                  <MapPin size={18} />
-                </span>
-                <span className="hero-quick-text">
-                  <strong>Locais de atendimento</strong>
-                  <small>Asa Norte, Gama e Taguatinga</small>
-                </span>
-                <ArrowUpRight size={14} className="hero-quick-arrow" />
-              </a>
-
-              <Link href="/o-medico" className="hero-quick-card">
-                <span className="hero-quick-icon" aria-hidden="true">
-                  <GraduationCap size={18} />
-                </span>
-                <span className="hero-quick-text">
-                  <strong>Formação médica</strong>
-                  <small>CRM, RQE e trajetória</small>
-                </span>
-                <ArrowUpRight size={14} className="hero-quick-arrow" />
-              </Link>
-            </nav>
-
-            {heroMode === "crianca" ? (
-              <p className="hero-description hero-reveal">
-                Olhar acolhedor para crianças que roncam, dormem de boca aberta
-                ou têm dificuldade para respirar pelo nariz — do diagnóstico em
-                consultório ao acolhimento como pequenos super-heróis.
-              </p>
-            ) : (
-              <p className="hero-description hero-reveal">
-                Tratamento clínico e cirúrgico da obstrução nasal, desvio de
-                septo, redução dos cornetos nasais, sinusite, ronco e apneia do
-                sono para adultos em Brasília.
-              </p>
-            )}
-
-            <div className="hero-cta-row hero-reveal">
-              <LinkButton href="#contato" light>
-                Agendar consulta
-              </LinkButton>
-
-              <a
-                href="#super-herois-home"
-                className="hero-kids-preview-badge"
-                aria-label="Ver fotos e vídeos reais do atendimento infantil"
-              >
-                <span className="hero-kids-avatars">
+                <span className="hero-door-avatars" aria-hidden="true">
                   <img
                     src="/media/super-herois-kids2.jpeg"
-                    alt="Pequeno super-herói"
-                    loading="eager"
-                  />
-                  <img
-                    src="/media/super-herois-kids3.jpeg"
-                    alt="Pequeno super-herói"
+                    alt=""
                     loading="eager"
                   />
                   <img
                     src="/media/super-herois-kids4.jpeg"
-                    alt="Pequena super-heroína"
+                    alt=""
                     loading="eager"
                   />
                 </span>
-                <span className="hero-kids-preview-text">
-                  <strong>Pequenos Super-Heróis</strong>
-                  <small>Ver fotos e vídeos reais ↓</small>
+                <span className="hero-door-text">
+                  <strong>Para Criança</strong>
+                  <small>Adenoide, amígdalas, ronco e cirurgia lúdica</small>
                 </span>
-              </a>
+                <ArrowUpRight size={16} className="hero-door-arrow" />
+              </Link>
+
+              <Link
+                href="/cirurgia-adulto"
+                className="hero-door-card"
+                onMouseEnter={() => setHeroFocus("adulto")}
+                onMouseLeave={() => setHeroFocus("none")}
+                onFocus={() => setHeroFocus("adulto")}
+                onBlur={() => setHeroFocus("none")}
+              >
+                <span className="hero-door-avatars" aria-hidden="true">
+                  <img
+                    src="/media/background-hero-section.jpg"
+                    alt=""
+                    style={{ objectPosition: "78% 15%" }}
+                    loading="eager"
+                  />
+                  <img
+                    src="/media/exame-nasal.jpg"
+                    alt=""
+                    style={{ objectPosition: "70% 20%" }}
+                    loading="eager"
+                  />
+                </span>
+                <span className="hero-door-text">
+                  <strong>Para Adulto</strong>
+                  <small>Desvio de septo, cornetos, sinusite e ronco</small>
+                </span>
+                <ArrowUpRight size={16} className="hero-door-arrow" />
+              </Link>
+            </nav>
+
+            <div className="hero-cta-row hero-reveal">
+              <LinkButton href="#contato">Agendar consulta</LinkButton>
+
+              <button
+                type="button"
+                className="hero-convenios-pill"
+                onClick={() =>
+                  window.dispatchEvent(new CustomEvent("open-unified-convenios"))
+                }
+              >
+                <ShieldCheck size={16} aria-hidden="true" />
+                <span>Consultar convênios</span>
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </button>
             </div>
           </div>
 
-          {/* Vídeo Flutuante na Direita do Hero */}
-          <div className="hero-video-float hero-reveal">
-            {heroMode === "crianca" ? (
-              <SmartVideo
-                key="video-crianca"
-                src="/videos/super-heroi.mp4"
-                ariaLabel="Vídeo de atendimento infantil — pequeno super-herói com Dr. Raimundo"
-              />
-            ) : (
-              <SmartVideo
-                key="video-adulto"
-                src="/videos/endoscopia-nasal.mp4"
-                ariaLabel="Vídeo de exame de videoendoscopia nasal com ótica flexível"
-              />
-            )}
-          </div>
-
-          <div className="hero-bottom hero-reveal">
-            <a href="#infantil" className="scroll-link">
-              <span className="circle-icon circle-icon-light">
-                <ArrowDown size={16} />
-              </span>
-              Quando avaliar a respiração infantil
-            </a>
-          </div>
           <span className="hero-caption">ATENÇÃO QUE ACOLHE.</span>
         </section>
 
-        <div className="intro-strip" data-reveal>
-          <span>Nariz, ouvidos e garganta.</span>
-          <span>Crianças e adultos.</span>
-          <span>Otorrinolaringologista · CRM-DF 20094 · RQE 13936.</span>
-        </div>
+        {/* FAIXA DE AUTORIDADE (+11 ANOS, +3 MIL CIRURGIAS, 5,0 GOOGLE) + ATALHOS RÁPIDOS */}
+        <section
+          className="hero-authority-bar"
+          aria-label="Experiência e atalhos rápidos"
+          data-reveal
+        >
+          <div className="hero-authority-metrics">
+            <div className="hero-metric">
+              <strong>+11 anos</strong>
+              <span>de experiência</span>
+            </div>
+            <div className="hero-metric">
+              <strong>+3 mil</strong>
+              <span>cirurgias realizadas</span>
+            </div>
+            <div className="hero-metric">
+              <strong className="hero-metric-stars">
+                5,0 <Star size={14} fill="#c4943a" stroke="#c4943a" />
+              </strong>
+              <span>no Google</span>
+            </div>
+          </div>
+
+          <nav
+            className="hero-authority-links"
+            aria-label="Atalhos das principais seções"
+          >
+            <a
+              href="#contato"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("contato");
+                if (el) {
+                  const y =
+                    el.getBoundingClientRect().top + window.pageYOffset - 80;
+                  window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+                }
+              }}
+            >
+              <MapPin size={14} aria-hidden="true" />
+              <span>Locais no DF</span>
+            </a>
+            <Link href="/o-medico">
+              <GraduationCap size={14} aria-hidden="true" />
+              <span>Formação médica</span>
+            </Link>
+            <a
+              href="#super-herois-home"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("super-herois-home");
+                if (el) {
+                  const y =
+                    el.getBoundingClientRect().top + window.pageYOffset - 80;
+                  window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+                }
+              }}
+            >
+              <Sparkles size={14} aria-hidden="true" />
+              <span>Pequenos Super-Heróis</span>
+            </a>
+          </nav>
+        </section>
 
         {/* SEÇÃO INFANTIL DE ALTO DESTAQUE NA HOME (CONSULTÓRIO + FOTOS E VÍDEOS REAIS) */}
         <section id="infantil" className="children-section children-consultorio-bg">

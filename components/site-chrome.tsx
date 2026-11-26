@@ -999,29 +999,23 @@ export function SiteHeader() {
                 className="quick-unit-link"
                 onClick={() => setBookingOpen(false)}
               >
-                <div
-                  className="quick-unit-bg"
-                  style={{ backgroundImage: "url('/media/otorhynus.jpg')" }}
-                  aria-hidden="true"
-                />
-                <div className="quick-unit-shade" aria-hidden="true" />
                 <img
                   src="/media/otorhynus.jpg"
                   alt="Unidade Otorhynus — Asa Norte"
                   className="quick-unit-thumb"
-                  width={60}
-                  height={60}
+                  width={56}
+                  height={56}
                   loading="lazy"
                 />
                 <div className="quick-unit-info">
                   <strong>Otorhynus — Asa Norte</strong>
                   <span>
-                    SHLN, Bloco J, Ed. Multiclínicas · WhatsApp (61) 98574-3764
+                    SHLN, Bloco J, Ed. Multiclínicas · (61) 98574-3764
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={17} />
-                  <ArrowUpRight size={15} />
+                  <MessageCircle size={16} />
+                  <ArrowUpRight size={14} />
                 </span>
               </a>
 
@@ -1032,30 +1026,23 @@ export function SiteHeader() {
                 className="quick-unit-link"
                 onClick={() => setBookingOpen(false)}
               >
-                <div
-                  className="quick-unit-bg"
-                  style={{ backgroundImage: "url('/media/otogama.jpg')" }}
-                  aria-hidden="true"
-                />
-                <div className="quick-unit-shade" aria-hidden="true" />
                 <img
                   src="/media/otogama.jpg"
                   alt="Clínica Otogama — Gama"
                   className="quick-unit-thumb"
-                  width={60}
-                  height={60}
+                  width={56}
+                  height={56}
                   loading="lazy"
                 />
                 <div className="quick-unit-info">
                   <strong>Clínica Otogama — Gama</strong>
                   <span>
-                    Quadra 01, Conjunto A, Lote 4, Gama Sul · WhatsApp (61)
-                    98346-6377
+                    Quadra 01, Conj. A, Lote 4, Gama Sul · (61) 98346-6377
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={17} />
-                  <ArrowUpRight size={15} />
+                  <MessageCircle size={16} />
+                  <ArrowUpRight size={14} />
                 </span>
               </a>
 
@@ -1066,30 +1053,23 @@ export function SiteHeader() {
                 className="quick-unit-link"
                 onClick={() => setBookingOpen(false)}
               >
-                <div
-                  className="quick-unit-bg"
-                  style={{ backgroundImage: "url('/media/cdootorrino.jpg')" }}
-                  aria-hidden="true"
-                />
-                <div className="quick-unit-shade" aria-hidden="true" />
                 <img
                   src="/media/cdootorrino.jpg"
                   alt="CDO Otorrino — Taguatinga"
                   className="quick-unit-thumb"
-                  width={60}
-                  height={60}
+                  width={56}
+                  height={56}
                   loading="lazy"
                 />
                 <div className="quick-unit-info">
                   <strong>CDO Otorrino — Taguatinga</strong>
                   <span>
-                    Centro Médico Hospital Anchieta, Salas 111/112 B · WhatsApp
-                    (61) 98323-0103
+                    Hospital Anchieta, Salas 111/112 B · (61) 98323-0103
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={17} />
-                  <ArrowUpRight size={15} />
+                  <MessageCircle size={16} />
+                  <ArrowUpRight size={14} />
                 </span>
               </a>
 
@@ -1100,32 +1080,25 @@ export function SiteHeader() {
                 className="quick-unit-link quick-unit-surgery"
                 onClick={() => setBookingOpen(false)}
               >
-                <div
-                  className="quick-unit-bg"
-                  style={{ backgroundImage: "url('/media/cirurgia.jpg')" }}
-                  aria-hidden="true"
-                />
-                <div className="quick-unit-shade" aria-hidden="true" />
                 <img
                   src="/media/cirurgia.jpg"
                   alt="Agendar Cirurgia e Consultar Valores"
                   className="quick-unit-thumb"
-                  width={60}
-                  height={60}
+                  width={56}
+                  height={56}
                   loading="lazy"
                 />
                 <div className="quick-unit-info">
                   <strong>
-                    Agendar Cirurgia · Consultar Valores (Criança e Adulto)
+                    Agendar Cirurgia · Valores (Criança e Adulto)
                   </strong>
                   <span>
-                    Canal exclusivo da equipe cirúrgica · WhatsApp +55 61
-                    8299-4767
+                    Canal exclusivo da equipe cirúrgica · (61) 8299-4767
                   </span>
                 </div>
                 <span className="quick-unit-action">
-                  <MessageCircle size={17} />
-                  <ArrowUpRight size={15} />
+                  <MessageCircle size={16} />
+                  <ArrowUpRight size={14} />
                 </span>
               </a>
             </div>
@@ -1259,6 +1232,15 @@ export function ContactSection() {
     setConveniosUnit(unit);
     setConveniosOpen(true);
   };
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const custom = e as CustomEvent<{ unit?: ConvenioUnitId }>;
+      openConvenios(custom.detail?.unit ?? "todos");
+    };
+    window.addEventListener("open-unified-convenios", handler);
+    return () => window.removeEventListener("open-unified-convenios", handler);
+  }, []);
 
   return (
     <section id="contato" className="contact-section">
